@@ -1,0 +1,5 @@
+C:/Users/User/CLionProjects/wave_function_collapse_ui/cmake-build-debug/CMakeFiles/wave_function_collapse_ui.dir
+C:/Users/User/CLionProjects/wave_function_collapse_ui/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/User/CLionProjects/wave_function_collapse_ui/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/User/CLionProjects/wave_function_collapse_ui/cmake-build-debug/CMakeFiles/wave_function_collapse_ui_autogen_timestamp_deps.dir
+C:/Users/User/CLionProjects/wave_function_collapse_ui/cmake-build-debug/CMakeFiles/wave_function_collapse_ui_autogen.dir
