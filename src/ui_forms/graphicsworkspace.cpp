@@ -8,27 +8,32 @@
 #include "ui_GraphicsWorkspace.h"
 #include "sudokuscenesidemenu.h"
 #include "../scenes/SudokuScene.h"
+#include "../widgets/Button.h"
 #include <QBrush>
+#include <QPushButton>
 
 int GraphicsWorkspace::s_current_state_index = 0;
 
 GraphicsWorkspace::GraphicsWorkspace(QWidget *parent) : QWidget(parent), ui(new Ui::GraphicsWorkspace)
 {
-    //Create all the scenes that can be activated on this workspace
+    ui->setupUi(this);
     init_default_scenes();
 
-    //Initialize the graphics view and set its scene to the first scene state
-    m_view = new QGraphicsView(this);
-    m_view ->setScene(m_scene_states.at(0));
+    m_graphics_view = new QGraphicsView;
+    m_graphics_view ->setScene(m_scene_states.at(0));
 
-    ui->setupUi(this);
-    m_view -> show();
+    m_sudoku_menu = new SudokuSceneSideMenu(m_graphics_view);
+    m_main_grid_layout = new QGridLayout(this);
+
+    m_main_grid_layout ->addWidget(m_graphics_view);
+    m_main_grid_layout ->addWidget(m_sudoku_menu);
 }
 
 GraphicsWorkspace::~GraphicsWorkspace()
 {
-    delete m_view;
+    delete m_graphics_view;
     delete ui;
+    delete m_main_grid_layout;
 }
 
 void GraphicsWorkspace::init_default_scenes()
@@ -36,8 +41,4 @@ void GraphicsWorkspace::init_default_scenes()
     //Initialize scenes at the same time as their menus
     auto sudoku_scene = new SudokuScene("puzzles/puzzle9.txt", this);
     m_scene_states.emplace_back(sudoku_scene);
-
-    auto sudokuMenu = new SudokuSceneSideMenu(this);
-    m_menus.emplace_back(sudokuMenu);
-    //TODO: Add the sudoku scene
 }

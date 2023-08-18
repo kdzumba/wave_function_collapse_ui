@@ -33,6 +33,18 @@ add_executable(wave_function_collapse_ui main.cpp
         src/models/SudokuBoard.cpp
         src/models/SudokuBlock.cpp
         src/models/Tile.cpp
+        src/graphics_items/BoardContainer.cpp
+        src/graphics_items/BoardContainer.h
+        src/utils.cpp
+        src/utils.h
+        src/widgets/Button.cpp
+        src/widgets/Button.h
+        src/widgets/ButtonGroup.cpp
+        src/widgets/ButtonGroup.h
+        src/graphics_items/SudokuControlsMenu.cpp
+        src/graphics_items/SudokuControlsMenu.h
+        src/graphics_items/ButtonGroup.cpp
+        src/graphics_items/ButtonGroup.h
 )
 target_link_libraries(wave_function_collapse_ui
         Qt::Core

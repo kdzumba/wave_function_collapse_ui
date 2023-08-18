@@ -33,7 +33,7 @@ public:
 public:
     static int constexpr TILE_SIZE = 75;
     static int constexpr POSITION_OFFSET = 10;
-    static int constexpr PEN_WIDTH = 3;
+    static int constexpr PEN_WIDTH = 2;
 private:
     QLabel* m_value;
     GridTileStyle m_style;

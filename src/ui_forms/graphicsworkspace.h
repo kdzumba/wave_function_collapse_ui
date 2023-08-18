@@ -8,7 +8,9 @@
 #include <QFrame>
 #include "../scenes/AbstractScene.h"
 #include "../AbstractSideMenu.h"
+#include "sudokuscenesidemenu.h"
 #include <QGraphicsView>
+#include <QGridLayout>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class GraphicsWorkspace; }
@@ -26,9 +28,10 @@ private:
 private:
     Ui::GraphicsWorkspace *ui;
     std::vector<AbstractScene*> m_scene_states;
-    std::vector<AbstractSideMenu*> m_menus;
     static int s_current_state_index;
-    QGraphicsView* m_view;
+    QGraphicsView* m_graphics_view;
+    QGridLayout* m_main_grid_layout;
+    SudokuSceneSideMenu* m_sudoku_menu;
 };
 
 

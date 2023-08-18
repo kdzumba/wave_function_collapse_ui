@@ -11,7 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QFrame>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -19,7 +19,7 @@ class Ui_SudokuSceneSideMenu
 {
 public:
 
-    void setupUi(QFrame *SudokuSceneSideMenu)
+    void setupUi(QWidget *SudokuSceneSideMenu)
     {
         if (SudokuSceneSideMenu->objectName().isEmpty())
             SudokuSceneSideMenu->setObjectName("SudokuSceneSideMenu");
@@ -30,7 +30,7 @@ public:
         QMetaObject::connectSlotsByName(SudokuSceneSideMenu);
     } // setupUi
 
-    void retranslateUi(QFrame *SudokuSceneSideMenu)
+    void retranslateUi(QWidget *SudokuSceneSideMenu)
     {
         SudokuSceneSideMenu->setWindowTitle(QCoreApplication::translate("SudokuSceneSideMenu", "SudokuSceneSideMenu", nullptr));
     } // retranslateUi

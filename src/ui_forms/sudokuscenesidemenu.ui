@@ -4,7 +4,7 @@
     <comment/>
     <exportmacro/>
     <class>SudokuSceneSideMenu</class>
-    <widget class="QFrame" name="SudokuSceneSideMenu">
+    <widget class="QWidget" name="SudokuSceneSideMenu">
         <property name="geometry">
             <rect>
                 <x>0</x>

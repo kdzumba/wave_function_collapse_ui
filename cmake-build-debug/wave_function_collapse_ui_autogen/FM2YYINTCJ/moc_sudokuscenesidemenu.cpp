@@ -74,7 +74,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSSudokuSceneSideMenuENDCLASS[] = 
 };
 
 Q_CONSTINIT const QMetaObject SudokuSceneSideMenu::staticMetaObject = { {
-    QMetaObject::SuperData::link<QFrame::staticMetaObject>(),
+    QMetaObject::SuperData::link<QWidget::staticMetaObject>(),
     qt_meta_stringdata_CLASSSudokuSceneSideMenuENDCLASS.offsetsAndSizes,
     qt_meta_data_CLASSSudokuSceneSideMenuENDCLASS,
     qt_static_metacall,
@@ -104,14 +104,12 @@ void *SudokuSceneSideMenu::qt_metacast(const char *_clname)
     if (!_clname) return nullptr;
     if (!strcmp(_clname, qt_meta_stringdata_CLASSSudokuSceneSideMenuENDCLASS.stringdata0))
         return static_cast<void*>(this);
-    if (!strcmp(_clname, "AbstractSideMenu"))
-        return static_cast< AbstractSideMenu*>(this);
-    return QFrame::qt_metacast(_clname);
+    return QWidget::qt_metacast(_clname);
 }
 
 int SudokuSceneSideMenu::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QFrame::qt_metacall(_c, _id, _a);
+    _id = QWidget::qt_metacall(_c, _id, _a);
     return _id;
 }
 QT_WARNING_POP

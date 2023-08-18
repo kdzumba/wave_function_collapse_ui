@@ -14,6 +14,9 @@
 #include "../graphics_items/GridTile.h"
 #include "../models/SudokuBlock.h"
 #include "../models/SudokuBoard.h"
+#include "../graphics_items/BoardContainer.h"
+#include "../widgets/ButtonGroup.h"
+#include <QGroupBox>
 
 class SudokuScene : public AbstractScene
 {
@@ -26,9 +29,7 @@ private:
 private:
     std::vector<std::vector<GridTile*>> m_grid_ui;
     SudokuBoard* m_board;
-    static int constexpr BOARD_SIZE = 9;
-    QList<QGraphicsGridLayout*> m_layouts;
-    QList<QGraphicsWidget*> m_containers;
+    BoardContainer* m_sudoku_grid;
 };
 
 

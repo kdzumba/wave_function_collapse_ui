@@ -4,7 +4,7 @@
 
 #ifndef WAVE_FUNCTION_COLLAPSE_UI_ABSTRACTSIDEMENU_H
 #define WAVE_FUNCTION_COLLAPSE_UI_ABSTRACTSIDEMENU_H
-class AbstractSideMenu
+class AbstractSideMenu : public QWidget
 {
 public:
     virtual void activate() = 0;

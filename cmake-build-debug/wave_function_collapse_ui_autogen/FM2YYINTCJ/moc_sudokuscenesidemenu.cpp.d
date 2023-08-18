@@ -132,8 +132,15 @@ C:/Users/User/CLionProjects/wave_function_collapse_ui/cmake-build-debug/wave_fun
   C:/Qt/6.5.1/mingw_64/include/QtGui/qtransform.h \
   C:/Qt/6.5.1/mingw_64/include/QtGui/qwindowdefs.h \
   C:/Qt/6.5.1/mingw_64/include/QtGui/qwindowdefs_win.h \
+  C:/Qt/6.5.1/mingw_64/include/QtWidgets/QAbstractButton \
+  C:/Qt/6.5.1/mingw_64/include/QtWidgets/QBoxLayout \
   C:/Qt/6.5.1/mingw_64/include/QtWidgets/QFrame \
+  C:/Qt/6.5.1/mingw_64/include/QtWidgets/qabstractbutton.h \
+  C:/Qt/6.5.1/mingw_64/include/QtWidgets/qboxlayout.h \
   C:/Qt/6.5.1/mingw_64/include/QtWidgets/qframe.h \
+  C:/Qt/6.5.1/mingw_64/include/QtWidgets/qgridlayout.h \
+  C:/Qt/6.5.1/mingw_64/include/QtWidgets/qlayout.h \
+  C:/Qt/6.5.1/mingw_64/include/QtWidgets/qlayoutitem.h \
   C:/Qt/6.5.1/mingw_64/include/QtWidgets/qsizepolicy.h \
   C:/Qt/6.5.1/mingw_64/include/QtWidgets/qtwidgets-config.h \
   C:/Qt/6.5.1/mingw_64/include/QtWidgets/qtwidgetsexports.h \
@@ -359,4 +366,5 @@ C:/Users/User/CLionProjects/wave_function_collapse_ui/cmake-build-debug/wave_fun
   C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/mingw/x86_64-w64-mingw32/include/vadefs.h \
   C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/mingw/x86_64-w64-mingw32/include/wchar.h \
   C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/mingw/x86_64-w64-mingw32/include/wctype.h \
-  C:/Users/User/CLionProjects/wave_function_collapse_ui/src/AbstractSideMenu.h
+  C:/Users/User/CLionProjects/wave_function_collapse_ui/src/AbstractSideMenu.h \
+  C:/Users/User/CLionProjects/wave_function_collapse_ui/src/widgets/ButtonGroup.h

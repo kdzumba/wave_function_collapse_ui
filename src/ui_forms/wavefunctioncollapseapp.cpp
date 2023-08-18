@@ -6,16 +6,14 @@
 
 #include "wavefunctioncollapseapp.h"
 #include "ui_WaveFunctionCollapseApp.h"
-#include "sudokuscenesidemenu.h"
 #include <QLayout>
 
 WaveFunctionCollapseApp::WaveFunctionCollapseApp(QWidget *parent) : QMainWindow(parent),
 ui(new Ui::WaveFunctionCollapseApp)
 {
-    ui->setupUi(this);
     m_workspace = new GraphicsWorkspace(this);
-    this ->resize(1920, 800);
     this ->setWindowTitle("Wave Function Collapse");
+    ui->setupUi(this);
 }
 
 WaveFunctionCollapseApp::~WaveFunctionCollapseApp()
@@ -26,5 +24,5 @@ WaveFunctionCollapseApp::~WaveFunctionCollapseApp()
 
 void WaveFunctionCollapseApp::run()
 {
-    this -> show();
+    this -> showMaximized();
 }
