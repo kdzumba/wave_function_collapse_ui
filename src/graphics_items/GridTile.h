@@ -14,6 +14,7 @@
 #include <QStyleOptionGraphicsItem>
 #include <QJsonObject>
 #include <QGraphicsLayoutItem>
+#include "../models/SudokuBlock.h"
 
 class GridTile : public QGraphicsLayoutItem, public QGraphicsItem
 {
@@ -25,11 +26,13 @@ class GridTile : public QGraphicsLayoutItem, public QGraphicsItem
     };
 
 public:
-    GridTile(const QString& value, int x, int y, bool is_permanently_collapsed);
+    GridTile(SudokuBlock* model, int x, int y);
+    ~GridTile() override;
     [[nodiscard]] QRectF boundingRect() const override;
     void paint(QPainter* painter, const QStyleOptionGraphicsItem * option, QWidget* widget) override;
     void setGeometry(const QRectF& geometry) override;
     QSizeF sizeHint(Qt::SizeHint which, const QSizeF &constraint) const override;
+    void advance(int step) override;
 public:
     static int constexpr TILE_SIZE = 60;
     static int constexpr POSITION_OFFSET = 10;
@@ -39,6 +42,7 @@ private:
     GridTileStyle m_style;
     std::pair<int, int> m_position;
     bool m_is_permanently_collapsed;
+    SudokuBlock* m_tile_model;
 };
 
 

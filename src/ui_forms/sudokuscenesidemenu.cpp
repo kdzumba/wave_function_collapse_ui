@@ -16,13 +16,28 @@ SudokuSceneSideMenu::SudokuSceneSideMenu(QWidget *parent) :QWidget(parent), ui(n
     setStyleSheet("background: transparent");
 
     auto* solve_button = new Button("Solve");
-    auto* generate_button = new Button("Generate New");
-    auto* reset_button = new Button("Reset");
+    QObject::connect(solve_button, SIGNAL(clicked(bool)), this, SLOT(handleSolveButtonClicked()));
     m_controls_button_group ->add(solve_button);
+
+    auto* reset_button = new Button("Reset");
+    QObject::connect(reset_button, SIGNAL(clicked(bool)), this, SLOT(handleResetButtonClicked()));
+
+    auto* generate_button = new Button("Generate New");
+
     m_controls_button_group ->add(generate_button);
     m_controls_button_group ->add(reset_button);
 }
 
 SudokuSceneSideMenu::~SudokuSceneSideMenu() {
     delete ui;
+}
+
+void SudokuSceneSideMenu::handleSolveButtonClicked()
+{
+    emit solveButtonClicked();
+}
+
+void SudokuSceneSideMenu::handleResetButtonClicked()
+{
+    emit resetButtonClicked();
 }

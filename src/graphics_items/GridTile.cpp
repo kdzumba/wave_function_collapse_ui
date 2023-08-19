@@ -4,11 +4,12 @@
 
 #include "GridTile.h"
 
-GridTile::GridTile(const QString& value, int x, int y, bool isPermanantelyCollapsed)
+GridTile::GridTile(SudokuBlock *model, int x, int y)
 {
-    m_value = new QLabel(value);
+    m_tile_model = model;
+    m_value = new QLabel(QString::number(model -> get_collapsed_state() -> get_value()));
     m_position = std::make_pair(x + POSITION_OFFSET, y + POSITION_OFFSET);
-    m_is_permanently_collapsed = isPermanantelyCollapsed;
+    m_is_permanently_collapsed = model -> get_is_permanently_collapsed();
     this ->setPos(m_position.first, m_position.second);
 }
 
@@ -53,3 +54,16 @@ QSizeF GridTile::sizeHint(Qt::SizeHint which, const QSizeF &constraint) const
     }
     return {};
 }
+
+void GridTile::advance(int step) {
+    qDebug() << "Advancing";
+    update(this -> boundingRect());
+    qDebug() << "IsVisible: " << isVisible();
+    m_value ->setText(QString::number(m_tile_model -> get_collapsed_state() -> get_value()));
+}
+
+GridTile::~GridTile()
+{
+    qDebug() << "Destroying a tile: " << this;
+}
+

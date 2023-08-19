@@ -42,7 +42,7 @@ private:
     bool is_safe(int row, int col, const std::unique_ptr<BlockState>& state);
     SudokuBlock* get_initial_block();
 private:
-    std::vector<std::vector<std::unique_ptr<SudokuBlock>>> m_board;
+    std::vector<std::vector<std::unique_ptr<SudokuBlock>>> m_grid;
     std::vector<std::vector<std::unique_ptr<SudokuBlock>>> m_initial_state;
     SudokuBlock* m_current_collapsed;
     SudokuBlock* m_initial_block;

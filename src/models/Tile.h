@@ -11,6 +11,7 @@ class BlockState
 public:
     explicit BlockState(int value);
     int get_value() const;
+    void set_value(int value) { m_value = value;}
     bool operator==(const BlockState& other) const;
     bool operator!=(const BlockState& other) const;
 private:

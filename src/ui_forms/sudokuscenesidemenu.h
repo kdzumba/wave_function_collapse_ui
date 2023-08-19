@@ -21,6 +21,12 @@ Q_OBJECT
 public:
     explicit SudokuSceneSideMenu(QWidget *parent = nullptr);
     ~SudokuSceneSideMenu() override;
+private slots:
+    void handleSolveButtonClicked();
+    void handleResetButtonClicked();
+signals:
+    void solveButtonClicked();
+    void resetButtonClicked();
 
 private:
     Ui::SudokuSceneSideMenu *ui;

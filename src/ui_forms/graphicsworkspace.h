@@ -16,7 +16,7 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class GraphicsWorkspace; }
 QT_END_NAMESPACE
 
-class GraphicsWorkspace : public QWidget {
+class GraphicsWorkspace : public QGraphicsView {
 Q_OBJECT
 
 public:
@@ -24,12 +24,12 @@ public:
     ~GraphicsWorkspace() override;
 private:
     void init_default_scenes();
+private slots:
+    static void sceneChanged();
 
 private:
     Ui::GraphicsWorkspace *ui;
     std::vector<AbstractScene*> m_scene_states;
-    static int s_current_state_index;
-    QGraphicsView* m_graphics_view;
     QGridLayout* m_main_grid_layout;
 };
 

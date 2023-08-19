@@ -38,7 +38,7 @@ void SudokuBoard::init_board()
             block -> set_coordinate(x, y);
             row.emplace_back(std::move(block));
         }
-        m_board.emplace_back(std::move(row));
+        m_grid.emplace_back(std::move(row));
     }
 }
 
@@ -61,7 +61,7 @@ void SudokuBoard::propagate_collapse_info(int row_number, int col_number, const 
     auto row_exclusions = get_row_exclusions(row_number);
 
     // Remove exclusions from available options of blocks at row_number
-    for(const auto& block : m_board.at(row_number))
+    for(const auto& block : m_grid.at(row_number))
     {
         block->remove_state(state);
         auto new_states = std::vector<std::unique_ptr<BlockState>>();
@@ -75,7 +75,7 @@ void SudokuBoard::propagate_collapse_info(int row_number, int col_number, const 
 
     //remove col_exclusions from available_states of column col_number
     auto col_exclusions = get_col_exclusions(col_number);
-    for(const auto& _row : m_board)
+    for(const auto& _row : m_grid)
     {
         const auto& block = _row.at(col_number);
         block -> remove_state(state);
@@ -95,7 +95,7 @@ void SudokuBoard::propagate_collapse_info(int row_number, int col_number, const 
     {
         for (auto n = 0; n < MIN_FULL_BLOCK_SIZE; n++)
         {
-            const auto& block = m_board.at(m + start_row_index).at(n + start_col_index);
+            const auto& block = m_grid.at(m + start_row_index).at(n + start_col_index);
             block -> remove_state(state);
             auto new_states = std::vector<std::unique_ptr<BlockState>>();
 
@@ -183,12 +183,12 @@ const std::vector<std::vector<std::unique_ptr<SudokuBlock>>>& SudokuBoard::solve
 
     if(s_backtrack_count > 5000)
     {
-        return m_board;
+        return m_grid;
     }
 
     if(next_block == nullptr)
     {
-        return m_board;
+        return m_grid;
     }
     else
     {
@@ -197,7 +197,7 @@ const std::vector<std::vector<std::unique_ptr<SudokuBlock>>>& SudokuBoard::solve
 
     if(!is_fully_solved())
         solve();
-    return m_board;
+    return m_grid;
 }
 
 /**
@@ -230,7 +230,7 @@ int SudokuBoard::generate_random_int(int start, int end) {
 SudokuBlock* SudokuBoard::least_entropy_block()
 {
     std::map<unsigned int, std::vector<SudokuBlock*>> entropy_to_block_map;
-    for(const auto& row : m_board)
+    for(const auto& row : m_grid)
     {
         for(const auto & block : row)
         {
@@ -264,7 +264,7 @@ SudokuBlock* SudokuBoard::least_entropy_block()
 bool SudokuBoard::is_fully_solved() const
 {
     bool is_full = true;
-    for(const auto& row : m_board)
+    for(const auto& row : m_grid)
     {
         for(const auto & col : row)
         {
@@ -288,7 +288,7 @@ void SudokuBoard::print()
     std::cout << std::endl << "_______________________" << std::endl;
 
     int row_count = 0;
-    for(const auto& row : m_board)
+    for(const auto& row : m_grid)
     {
         std::cout << row_count << "| ";
         for(const auto& block : row)
@@ -311,7 +311,7 @@ void SudokuBoard::print()
 std::vector<std::unique_ptr<BlockState>> SudokuBoard::get_row_exclusions(int row_number)
 {
     auto row_exclusions = std::vector<std::unique_ptr<BlockState>>();
-    for(const auto& block : m_board.at(row_number))
+    for(const auto& block : m_grid.at(row_number))
     {
         if(block->get_collapsed_state() != nullptr && block->get_collapsed_state() -> get_value() != 0)
             row_exclusions.emplace_back(std::make_unique<BlockState>(*(block->get_collapsed_state())));
@@ -331,7 +331,7 @@ std::vector<std::unique_ptr<BlockState>> SudokuBoard::get_col_exclusions(int col
 {
     auto col_exclusions = std::vector<std::unique_ptr<BlockState>>();
 
-    for(auto& _row : m_board)
+    for(auto& _row : m_grid)
     {
         const auto& block =  _row.at(col_number);
         if(block->get_collapsed_state() != nullptr && block->get_collapsed_state() -> get_value() != 0)
@@ -358,7 +358,7 @@ std::vector<std::unique_ptr<BlockState>> SudokuBoard::get_sqr_exclusions(int row
     {
         for (auto n = 0; n < MIN_FULL_BLOCK_SIZE; n++)
         {
-            const auto& block = m_board.at(m + start_row_index).at(n + start_col_index);
+            const auto& block = m_grid.at(m + start_row_index).at(n + start_col_index);
             if(block->get_collapsed_state() != nullptr && block->get_collapsed_state() -> get_value() != 0)
                 sqr_exclusions.emplace_back(std::make_unique<BlockState>(*(block->get_collapsed_state())));
         }
@@ -378,11 +378,11 @@ std::vector<std::unique_ptr<BlockState>> SudokuBoard::get_sqr_exclusions(int row
  */
 void SudokuBoard::propagate_decollapse_info(int row, int col, const std::unique_ptr<BlockState>& state)
 {
-    const auto& being_decollapsed = m_board.at(row).at(col).get();
+    const auto& being_decollapsed = m_grid.at(row).at(col).get();
     update_processing_chain(being_decollapsed);
 
     //Every block in row should get state added to their available options
-    for(const auto& block : m_board.at(row))
+    for(const auto& block : m_grid.at(row))
     {
         auto current_row = std::get<0>(block -> get_coordinate());
         auto current_col = std::get<1>(block -> get_coordinate());
@@ -394,7 +394,7 @@ void SudokuBoard::propagate_decollapse_info(int row, int col, const std::unique_
     }
 
     //Every block in col should get state added back to their available options
-    for(const auto& _row : m_board)
+    for(const auto& _row : m_grid)
     {
         const auto& block = _row.at(col);
         auto current_row = std::get<0>(block -> get_coordinate());
@@ -412,7 +412,7 @@ void SudokuBoard::propagate_decollapse_info(int row, int col, const std::unique_
     {
         for(auto n = 0; n < MIN_FULL_BLOCK_SIZE; n++)
         {
-            const auto& block = m_board.at(m + start_row_index).at(n + start_col_index);
+            const auto& block = m_grid.at(m + start_row_index).at(n + start_col_index);
             auto current_row = std::get<0>(block -> get_coordinate());
             auto current_col = std::get<1>(block -> get_coordinate());
 
@@ -428,7 +428,7 @@ void SudokuBoard::propagate_decollapse_info(int row, int col, const std::unique_
  */
 void SudokuBoard::print_available_options()
 {
-    for(const auto& row : m_board)
+    for(const auto& row : m_grid)
     {
         for(const auto& block : row)
         {
@@ -487,7 +487,7 @@ bool SudokuBoard::is_safe(int row, int col, const std::unique_ptr<BlockState>& s
  */
 void SudokuBoard::update_processing_chain(SudokuBlock *old)
 {
-    for(const auto& row : m_board)
+    for(const auto& row : m_grid)
     {
         for(const auto& block : row)
         {
@@ -524,7 +524,7 @@ void SudokuBoard::read_from_file(const std::string &filename)
             ss >> value;
             auto state = std::make_unique<BlockState>(value);
 
-            const auto& block = m_board.at(row_index).at(col_index);
+            const auto& block = m_grid.at(row_index).at(col_index);
             block->set_collapsed_state(std::move(state));
             propagate_collapse_info(row_index, col_index, block->get_collapsed_state());
 
@@ -540,8 +540,9 @@ void SudokuBoard::read_from_file(const std::string &filename)
 
 void SudokuBoard::reset()
 {
-    m_board.clear();
-    init_board();
+
+//    m_grid.clear();
+//    init_board();
     m_current_collapsed = nullptr;
     m_initial_block = nullptr;
     s_stack_counter = 0;
@@ -560,7 +561,7 @@ SudokuBlock *SudokuBoard::get_initial_block()
 {
     std::vector<std::tuple<int, int>> coordinates_to_process;
 
-    for(auto& row : m_board)
+    for(auto& row : m_grid)
     {
         for(const auto& block : row)
         {
@@ -572,10 +573,10 @@ SudokuBlock *SudokuBoard::get_initial_block()
     }
     auto rand_index = generate_random_int(0, (int)coordinates_to_process.size() - 1);
     auto initial_coordinate = coordinates_to_process.at(rand_index);
-    const auto& initial_block = m_board.at(std::get<0>(initial_coordinate)).at(std::get<1>(initial_coordinate));
+    const auto& initial_block = m_grid.at(std::get<0>(initial_coordinate)).at(std::get<1>(initial_coordinate));
     return initial_block.get();
 }
 
 const std::vector<std::vector<std::unique_ptr<SudokuBlock>>> &SudokuBoard::get_current_board() {
-    return m_board;
+    return m_grid;
 }

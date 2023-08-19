@@ -38,20 +38,40 @@ namespace {
 #ifdef QT_MOC_HAS_STRINGDATA
 struct qt_meta_stringdata_CLASSSudokuSceneSideMenuENDCLASS_t {};
 static constexpr auto qt_meta_stringdata_CLASSSudokuSceneSideMenuENDCLASS = QtMocHelpers::stringData(
-    "SudokuSceneSideMenu"
+    "SudokuSceneSideMenu",
+    "solveButtonClicked",
+    "",
+    "resetButtonClicked",
+    "handleSolveButtonClicked",
+    "handleResetButtonClicked"
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSSudokuSceneSideMenuENDCLASS_t {
-    uint offsetsAndSizes[2];
+    uint offsetsAndSizes[12];
     char stringdata0[20];
+    char stringdata1[19];
+    char stringdata2[1];
+    char stringdata3[19];
+    char stringdata4[25];
+    char stringdata5[25];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSSudokuSceneSideMenuENDCLASS_t::offsetsAndSizes) + ofs), len 
 Q_CONSTINIT static const qt_meta_stringdata_CLASSSudokuSceneSideMenuENDCLASS_t qt_meta_stringdata_CLASSSudokuSceneSideMenuENDCLASS = {
     {
-        QT_MOC_LITERAL(0, 19)   // "SudokuSceneSideMenu"
+        QT_MOC_LITERAL(0, 19),  // "SudokuSceneSideMenu"
+        QT_MOC_LITERAL(20, 18),  // "solveButtonClicked"
+        QT_MOC_LITERAL(39, 0),  // ""
+        QT_MOC_LITERAL(40, 18),  // "resetButtonClicked"
+        QT_MOC_LITERAL(59, 24),  // "handleSolveButtonClicked"
+        QT_MOC_LITERAL(84, 24)   // "handleResetButtonClicked"
     },
-    "SudokuSceneSideMenu"
+    "SudokuSceneSideMenu",
+    "solveButtonClicked",
+    "",
+    "resetButtonClicked",
+    "handleSolveButtonClicked",
+    "handleResetButtonClicked"
 };
 #undef QT_MOC_LITERAL
 #endif // !QT_MOC_HAS_STRING_DATA
@@ -63,12 +83,28 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSSudokuSceneSideMenuENDCLASS[] = 
       11,       // revision
        0,       // classname
        0,    0, // classinfo
-       0,    0, // methods
+       4,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       0,       // signalCount
+       2,       // signalCount
+
+ // signals: name, argc, parameters, tag, flags, initial metatype offsets
+       1,    0,   38,    2, 0x06,    1 /* Public */,
+       3,    0,   39,    2, 0x06,    2 /* Public */,
+
+ // slots: name, argc, parameters, tag, flags, initial metatype offsets
+       4,    0,   40,    2, 0x08,    3 /* Private */,
+       5,    0,   41,    2, 0x08,    4 /* Private */,
+
+ // signals: parameters
+    QMetaType::Void,
+    QMetaType::Void,
+
+ // slots: parameters
+    QMetaType::Void,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -81,16 +117,48 @@ Q_CONSTINIT const QMetaObject SudokuSceneSideMenu::staticMetaObject = { {
     nullptr,
     qt_incomplete_metaTypeArray<qt_meta_stringdata_CLASSSudokuSceneSideMenuENDCLASS_t,
         // Q_OBJECT / Q_GADGET
-        QtPrivate::TypeAndForceComplete<SudokuSceneSideMenu, std::true_type>
+        QtPrivate::TypeAndForceComplete<SudokuSceneSideMenu, std::true_type>,
+        // method 'solveButtonClicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'resetButtonClicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'handleSolveButtonClicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'handleResetButtonClicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
 } };
 
 void SudokuSceneSideMenu::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
-    (void)_o;
-    (void)_id;
-    (void)_c;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        auto *_t = static_cast<SudokuSceneSideMenu *>(_o);
+        (void)_t;
+        switch (_id) {
+        case 0: _t->solveButtonClicked(); break;
+        case 1: _t->resetButtonClicked(); break;
+        case 2: _t->handleSolveButtonClicked(); break;
+        case 3: _t->handleResetButtonClicked(); break;
+        default: ;
+        }
+    } else if (_c == QMetaObject::IndexOfMethod) {
+        int *result = reinterpret_cast<int *>(_a[0]);
+        {
+            using _t = void (SudokuSceneSideMenu::*)();
+            if (_t _q_method = &SudokuSceneSideMenu::solveButtonClicked; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
+                *result = 0;
+                return;
+            }
+        }
+        {
+            using _t = void (SudokuSceneSideMenu::*)();
+            if (_t _q_method = &SudokuSceneSideMenu::resetButtonClicked; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
+                *result = 1;
+                return;
+            }
+        }
+    }
     (void)_a;
 }
 
@@ -110,6 +178,29 @@ void *SudokuSceneSideMenu::qt_metacast(const char *_clname)
 int SudokuSceneSideMenu::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QWidget::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 4)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 4;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 4)
+            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
+        _id -= 4;
+    }
     return _id;
+}
+
+// SIGNAL 0
+void SudokuSceneSideMenu::solveButtonClicked()
+{
+    QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
+}
+
+// SIGNAL 1
+void SudokuSceneSideMenu::resetButtonClicked()
+{
+    QMetaObject::activate(this, &staticMetaObject, 1, nullptr);
 }
 QT_WARNING_POP

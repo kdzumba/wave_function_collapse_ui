@@ -4,10 +4,16 @@
 
 #include <algorithm>
 #include <utility>
+#include <iostream>
 #include "SudokuBlock.h"
 
 SudokuBlock::SudokuBlock(): m_previous(nullptr), m_is_current_block(false), m_coordinate(std::make_tuple(0, 0)),
 m_is_permanently_collapsed(false)
+{
+    reset_available_options();
+}
+
+void SudokuBlock::reset_available_options()
 {
     for(int i = 1; i <= 9; i++)
     {
@@ -132,4 +138,9 @@ void SudokuBlock::set_permanently_collapsed(bool is_collapsed)
     //permanently collapsed blocks should have a maximum entropy and no available states
     m_is_permanently_collapsed = is_collapsed;
     m_available_states.clear();
+}
+
+SudokuBlock::~SudokuBlock()
+{
+    std::cout << "Destroying Sudoku Block: " << this << std::endl;
 }

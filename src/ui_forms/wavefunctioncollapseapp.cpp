@@ -8,21 +8,19 @@
 #include "ui_WaveFunctionCollapseApp.h"
 #include <QLayout>
 
-WaveFunctionCollapseApp::WaveFunctionCollapseApp(QWidget *parent) : QMainWindow(parent),
-ui(new Ui::WaveFunctionCollapseApp)
+WaveFunctionCollapseApp::WaveFunctionCollapseApp(QWidget *parent) : QMainWindow(parent)
 {
     m_workspace = new GraphicsWorkspace(this);
     this ->setWindowTitle("Wave Function Collapse");
-    ui->setupUi(this);
+    this ->setCentralWidget(m_workspace);
 }
 
 WaveFunctionCollapseApp::~WaveFunctionCollapseApp()
 {
-    delete ui;
     delete m_workspace;
 }
 
 void WaveFunctionCollapseApp::run()
 {
-    this -> show();
+    this -> showMaximized();
 }

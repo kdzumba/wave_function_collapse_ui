@@ -22,9 +22,12 @@
 
 class SudokuScene : public AbstractScene
 {
+    Q_OBJECT
 public:
     explicit SudokuScene(const std::string& filename, QWidget* parent = nullptr);
+public slots:
     void animate() override;
+    void reset();
 private:
     void init();
     void arrangeItems();

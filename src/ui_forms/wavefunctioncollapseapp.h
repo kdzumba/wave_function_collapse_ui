@@ -9,11 +9,6 @@
 #include "graphicsworkspace.h"
 #include "../AbstractSideMenu.h"
 
-
-QT_BEGIN_NAMESPACE
-namespace Ui { class WaveFunctionCollapseApp; }
-QT_END_NAMESPACE
-
 class WaveFunctionCollapseApp : public QMainWindow
 {
     Q_OBJECT
@@ -23,7 +18,6 @@ public:
     void run();
 
 private:
-    Ui::WaveFunctionCollapseApp *ui;
     std::vector<AbstractSideMenu*> m_menus;
     GraphicsWorkspace* m_workspace;
 };
