@@ -13,13 +13,14 @@ SudokuSceneSideMenu::SudokuSceneSideMenu(QWidget *parent) :QWidget(parent), ui(n
 {
     ui->setupUi(this);
     m_controls_button_group = new ButtonGroup(this);
+    setStyleSheet("background: transparent");
 
     auto* solve_button = new Button("Solve");
     auto* generate_button = new Button("Generate New");
+    auto* reset_button = new Button("Reset");
     m_controls_button_group ->add(solve_button);
     m_controls_button_group ->add(generate_button);
-
-    qDebug() << "menu size: " << this -> width() << " , " << this  -> height();
+    m_controls_button_group ->add(reset_button);
 }
 
 SudokuSceneSideMenu::~SudokuSceneSideMenu() {

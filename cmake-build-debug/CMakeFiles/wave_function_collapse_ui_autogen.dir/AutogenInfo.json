@@ -232,21 +232,9 @@
 			null
 		],
 		[
-			"C:/Users/User/CLionProjects/wave_function_collapse_ui/src/graphics_items/ButtonGroup.h",
-			"MU",
-			"UGM3QNIJL2/moc_ButtonGroup.cpp",
-			null
-		],
-		[
 			"C:/Users/User/CLionProjects/wave_function_collapse_ui/src/graphics_items/GridTile.h",
 			"MU",
 			"UGM3QNIJL2/moc_GridTile.cpp",
-			null
-		],
-		[
-			"C:/Users/User/CLionProjects/wave_function_collapse_ui/src/graphics_items/SudokuControlsMenu.h",
-			"MU",
-			"UGM3QNIJL2/moc_SudokuControlsMenu.cpp",
 			null
 		],
 		[
@@ -396,17 +384,7 @@
 			null
 		],
 		[
-			"C:/Users/User/CLionProjects/wave_function_collapse_ui/src/graphics_items/ButtonGroup.cpp",
-			"MU",
-			null
-		],
-		[
 			"C:/Users/User/CLionProjects/wave_function_collapse_ui/src/graphics_items/GridTile.cpp",
-			"MU",
-			null
-		],
-		[
-			"C:/Users/User/CLionProjects/wave_function_collapse_ui/src/graphics_items/SudokuControlsMenu.cpp",
 			"MU",
 			null
 		],

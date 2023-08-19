@@ -23,13 +23,13 @@ public:
     const std::vector<std::vector<std::unique_ptr<SudokuBlock>>>& get_current_board();
     void print_available_options();
     void print();
+    bool is_fully_solved() const;
 
 private:
     void init_board();
     void read_from_file(const std::string& filename);
     void collapse(SudokuBlock* block);
     SudokuBlock* backtrack();
-    bool is_fully_solved() const;
     static std::tuple<int, int> random_coordinate();
     static int generate_random_int(int start, int end);
     void update_processing_chain(SudokuBlock *old);
@@ -51,8 +51,9 @@ private:
     static int constexpr MIN_FULL_BLOCK_SIZE = 3;
     static int s_stack_counter;
     static int s_retries_count;
-    static int constexpr STACK_COUNTER = 2000;
-    static int constexpr MAX_RETRIES = 100;
+    static int s_backtrack_count;
+    static int constexpr STACK_COUNTER = 30000;
+    static int constexpr MAX_RETRIES = 10000;
 };
 
 #endif //WAVE_FUNCTION_COLLAPSE_SUDOKUBOARD_H

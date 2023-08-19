@@ -8,13 +8,23 @@
 
 SudokuScene::SudokuScene(const std::string& filename, QWidget* parent) : AbstractScene(parent)
 {
+    m_sudoku_grid = new BoardContainer;
+    m_sudoku_menu = new SudokuSceneSideMenu;
+    m_sudoku_menu_proxy = this ->addWidget(m_sudoku_menu);
+
+    m_scene_container = new QGraphicsWidget;
+    m_scene_layout = new QGraphicsGridLayout(m_scene_container);
+    m_scene_layout ->addItem(m_sudoku_grid, 0,0);
+    m_scene_layout ->addItem(m_sudoku_menu_proxy, 1, 0);
+    this ->addItem(m_scene_container);
+
     //Generate a random number between 1 and 180 (QGradient::Present have values from 1 to 180)
     auto rand_gradient = Utils::generate_random_int(1, 180);
-    auto gradient = QGradient(QGradient::Preset(rand_gradient));
+//    auto gradient = QGradient(QGradient::Preset(rand_gradient));
+    auto gradient = QGradient(QGradient::GentleCare);
     auto brush = QBrush(gradient);
     this ->setBackgroundBrush(brush);
 
-    m_sudoku_grid = new BoardContainer;
     m_board = new SudokuBoard(filename);
     init();
 }
@@ -31,6 +41,15 @@ void SudokuScene::animate()
  */
 void SudokuScene::init()
 {
+    m_retries_count = 0;
+    while(!(m_board -> is_fully_solved()) && m_retries_count < 10000)
+    {
+        m_board -> reset();
+        m_board -> init_solve();
+        m_board -> solve();
+        m_retries_count++;
+    }
+
     const auto& initial_board = m_board -> get_current_board();
     auto board_size = m_sudoku_grid -> getSize();
 
@@ -41,7 +60,7 @@ void SudokuScene::init()
         {
             auto x = GridTile::TILE_SIZE * row;
             auto y = GridTile::TILE_SIZE * col;
-            const auto& block_model = initial_board.at(col).at(row);
+            const auto& block_model = initial_board.at(row).at(col);
             auto value = block_model -> get_collapsed_state() -> get_value();
             auto is_permanently_collapsed = block_model -> get_is_permanently_collapsed();
             auto tile = new GridTile(QString::number(value), x, y, is_permanently_collapsed);
@@ -78,8 +97,6 @@ void SudokuScene::arrangeItems()
                 }
             }
             m_sudoku_grid ->add(layout, grid_row_index, grid_col_index);
-            const auto& widget = inner_grid_widgets.at(grid_layout_index);
-            this ->addItem(widget);
 
             grid_col_index++;
             grid_layout_index++;

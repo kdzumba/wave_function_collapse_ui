@@ -589,12 +589,8 @@ wave_function_collapse_ui_autogen/timestamp: \
 	C:/Users/User/CLionProjects/wave_function_collapse_ui/src/AbstractSideMenu.h \
 	C:/Users/User/CLionProjects/wave_function_collapse_ui/src/graphics_items/BoardContainer.cpp \
 	C:/Users/User/CLionProjects/wave_function_collapse_ui/src/graphics_items/BoardContainer.h \
-	C:/Users/User/CLionProjects/wave_function_collapse_ui/src/graphics_items/ButtonGroup.cpp \
-	C:/Users/User/CLionProjects/wave_function_collapse_ui/src/graphics_items/ButtonGroup.h \
 	C:/Users/User/CLionProjects/wave_function_collapse_ui/src/graphics_items/GridTile.cpp \
 	C:/Users/User/CLionProjects/wave_function_collapse_ui/src/graphics_items/GridTile.h \
-	C:/Users/User/CLionProjects/wave_function_collapse_ui/src/graphics_items/SudokuControlsMenu.cpp \
-	C:/Users/User/CLionProjects/wave_function_collapse_ui/src/graphics_items/SudokuControlsMenu.h \
 	C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/SudokuBlock.cpp \
 	C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/SudokuBlock.h \
 	C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/SudokuBoard.cpp \

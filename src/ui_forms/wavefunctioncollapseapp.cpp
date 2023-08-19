@@ -24,5 +24,5 @@ WaveFunctionCollapseApp::~WaveFunctionCollapseApp()
 
 void WaveFunctionCollapseApp::run()
 {
-    this -> showMaximized();
+    this -> show();
 }

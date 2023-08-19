@@ -16,7 +16,9 @@
 #include "../models/SudokuBoard.h"
 #include "../graphics_items/BoardContainer.h"
 #include "../widgets/ButtonGroup.h"
+#include "../ui_forms/sudokuscenesidemenu.h"
 #include <QGroupBox>
+#include <QGraphicsProxyWidget>
 
 class SudokuScene : public AbstractScene
 {
@@ -29,7 +31,12 @@ private:
 private:
     std::vector<std::vector<GridTile*>> m_grid_ui;
     SudokuBoard* m_board;
+    int m_retries_count;
     BoardContainer* m_sudoku_grid;
+    QGraphicsProxyWidget* m_sudoku_menu_proxy;
+    SudokuSceneSideMenu* m_sudoku_menu;
+    QGraphicsGridLayout* m_scene_layout;
+    QGraphicsWidget* m_scene_container;
 };
 
 

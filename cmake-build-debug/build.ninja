@@ -161,22 +161,6 @@ build CMakeFiles/wave_function_collapse_ui.dir/src/widgets/ButtonGroup.cpp.obj: 
   OBJECT_DIR = CMakeFiles\wave_function_collapse_ui.dir
   OBJECT_FILE_DIR = CMakeFiles\wave_function_collapse_ui.dir\src\widgets
 
-build CMakeFiles/wave_function_collapse_ui.dir/src/graphics_items/SudokuControlsMenu.cpp.obj: CXX_COMPILER__wave_function_collapse_ui_unscanned_Debug C$:/Users/User/CLionProjects/wave_function_collapse_ui/src/graphics_items/SudokuControlsMenu.cpp || cmake_object_order_depends_target_wave_function_collapse_ui
-  DEFINES = -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64
-  DEP_FILE = CMakeFiles\wave_function_collapse_ui.dir\src\graphics_items\SudokuControlsMenu.cpp.obj.d
-  FLAGS = -g -fdiagnostics-color=always
-  INCLUDES = -IC:/Users/User/CLionProjects/wave_function_collapse_ui/cmake-build-debug/wave_function_collapse_ui_autogen/include -isystem C:/Qt/6.5.1/mingw_64/include/QtCore -isystem C:/Qt/6.5.1/mingw_64/include -isystem C:/Qt/6.5.1/mingw_64/mkspecs/win32-g++ -isystem C:/Qt/6.5.1/mingw_64/include/QtGui -isystem C:/Qt/6.5.1/mingw_64/include/QtWidgets
-  OBJECT_DIR = CMakeFiles\wave_function_collapse_ui.dir
-  OBJECT_FILE_DIR = CMakeFiles\wave_function_collapse_ui.dir\src\graphics_items
-
-build CMakeFiles/wave_function_collapse_ui.dir/src/graphics_items/ButtonGroup.cpp.obj: CXX_COMPILER__wave_function_collapse_ui_unscanned_Debug C$:/Users/User/CLionProjects/wave_function_collapse_ui/src/graphics_items/ButtonGroup.cpp || cmake_object_order_depends_target_wave_function_collapse_ui
-  DEFINES = -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64
-  DEP_FILE = CMakeFiles\wave_function_collapse_ui.dir\src\graphics_items\ButtonGroup.cpp.obj.d
-  FLAGS = -g -fdiagnostics-color=always
-  INCLUDES = -IC:/Users/User/CLionProjects/wave_function_collapse_ui/cmake-build-debug/wave_function_collapse_ui_autogen/include -isystem C:/Qt/6.5.1/mingw_64/include/QtCore -isystem C:/Qt/6.5.1/mingw_64/include -isystem C:/Qt/6.5.1/mingw_64/mkspecs/win32-g++ -isystem C:/Qt/6.5.1/mingw_64/include/QtGui -isystem C:/Qt/6.5.1/mingw_64/include/QtWidgets
-  OBJECT_DIR = CMakeFiles\wave_function_collapse_ui.dir
-  OBJECT_FILE_DIR = CMakeFiles\wave_function_collapse_ui.dir\src\graphics_items
-
 
 # =============================================================================
 # Link build statements for EXECUTABLE target wave_function_collapse_ui
@@ -185,7 +169,7 @@ build CMakeFiles/wave_function_collapse_ui.dir/src/graphics_items/ButtonGroup.cp
 #############################################
 # Link the executable wave_function_collapse_ui.exe
 
-build wave_function_collapse_ui.exe: CXX_EXECUTABLE_LINKER__wave_function_collapse_ui_Debug CMakeFiles/wave_function_collapse_ui.dir/wave_function_collapse_ui_autogen/mocs_compilation.cpp.obj CMakeFiles/wave_function_collapse_ui.dir/main.cpp.obj CMakeFiles/wave_function_collapse_ui.dir/src/ui_forms/wavefunctioncollapseapp.cpp.obj CMakeFiles/wave_function_collapse_ui.dir/src/ui_forms/graphicsworkspace.cpp.obj CMakeFiles/wave_function_collapse_ui.dir/src/ui_forms/sudokuscenesidemenu.cpp.obj CMakeFiles/wave_function_collapse_ui.dir/src/scenes/SudokuScene.cpp.obj CMakeFiles/wave_function_collapse_ui.dir/src/graphics_items/GridTile.cpp.obj CMakeFiles/wave_function_collapse_ui.dir/src/models/SudokuBoard.cpp.obj CMakeFiles/wave_function_collapse_ui.dir/src/models/SudokuBlock.cpp.obj CMakeFiles/wave_function_collapse_ui.dir/src/models/Tile.cpp.obj CMakeFiles/wave_function_collapse_ui.dir/src/graphics_items/BoardContainer.cpp.obj CMakeFiles/wave_function_collapse_ui.dir/src/utils.cpp.obj CMakeFiles/wave_function_collapse_ui.dir/src/widgets/Button.cpp.obj CMakeFiles/wave_function_collapse_ui.dir/src/widgets/ButtonGroup.cpp.obj CMakeFiles/wave_function_collapse_ui.dir/src/graphics_items/SudokuControlsMenu.cpp.obj CMakeFiles/wave_function_collapse_ui.dir/src/graphics_items/ButtonGroup.cpp.obj | C$:/Qt/6.5.1/mingw_64/lib/libQt6Widgets.a C$:/Qt/6.5.1/mingw_64/lib/libQt6Gui.a C$:/Qt/6.5.1/mingw_64/lib/libQt6Core.a || wave_function_collapse_ui_autogen wave_function_collapse_ui_autogen_timestamp_deps
+build wave_function_collapse_ui.exe: CXX_EXECUTABLE_LINKER__wave_function_collapse_ui_Debug CMakeFiles/wave_function_collapse_ui.dir/wave_function_collapse_ui_autogen/mocs_compilation.cpp.obj CMakeFiles/wave_function_collapse_ui.dir/main.cpp.obj CMakeFiles/wave_function_collapse_ui.dir/src/ui_forms/wavefunctioncollapseapp.cpp.obj CMakeFiles/wave_function_collapse_ui.dir/src/ui_forms/graphicsworkspace.cpp.obj CMakeFiles/wave_function_collapse_ui.dir/src/ui_forms/sudokuscenesidemenu.cpp.obj CMakeFiles/wave_function_collapse_ui.dir/src/scenes/SudokuScene.cpp.obj CMakeFiles/wave_function_collapse_ui.dir/src/graphics_items/GridTile.cpp.obj CMakeFiles/wave_function_collapse_ui.dir/src/models/SudokuBoard.cpp.obj CMakeFiles/wave_function_collapse_ui.dir/src/models/SudokuBlock.cpp.obj CMakeFiles/wave_function_collapse_ui.dir/src/models/Tile.cpp.obj CMakeFiles/wave_function_collapse_ui.dir/src/graphics_items/BoardContainer.cpp.obj CMakeFiles/wave_function_collapse_ui.dir/src/utils.cpp.obj CMakeFiles/wave_function_collapse_ui.dir/src/widgets/Button.cpp.obj CMakeFiles/wave_function_collapse_ui.dir/src/widgets/ButtonGroup.cpp.obj | C$:/Qt/6.5.1/mingw_64/lib/libQt6Widgets.a C$:/Qt/6.5.1/mingw_64/lib/libQt6Gui.a C$:/Qt/6.5.1/mingw_64/lib/libQt6Core.a || wave_function_collapse_ui_autogen wave_function_collapse_ui_autogen_timestamp_deps
   FLAGS = -g
   LINK_LIBRARIES = C:/Qt/6.5.1/mingw_64/lib/libQt6Widgets.a  C:/Qt/6.5.1/mingw_64/lib/libQt6Gui.a  C:/Qt/6.5.1/mingw_64/lib/libQt6Core.a  -lmpr  -luserenv  -ld3d11  -ldxgi  -ldxguid  -ldcomp  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\wave_function_collapse_ui.dir

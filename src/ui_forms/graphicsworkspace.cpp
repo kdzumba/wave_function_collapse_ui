@@ -8,7 +8,6 @@
 #include "ui_GraphicsWorkspace.h"
 #include "sudokuscenesidemenu.h"
 #include "../scenes/SudokuScene.h"
-#include "../widgets/Button.h"
 #include <QBrush>
 #include <QPushButton>
 
@@ -21,12 +20,8 @@ GraphicsWorkspace::GraphicsWorkspace(QWidget *parent) : QWidget(parent), ui(new 
 
     m_graphics_view = new QGraphicsView;
     m_graphics_view ->setScene(m_scene_states.at(0));
-
-    m_sudoku_menu = new SudokuSceneSideMenu(m_graphics_view);
     m_main_grid_layout = new QGridLayout(this);
-
     m_main_grid_layout ->addWidget(m_graphics_view);
-    m_main_grid_layout ->addWidget(m_sudoku_menu);
 }
 
 GraphicsWorkspace::~GraphicsWorkspace()
@@ -39,6 +34,6 @@ GraphicsWorkspace::~GraphicsWorkspace()
 void GraphicsWorkspace::init_default_scenes()
 {
     //Initialize scenes at the same time as their menus
-    auto sudoku_scene = new SudokuScene("puzzles/puzzle9.txt", this);
+    auto sudoku_scene = new SudokuScene("puzzles/puzzle11.txt", this);
     m_scene_states.emplace_back(sudoku_scene);
 }

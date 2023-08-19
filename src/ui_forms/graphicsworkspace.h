@@ -31,7 +31,6 @@ private:
     static int s_current_state_index;
     QGraphicsView* m_graphics_view;
     QGridLayout* m_main_grid_layout;
-    SudokuSceneSideMenu* m_sudoku_menu;
 };
 
 

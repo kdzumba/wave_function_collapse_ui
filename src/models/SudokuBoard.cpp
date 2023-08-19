@@ -12,6 +12,7 @@
 
 int SudokuBoard::s_stack_counter = 0;
 int SudokuBoard::s_retries_count = 0;
+int SudokuBoard::s_backtrack_count = 0;
 
 SudokuBoard::SudokuBoard()
 {
@@ -43,11 +44,6 @@ void SudokuBoard::init_board()
 
 void SudokuBoard::init_solve()
 {
-    auto start_coordinate = random_coordinate();
-    int x = 2; //std::get<0>(start_coordinate);
-    int y = 8;//std::get<1>(start_coordinate);
-
-//    const auto& initial_block = m_board.at(x).at(y);
     collapse(get_initial_block());
 }
 
@@ -112,10 +108,6 @@ void SudokuBoard::propagate_collapse_info(int row_number, int col_number, const 
 
 void SudokuBoard::collapse(SudokuBlock* block)
 {
-    std::cout << "Before" << std::endl;
-    std::cout << "Setting block: x: " << std::get<0>(block -> get_coordinate()) << " , y: " << std::get<1>(block -> get_coordinate()) << std::endl;
-    print();
-
     auto rand_index = generate_random_int(0, (int) block->get_available_states().size() - 1);
     auto next_state = std::make_unique<BlockState>(*(block->get_available_states().at(rand_index)));
 
@@ -132,19 +124,11 @@ void SudokuBoard::collapse(SudokuBlock* block)
     if(block != m_initial_block && block != m_current_collapsed)
         block->set_previous_block(m_current_collapsed);
 
-    if(block -> get_previous_block() == block)
-        std::cout << "Pointing to itself" << std::endl;
-
     auto row_number = std::get<0>(block -> get_coordinate());
     auto col_number = std::get<1>(block -> get_coordinate());
 
-    if(m_current_collapsed == block)
-        std::cout << "current_collapsed and block to collapse are the same" << std::endl;
-
     m_current_collapsed = block;
     propagate_collapse_info(row_number, col_number, block -> get_collapsed_state());
-    std::cout << "After: " << std::endl;
-    print();
 }
 
 /**
@@ -154,7 +138,7 @@ void SudokuBoard::collapse(SudokuBlock* block)
  */
 SudokuBlock* SudokuBoard::backtrack()
 {
-    std::cout << "Backtracking" << std::endl;
+    s_backtrack_count++;
     auto to_reprocess = m_current_collapsed;
 
     //We need to go back through all previously set blocks until we find one where we could have
@@ -164,16 +148,12 @@ SudokuBlock* SudokuBoard::backtrack()
         to_reprocess = to_reprocess -> get_previous_block();
     }
 
-    if(to_reprocess == m_current_collapsed)
-        std::cout << "m_current_collapsed to be re_processed" << std::endl;
-
     if(to_reprocess == nullptr)
     {
         //If we got here, it means we went all the way back to the first set block, which means the starting block
         //Was not the right one to start with. We need to reset the board and re-solve from scratch.
         //The option of finding another block that is unset doesn't solve the problem of there being a block in this
         //to_reprocess path that has an entropy of 0
-        std::cout << "nullptr scenario occurred" << std::endl;
         return nullptr;
     }
 
@@ -190,6 +170,7 @@ SudokuBlock* SudokuBoard::backtrack()
 
 /**
  * Continuously solves a sudoku puzzle using wave function collapse and backtracking
+ * Client code should control how many retries we make. This is s recursive function and can exhaust stack resources
  * @return A 2-dimensional vector of unique_ptr to SudokuBlock, which represents a fully solved sudoku
  */
 const std::vector<std::vector<std::unique_ptr<SudokuBlock>>>& SudokuBoard::solve()
@@ -200,33 +181,22 @@ const std::vector<std::vector<std::unique_ptr<SudokuBlock>>>& SudokuBoard::solve
     if(next_block -> get_entropy() == 0)
         next_block = backtrack();
 
+    if(s_backtrack_count > 5000)
+    {
+        return m_board;
+    }
+
     if(next_block == nullptr)
     {
-        if(s_retries_count < MAX_RETRIES)
-        {
-            std::cout << "Could not solve board, retrying" << std::endl;
-            reset();
-            init_solve();
-        }
-        else
-        {
-            // TODO: Need to handle this scenario by letting the client know that the board can't be solved
-            std::cout << "Failed to solve puzzle after " << MAX_RETRIES << " attempts" << std::endl;
-            return m_board;
-        }
+        return m_board;
     }
     else
     {
         collapse(next_block);
     }
 
-//    print();
-
-    if(!is_fully_solved() && s_retries_count < MAX_RETRIES && s_stack_counter < STACK_COUNTER)
+    if(!is_fully_solved())
         solve();
-    std::cout << "Number of retries: " << s_retries_count << std::endl;
-    std::cout << "Stack size: " << s_stack_counter << std::endl;
-
     return m_board;
 }
 
@@ -285,9 +255,6 @@ SudokuBlock* SudokuBoard::least_entropy_block()
     auto rand_index = generate_random_int(0, (int)(min_entropy.size() - 1));
 
     auto least_entropy_block = min_entropy.at(rand_index);
-    if(least_entropy_block == m_current_collapsed)
-        std::cout << "current_collapsed and least_entropy are the same" << std::endl;
-
     return least_entropy_block;
 }
 
@@ -578,6 +545,7 @@ void SudokuBoard::reset()
     m_current_collapsed = nullptr;
     m_initial_block = nullptr;
     s_stack_counter = 0;
+    s_backtrack_count = 0;
     s_retries_count++;
 
     //TODO: Don't like having to read from file again, will need to find a way to save the initial state

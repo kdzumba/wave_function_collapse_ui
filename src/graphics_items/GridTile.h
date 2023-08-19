@@ -31,7 +31,7 @@ public:
     void setGeometry(const QRectF& geometry) override;
     QSizeF sizeHint(Qt::SizeHint which, const QSizeF &constraint) const override;
 public:
-    static int constexpr TILE_SIZE = 75;
+    static int constexpr TILE_SIZE = 60;
     static int constexpr POSITION_OFFSET = 10;
     static int constexpr PEN_WIDTH = 2;
 private:

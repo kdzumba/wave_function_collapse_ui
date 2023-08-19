@@ -41,10 +41,6 @@ add_executable(wave_function_collapse_ui main.cpp
         src/widgets/Button.h
         src/widgets/ButtonGroup.cpp
         src/widgets/ButtonGroup.h
-        src/graphics_items/SudokuControlsMenu.cpp
-        src/graphics_items/SudokuControlsMenu.h
-        src/graphics_items/ButtonGroup.cpp
-        src/graphics_items/ButtonGroup.h
 )
 target_link_libraries(wave_function_collapse_ui
         Qt::Core

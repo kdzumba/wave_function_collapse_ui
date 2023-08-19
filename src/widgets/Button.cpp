@@ -7,8 +7,9 @@
 Button::Button(const QString &text, QWidget *parent) : QPushButton(text, parent), m_text(text)
 {
     this ->setStyleSheet("background-color: white;"
-                         "padding: 20px; "
                          "border-radius: 10px; "
-                         "width: 200px;"
-                         "color: red");
+                         "font-family: Arial;"
+                         "font-size: 18px;"
+                         "padding: 20px;"
+                         "color: black");
 }
