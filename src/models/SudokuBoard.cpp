@@ -540,9 +540,20 @@ void SudokuBoard::read_from_file(const std::string &filename)
 
 void SudokuBoard::reset()
 {
-
-//    m_grid.clear();
-//    init_board();
+    reset_available_states();
+    for(const auto& row : m_grid)
+    {
+        for(const auto& block : row)
+        {
+            auto value = block -> get_is_permanently_collapsed() ? block -> get_collapsed_state() -> get_value() : 0;
+            auto state = std::make_unique<BlockState>(value);
+            auto coordinate = block -> get_coordinate();
+            block ->set_collapsed_state(std::move(state));
+            block ->make_current_block(false);
+            block ->set_previous_block(nullptr);
+            propagate_collapse_info(std::get<0>(coordinate), std::get<1>(coordinate), block -> get_collapsed_state());
+        }
+    }
     m_current_collapsed = nullptr;
     m_initial_block = nullptr;
     s_stack_counter = 0;
@@ -550,7 +561,7 @@ void SudokuBoard::reset()
     s_retries_count++;
 
     //TODO: Don't like having to read from file again, will need to find a way to save the initial state
-    read_from_file(m_puzzle_file);
+//    read_from_file(m_puzzle_file);
 }
 
 /**
@@ -579,4 +590,15 @@ SudokuBlock *SudokuBoard::get_initial_block()
 
 const std::vector<std::vector<std::unique_ptr<SudokuBlock>>> &SudokuBoard::get_current_board() {
     return m_grid;
+}
+
+void SudokuBoard::reset_available_states()
+{
+    for(const auto& row : m_grid)
+    {
+        for(const auto& block : row)
+        {
+            block->reset_available_states();
+        }
+    }
 }

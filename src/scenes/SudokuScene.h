@@ -28,6 +28,7 @@ public:
 public slots:
     void animate() override;
     void reset();
+    void generate();
 private:
     void init();
     void arrangeItems();

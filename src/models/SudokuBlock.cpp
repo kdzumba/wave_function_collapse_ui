@@ -10,11 +10,12 @@
 SudokuBlock::SudokuBlock(): m_previous(nullptr), m_is_current_block(false), m_coordinate(std::make_tuple(0, 0)),
 m_is_permanently_collapsed(false)
 {
-    reset_available_options();
+    reset_available_states();
 }
 
-void SudokuBlock::reset_available_options()
+void SudokuBlock::reset_available_states()
 {
+    m_available_states.clear();
     for(int i = 1; i <= 9; i++)
     {
         auto block = std::make_unique<BlockState>(i);

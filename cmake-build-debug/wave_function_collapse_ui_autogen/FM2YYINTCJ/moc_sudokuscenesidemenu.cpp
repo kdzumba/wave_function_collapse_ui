@@ -42,18 +42,22 @@ static constexpr auto qt_meta_stringdata_CLASSSudokuSceneSideMenuENDCLASS = QtMo
     "solveButtonClicked",
     "",
     "resetButtonClicked",
+    "generateButtonClicked",
     "handleSolveButtonClicked",
-    "handleResetButtonClicked"
+    "handleResetButtonClicked",
+    "handleGenerateButtonClicked"
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSSudokuSceneSideMenuENDCLASS_t {
-    uint offsetsAndSizes[12];
+    uint offsetsAndSizes[16];
     char stringdata0[20];
     char stringdata1[19];
     char stringdata2[1];
     char stringdata3[19];
-    char stringdata4[25];
+    char stringdata4[22];
     char stringdata5[25];
+    char stringdata6[25];
+    char stringdata7[28];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSSudokuSceneSideMenuENDCLASS_t::offsetsAndSizes) + ofs), len 
@@ -63,15 +67,19 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSSudokuSceneSideMenuENDCLASS_t q
         QT_MOC_LITERAL(20, 18),  // "solveButtonClicked"
         QT_MOC_LITERAL(39, 0),  // ""
         QT_MOC_LITERAL(40, 18),  // "resetButtonClicked"
-        QT_MOC_LITERAL(59, 24),  // "handleSolveButtonClicked"
-        QT_MOC_LITERAL(84, 24)   // "handleResetButtonClicked"
+        QT_MOC_LITERAL(59, 21),  // "generateButtonClicked"
+        QT_MOC_LITERAL(81, 24),  // "handleSolveButtonClicked"
+        QT_MOC_LITERAL(106, 24),  // "handleResetButtonClicked"
+        QT_MOC_LITERAL(131, 27)   // "handleGenerateButtonClicked"
     },
     "SudokuSceneSideMenu",
     "solveButtonClicked",
     "",
     "resetButtonClicked",
+    "generateButtonClicked",
     "handleSolveButtonClicked",
-    "handleResetButtonClicked"
+    "handleResetButtonClicked",
+    "handleGenerateButtonClicked"
 };
 #undef QT_MOC_LITERAL
 #endif // !QT_MOC_HAS_STRING_DATA
@@ -83,26 +91,30 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSSudokuSceneSideMenuENDCLASS[] = 
       11,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       6,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       2,       // signalCount
+       3,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   38,    2, 0x06,    1 /* Public */,
-       3,    0,   39,    2, 0x06,    2 /* Public */,
+       1,    0,   50,    2, 0x06,    1 /* Public */,
+       3,    0,   51,    2, 0x06,    2 /* Public */,
+       4,    0,   52,    2, 0x06,    3 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       4,    0,   40,    2, 0x08,    3 /* Private */,
-       5,    0,   41,    2, 0x08,    4 /* Private */,
+       5,    0,   53,    2, 0x08,    4 /* Private */,
+       6,    0,   54,    2, 0x08,    5 /* Private */,
+       7,    0,   55,    2, 0x08,    6 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void,
 
  // slots: parameters
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
 
@@ -122,9 +134,13 @@ Q_CONSTINIT const QMetaObject SudokuSceneSideMenu::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'resetButtonClicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'generateButtonClicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'handleSolveButtonClicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'handleResetButtonClicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'handleGenerateButtonClicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
@@ -138,8 +154,10 @@ void SudokuSceneSideMenu::qt_static_metacall(QObject *_o, QMetaObject::Call _c, 
         switch (_id) {
         case 0: _t->solveButtonClicked(); break;
         case 1: _t->resetButtonClicked(); break;
-        case 2: _t->handleSolveButtonClicked(); break;
-        case 3: _t->handleResetButtonClicked(); break;
+        case 2: _t->generateButtonClicked(); break;
+        case 3: _t->handleSolveButtonClicked(); break;
+        case 4: _t->handleResetButtonClicked(); break;
+        case 5: _t->handleGenerateButtonClicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -155,6 +173,13 @@ void SudokuSceneSideMenu::qt_static_metacall(QObject *_o, QMetaObject::Call _c, 
             using _t = void (SudokuSceneSideMenu::*)();
             if (_t _q_method = &SudokuSceneSideMenu::resetButtonClicked; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
                 *result = 1;
+                return;
+            }
+        }
+        {
+            using _t = void (SudokuSceneSideMenu::*)();
+            if (_t _q_method = &SudokuSceneSideMenu::generateButtonClicked; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
+                *result = 2;
                 return;
             }
         }
@@ -181,13 +206,13 @@ int SudokuSceneSideMenu::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 6;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 6)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 4;
+        _id -= 6;
     }
     return _id;
 }
@@ -202,5 +227,11 @@ void SudokuSceneSideMenu::solveButtonClicked()
 void SudokuSceneSideMenu::resetButtonClicked()
 {
     QMetaObject::activate(this, &staticMetaObject, 1, nullptr);
+}
+
+// SIGNAL 2
+void SudokuSceneSideMenu::generateButtonClicked()
+{
+    QMetaObject::activate(this, &staticMetaObject, 2, nullptr);
 }
 QT_WARNING_POP

@@ -37,7 +37,7 @@ GraphicsWorkspace::~GraphicsWorkspace()
 void GraphicsWorkspace::init_default_scenes()
 {
     //Initialize scenes at the same time as their menus
-    auto sudoku_scene = new SudokuScene("puzzles/puzzle4.txt", this);
+    auto sudoku_scene = new SudokuScene("puzzles/puzzle3.txt", this);
     m_scene_states.emplace_back(sudoku_scene);
 }
 

@@ -24,10 +24,10 @@ public:
     void print_available_options();
     void print();
     bool is_fully_solved() const;
-
+    void read_from_file(const std::string& filename);
+    void reset_available_states();
 private:
     void init_board();
-    void read_from_file(const std::string& filename);
     void collapse(SudokuBlock* block);
     SudokuBlock* backtrack();
     static std::tuple<int, int> random_coordinate();

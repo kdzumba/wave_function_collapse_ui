@@ -31,7 +31,7 @@ public:
     void set_available_states(const std::vector<std::unique_ptr<BlockState>>& options);
     bool get_is_permanently_collapsed() const;
     void set_permanently_collapsed(bool is_collapsed);
-    void reset_available_options();
+    void reset_available_states();
 private:
     SudokuBlock* m_previous;
     bool m_is_current_block;

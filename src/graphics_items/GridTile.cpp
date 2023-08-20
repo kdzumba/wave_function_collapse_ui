@@ -4,6 +4,8 @@
 
 #include "GridTile.h"
 
+int GridTile::s_advance_call_count = 0;
+
 GridTile::GridTile(SudokuBlock *model, int x, int y)
 {
     m_tile_model = model;
@@ -56,10 +58,9 @@ QSizeF GridTile::sizeHint(Qt::SizeHint which, const QSizeF &constraint) const
 }
 
 void GridTile::advance(int step) {
-    qDebug() << "Advancing";
     update(this -> boundingRect());
-    qDebug() << "IsVisible: " << isVisible();
     m_value ->setText(QString::number(m_tile_model -> get_collapsed_state() -> get_value()));
+    qDebug() << "Advances done: " << s_advance_call_count++;
 }
 
 GridTile::~GridTile()

@@ -12,10 +12,12 @@ SudokuScene::SudokuScene(const std::string& filename, QWidget* parent) : Abstrac
     m_sudoku_menu = new SudokuSceneSideMenu;
     QObject::connect(m_sudoku_menu, SIGNAL(solveButtonClicked()), this, SLOT(animate()));
     QObject::connect(m_sudoku_menu, SIGNAL(resetButtonClicked()), this, SLOT(reset()));
-    m_sudoku_menu_proxy = this ->addWidget(m_sudoku_menu);
+    QObject::connect(m_sudoku_menu, SIGNAL(generateButtonClicked()), this, SLOT(generate()));
 
+    m_sudoku_menu_proxy = this ->addWidget(m_sudoku_menu);
     m_scene_container = new QGraphicsWidget;
     m_scene_layout = new QGraphicsGridLayout(m_scene_container);
+
     m_scene_layout ->addItem(m_sudoku_grid, 0,0);
     m_scene_layout ->addItem(m_sudoku_menu_proxy, 1, 0);
     this ->addItem(m_scene_container);
@@ -42,6 +44,8 @@ void SudokuScene::animate()
         m_retries_count++;
     }
     this -> advance();
+    qDebug() << "Done Advancing";
+    GridTile::s_advance_call_count = 0;
 }
 
 /**
@@ -61,8 +65,6 @@ void SudokuScene::init()
             auto x = GridTile::TILE_SIZE * row;
             auto y = GridTile::TILE_SIZE * col;
             const auto& block_model = initial_board.at(row).at(col);
-            auto value = block_model -> get_collapsed_state() -> get_value();
-            auto is_permanently_collapsed = block_model -> get_is_permanently_collapsed();
             auto tile = new GridTile(block_model.get(), x, y);
             this ->addItem(tile);
             _row.emplace_back(tile);
@@ -109,4 +111,26 @@ void SudokuScene::reset()
 {
     m_board -> reset();
     this -> advance();
+}
+
+void SudokuScene::generate()
+{
+    delete m_board;
+    auto file_index = Utils::generate_random_int(1, 11);
+    auto filename = std::string("puzzles/puzzle") + std::to_string(file_index) + ".txt";
+    m_board = new SudokuBoard(filename);
+
+    for(const auto& row : m_grid_ui)
+    {
+        for(const auto& tile : row)
+        {
+            this -> removeItem(tile);
+        }
+    }
+
+    m_grid_ui.clear();
+    this ->removeItem(m_sudoku_grid);
+    m_sudoku_grid = new BoardContainer;
+    m_scene_layout ->addItem(m_sudoku_grid, 0,0);
+    init();
 }

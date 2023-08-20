@@ -21,11 +21,11 @@ SudokuSceneSideMenu::SudokuSceneSideMenu(QWidget *parent) :QWidget(parent), ui(n
 
     auto* reset_button = new Button("Reset");
     QObject::connect(reset_button, SIGNAL(clicked(bool)), this, SLOT(handleResetButtonClicked()));
+    m_controls_button_group ->add(reset_button);
 
     auto* generate_button = new Button("Generate New");
-
+    QObject::connect(generate_button, SIGNAL(clicked(bool)), this, SLOT(handleGenerateButtonClicked()));
     m_controls_button_group ->add(generate_button);
-    m_controls_button_group ->add(reset_button);
 }
 
 SudokuSceneSideMenu::~SudokuSceneSideMenu() {
@@ -40,4 +40,9 @@ void SudokuSceneSideMenu::handleSolveButtonClicked()
 void SudokuSceneSideMenu::handleResetButtonClicked()
 {
     emit resetButtonClicked();
+}
+
+void SudokuSceneSideMenu::handleGenerateButtonClicked()
+{
+    emit generateButtonClicked();
 }

@@ -24,9 +24,11 @@ public:
 private slots:
     void handleSolveButtonClicked();
     void handleResetButtonClicked();
+    void handleGenerateButtonClicked();
 signals:
     void solveButtonClicked();
     void resetButtonClicked();
+    void generateButtonClicked();
 
 private:
     Ui::SudokuSceneSideMenu *ui;

@@ -43,6 +43,8 @@ private:
     std::pair<int, int> m_position;
     bool m_is_permanently_collapsed;
     SudokuBlock* m_tile_model;
+public:
+    static int s_advance_call_count;
 };
 
 
