@@ -35,11 +35,11 @@ SudokuScene::SudokuScene(const std::string& filename, QWidget* parent) : Abstrac
 
 void SudokuScene::animate()
 {
+    m_board -> init_solve();
     auto solve = [&]() -> void{
         m_retries_count = 0;
         while(!(m_board -> is_fully_solved()) && m_retries_count < 10000)
         {
-            m_board -> init_solve();
             m_board -> solve();
             m_retries_count++;
         }
@@ -47,6 +47,7 @@ void SudokuScene::animate()
 
     auto solve_thread = QThread::create(solve);
     solve_thread ->start();
+    solve_thread ->wait();
     qDebug() << "Done Advancing";
     GridTile::s_advance_call_count = 0;
 }
@@ -117,26 +118,34 @@ void SudokuScene::reset()
     };
     auto reset_thread = QThread::create(reset);
     reset_thread->start();
+    reset_thread -> wait();
 }
 
 void SudokuScene::generate()
 {
-    delete m_board;
-    auto file_index = Utils::generate_random_int(1, 11);
-    auto filename = std::string("puzzles/puzzle") + std::to_string(file_index) + ".txt";
-    m_board = new SudokuBoard(filename);
+    qDebug() << "Before generating: " << this -> items().size();
 
+    //Remove all items from m_grid_ui (messes up the indexing in arrangeItems()
     for(const auto& row : m_grid_ui)
     {
-        for(const auto& tile : row)
+        for(auto tile : row)
         {
-            this -> removeItem(tile);
+            this ->removeItem(tile);
         }
     }
-
     m_grid_ui.clear();
-    this ->removeItem(m_sudoku_grid);
+
+    //No need for this board anymore, free up memory and reset to nullptr (avoid gibberish)
+    delete m_board;
+    m_board = nullptr;
+
+    m_sudoku_grid = nullptr;
+
+    auto file_index = Utils::generate_random_int(1, 11);
+    auto filename = std::string("puzzles/puzzle") + std::to_string(file_index) + ".txt";
+
+    m_board = new SudokuBoard(filename);
     m_sudoku_grid = new BoardContainer;
-    m_scene_layout ->addItem(m_sudoku_grid, 0,0);
     init();
+    qDebug() << "After generating: " << this -> items().size();
 }

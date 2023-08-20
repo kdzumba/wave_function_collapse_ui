@@ -600,3 +600,8 @@ void SudokuBoard::reset_available_states()
         }
     }
 }
+
+SudokuBoard::~SudokuBoard()
+{
+    std::cout << "Deleting Board" << std::endl;
+}

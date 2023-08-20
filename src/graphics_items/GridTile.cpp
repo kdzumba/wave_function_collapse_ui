@@ -106,6 +106,7 @@ void GridTile::advance(int step) {
     if(!step) return;
     update(this -> boundingRect());
     m_value ->setText(QString::number(m_tile_model -> get_collapsed_state() -> get_value()));
+    qDebug() << "Advance call count: " << s_advance_call_count;
     qDebug() << "Advances done: " << std::get<0>(m_tile_model -> get_coordinate()) << " " << std::get<1>(m_tile_model -> get_coordinate());
 }
 

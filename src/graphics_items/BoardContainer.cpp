@@ -48,3 +48,8 @@ void BoardContainer::childGridGeometryChanged()
     this -> layout() -> invalidate();
     this -> layout()->activate();
 }
+
+BoardContainer::~BoardContainer()
+{
+    qDebug() << "Destroying the BoardContainer";
+}

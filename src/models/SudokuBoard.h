@@ -19,6 +19,7 @@ class SudokuBoard : public QObject
 public:
     SudokuBoard();
     explicit SudokuBoard(const std::string& filename);
+    ~SudokuBoard();
     void init_solve();
     void reset();
     const std::vector<std::vector<std::unique_ptr<SudokuBlock>>>& solve();
