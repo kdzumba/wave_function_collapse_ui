@@ -19,13 +19,7 @@ GraphicsWorkspace::GraphicsWorkspace(QWidget *parent) : QGraphicsView(parent), u
     this ->setScene(m_scene_states.at(0));
     m_main_grid_layout = new QGridLayout;
     this ->setLayout(m_main_grid_layout);
-
-    QObject::connect(this -> scene(), SIGNAL(changed()), this, SLOT(sceneChanged()));
-
-//    m_graphics_view = new QGraphicsView;
-//    m_graphics_view ->setScene(m_scene_states.at(0));
-//    m_main_grid_layout = new QGridLayout(this);
-//    m_main_grid_layout ->addWidget(m_graphics_view);
+    this ->setRenderHint(QPainter::Antialiasing);
 }
 
 GraphicsWorkspace::~GraphicsWorkspace()

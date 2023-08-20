@@ -44,6 +44,7 @@ void SudokuBlock::set_collapsed_state(std::unique_ptr<BlockState> state)
 {
     remove_state(state);
     m_collapsed_state = std::move(state);
+    emit block_collapsed(1);
 }
 
 

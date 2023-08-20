@@ -129,6 +129,7 @@ void SudokuBoard::collapse(SudokuBlock* block)
 
     m_current_collapsed = block;
     propagate_collapse_info(row_number, col_number, block -> get_collapsed_state());
+    emit block_collapsed();
 }
 
 /**
@@ -559,9 +560,6 @@ void SudokuBoard::reset()
     s_stack_counter = 0;
     s_backtrack_count = 0;
     s_retries_count++;
-
-    //TODO: Don't like having to read from file again, will need to find a way to save the initial state
-//    read_from_file(m_puzzle_file);
 }
 
 /**

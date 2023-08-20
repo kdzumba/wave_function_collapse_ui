@@ -15,9 +15,13 @@
 #include <QJsonObject>
 #include <QGraphicsLayoutItem>
 #include "../models/SudokuBlock.h"
+#include <QGraphicsTextItem>
+#include <QGraphicsGridLayout>
+#include <QGraphicsProxyWidget>
 
-class GridTile : public QGraphicsLayoutItem, public QGraphicsItem
+class GridTile : public QObject, public QGraphicsLayoutItem, public QGraphicsItem
 {
+    Q_OBJECT
     struct GridTileStyle
     {
         QString tile_hovered_color;
@@ -32,13 +36,16 @@ public:
     void paint(QPainter* painter, const QStyleOptionGraphicsItem * option, QWidget* widget) override;
     void setGeometry(const QRectF& geometry) override;
     QSizeF sizeHint(Qt::SizeHint which, const QSizeF &constraint) const override;
+public slots:
     void advance(int step) override;
 public:
-    static int constexpr TILE_SIZE = 60;
+    static int constexpr TILE_SIZE = 80;
     static int constexpr POSITION_OFFSET = 10;
     static int constexpr PEN_WIDTH = 2;
+    static int constexpr STATES_LABEL_SIZE = TILE_SIZE / 3;
 private:
     QLabel* m_value;
+    QList<QList<QLabel*>> m_available_states;
     GridTileStyle m_style;
     std::pair<int, int> m_position;
     bool m_is_permanently_collapsed;

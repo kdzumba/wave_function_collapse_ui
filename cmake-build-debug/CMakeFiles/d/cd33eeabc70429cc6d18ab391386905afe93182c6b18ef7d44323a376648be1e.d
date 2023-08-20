@@ -178,6 +178,7 @@ wave_function_collapse_ui_autogen/timestamp: \
   C:/Qt/6.5.1/mingw_64/include/QtWidgets/QGraphicsLayoutItem \
   C:/Qt/6.5.1/mingw_64/include/QtWidgets/QGraphicsProxyWidget \
   C:/Qt/6.5.1/mingw_64/include/QtWidgets/QGraphicsScene \
+  C:/Qt/6.5.1/mingw_64/include/QtWidgets/QGraphicsTextItem \
   C:/Qt/6.5.1/mingw_64/include/QtWidgets/QGraphicsView \
   C:/Qt/6.5.1/mingw_64/include/QtWidgets/QGraphicsWidget \
   C:/Qt/6.5.1/mingw_64/include/QtWidgets/QGridLayout \
@@ -242,6 +243,14 @@ wave_function_collapse_ui_autogen/timestamp: \
   C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6/QtPublicTestHelpers.cmake \
   C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6/QtPublicToolHelpers.cmake \
   C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6/QtPublicWalkLibsHelpers.cmake \
+  C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6Concurrent/Qt6ConcurrentAdditionalTargetInfo.cmake \
+  C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6Concurrent/Qt6ConcurrentConfig.cmake \
+  C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6Concurrent/Qt6ConcurrentConfigVersion.cmake \
+  C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6Concurrent/Qt6ConcurrentConfigVersionImpl.cmake \
+  C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6Concurrent/Qt6ConcurrentDependencies.cmake \
+  C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6Concurrent/Qt6ConcurrentTargets-relwithdebinfo.cmake \
+  C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6Concurrent/Qt6ConcurrentTargets.cmake \
+  C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6Concurrent/Qt6ConcurrentVersionlessTargets.cmake \
   C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6Core/Qt6CoreAdditionalTargetInfo.cmake \
   C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6Core/Qt6CoreConfig.cmake \
   C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6Core/Qt6CoreConfigExtras.cmake \

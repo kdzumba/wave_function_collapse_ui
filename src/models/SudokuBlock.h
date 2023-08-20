@@ -9,9 +9,11 @@
 #include <vector>
 #include <memory>
 #include "Tile.h"
+#include <QObject>
 
-class SudokuBlock
+class SudokuBlock :public QObject
 {
+    Q_OBJECT
 public:
     SudokuBlock();
     ~SudokuBlock();
@@ -32,6 +34,10 @@ public:
     bool get_is_permanently_collapsed() const;
     void set_permanently_collapsed(bool is_collapsed);
     void reset_available_states();
+    bool is_current_block() const {return m_is_current_block;}
+signals:
+    void block_collapsed(int phase);
+
 private:
     SudokuBlock* m_previous;
     bool m_is_current_block;

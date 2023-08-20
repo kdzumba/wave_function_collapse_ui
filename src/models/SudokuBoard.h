@@ -11,9 +11,11 @@
 #include <memory>
 #include <string>
 #include "SudokuBlock.h"
+#include <QObject>
 
-class SudokuBoard
+class SudokuBoard : public QObject
 {
+    Q_OBJECT
 public:
     SudokuBoard();
     explicit SudokuBoard(const std::string& filename);
@@ -26,6 +28,8 @@ public:
     bool is_fully_solved() const;
     void read_from_file(const std::string& filename);
     void reset_available_states();
+signals:
+    void block_collapsed();
 private:
     void init_board();
     void collapse(SudokuBlock* block);

@@ -5,9 +5,11 @@
 #include "SudokuScene.h"
 #include "../utils.h"
 #include "../widgets/Button.h"
+#include <QtConcurrent/QtConcurrent>
 
 SudokuScene::SudokuScene(const std::string& filename, QWidget* parent) : AbstractScene(parent), m_retries_count(0)
 {
+    m_board = new SudokuBoard(filename);
     m_sudoku_grid = new BoardContainer;
     m_sudoku_menu = new SudokuSceneSideMenu;
     QObject::connect(m_sudoku_menu, SIGNAL(solveButtonClicked()), this, SLOT(animate()));
@@ -28,22 +30,23 @@ SudokuScene::SudokuScene(const std::string& filename, QWidget* parent) : Abstrac
 //    auto gradient = QGradient(QGradient::GentleCare);
     auto brush = QBrush(gradient);
     this ->setBackgroundBrush(brush);
-
-    m_board = new SudokuBoard(filename);
     init();
 }
 
 void SudokuScene::animate()
 {
-    m_retries_count = 0;
-    while(!(m_board -> is_fully_solved()) && m_retries_count < 10000)
-    {
-        m_board -> reset();
-        m_board -> init_solve();
-        m_board -> solve();
-        m_retries_count++;
-    }
-    this -> advance();
+    auto solve = [&]() -> void{
+        m_retries_count = 0;
+        while(!(m_board -> is_fully_solved()) && m_retries_count < 10000)
+        {
+            m_board -> init_solve();
+            m_board -> solve();
+            m_retries_count++;
+        }
+    };
+
+    auto solve_thread = QThread::create(solve);
+    solve_thread ->start();
     qDebug() << "Done Advancing";
     GridTile::s_advance_call_count = 0;
 }
@@ -109,8 +112,11 @@ void SudokuScene::arrangeItems()
 
 void SudokuScene::reset()
 {
-    m_board -> reset();
-    this -> advance();
+    auto reset = [&]() -> void{
+        m_board -> reset();
+    };
+    auto reset_thread = QThread::create(reset);
+    reset_thread->start();
 }
 
 void SudokuScene::generate()

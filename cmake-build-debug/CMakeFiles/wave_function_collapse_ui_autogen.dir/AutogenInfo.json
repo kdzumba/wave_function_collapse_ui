@@ -212,7 +212,16 @@
 		"C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeFindDependencyMacro.cmake",
 		"C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6Widgets/Qt6QWindowsVistaStylePluginTargets.cmake",
 		"C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6Widgets/Qt6QWindowsVistaStylePluginTargets-relwithdebinfo.cmake",
-		"C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6Widgets/Qt6QWindowsVistaStylePluginAdditionalTargetInfo.cmake"
+		"C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6Widgets/Qt6QWindowsVistaStylePluginAdditionalTargetInfo.cmake",
+		"C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6Concurrent/Qt6ConcurrentConfigVersion.cmake",
+		"C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6Concurrent/Qt6ConcurrentConfigVersionImpl.cmake",
+		"C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6Concurrent/Qt6ConcurrentConfig.cmake",
+		"C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeFindDependencyMacro.cmake",
+		"C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6Concurrent/Qt6ConcurrentDependencies.cmake",
+		"C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6Concurrent/Qt6ConcurrentTargets.cmake",
+		"C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6Concurrent/Qt6ConcurrentTargets-relwithdebinfo.cmake",
+		"C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6Concurrent/Qt6ConcurrentAdditionalTargetInfo.cmake",
+		"C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6Concurrent/Qt6ConcurrentVersionlessTargets.cmake"
 	],
 	"CMAKE_SOURCE_DIR" : "C:/Users/User/CLionProjects/wave_function_collapse_ui",
 	"DEP_FILE" : "C:/Users/User/CLionProjects/wave_function_collapse_ui/cmake-build-debug/wave_function_collapse_ui_autogen/deps",
@@ -310,6 +319,7 @@
 	"MOC_DEFINITIONS" : 
 	[
 		"MINGW_HAS_SECURE_API=1",
+		"QT_CONCURRENT_LIB",
 		"QT_CORE_LIB",
 		"QT_GUI_LIB",
 		"QT_WIDGETS_LIB",
@@ -334,6 +344,7 @@
 		"C:/Qt/6.5.1/mingw_64/mkspecs/win32-g++",
 		"C:/Qt/6.5.1/mingw_64/include/QtGui",
 		"C:/Qt/6.5.1/mingw_64/include/QtWidgets",
+		"C:/Qt/6.5.1/mingw_64/include/QtConcurrent",
 		"C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++",
 		"C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32",
 		"C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward",

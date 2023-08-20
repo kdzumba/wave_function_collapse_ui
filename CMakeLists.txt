@@ -12,6 +12,7 @@ find_package(Qt6 COMPONENTS
         Core
         Gui
         Widgets
+        Concurrent
         REQUIRED)
 
 add_executable(wave_function_collapse_ui main.cpp
@@ -46,6 +47,7 @@ target_link_libraries(wave_function_collapse_ui
         Qt::Core
         Qt::Gui
         Qt::Widgets
+        Qt::Concurrent
 )
 
 if (WIN32 AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
