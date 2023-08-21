@@ -108,6 +108,7 @@ void SudokuBoard::propagate_collapse_info(int row_number, int col_number, const 
 
 void SudokuBoard::collapse(SudokuBlock* block)
 {
+    std::cout << "Collapsing block: " << block << std::endl;
     auto rand_index = generate_random_int(0, (int) block->get_available_states().size() - 1);
     auto next_state = std::make_unique<BlockState>(*(block->get_available_states().at(rand_index)));
 
@@ -282,6 +283,8 @@ bool SudokuBoard::is_fully_solved() const
 void SudokuBoard::print()
 {
     std::cout << "Recursive call count: " << s_stack_counter << std::endl;
+    std::cout << "Retries call count: " << s_retries_count << std::endl;
+    std::cout << "backtrack call count: " << s_backtrack_count << std::endl;
     std::cout << std::setw(4) << 0;
 
     for(auto col : {1, 2, 3, 4, 5, 6, 7, 8})

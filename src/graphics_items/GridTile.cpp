@@ -2,6 +2,7 @@
 // Created by User on 2023/08/15.
 //
 
+#include <iostream>
 #include "GridTile.h"
 
 int GridTile::s_advance_call_count = 0;
@@ -106,12 +107,12 @@ void GridTile::advance(int step) {
     if(!step) return;
     update(this -> boundingRect());
     m_value ->setText(QString::number(m_tile_model -> get_collapsed_state() -> get_value()));
-    qDebug() << "Advance call count: " << s_advance_call_count;
+    qDebug() << "Advanced block address: " << m_tile_model;
     qDebug() << "Advances done: " << std::get<0>(m_tile_model -> get_coordinate()) << " " << std::get<1>(m_tile_model -> get_coordinate());
 }
 
 GridTile::~GridTile()
 {
-    qDebug() << "Destroying a tile: ";
+    std::cout << "Destroying a tile: " << this << std::endl;
 }
 

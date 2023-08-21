@@ -35,8 +35,12 @@ SudokuScene::SudokuScene(const std::string& filename, QWidget* parent) : Abstrac
 
 void SudokuScene::animate()
 {
-    m_board -> init_solve();
+    reset();
     auto solve = [&]() -> void{
+        //This guy just collapses the first block to kick star solve.
+        //Need it in here after reset because the first solves removes
+        //all available options (fully solved)
+        m_board -> init_solve();
         m_retries_count = 0;
         while(!(m_board -> is_fully_solved()) && m_retries_count < 10000)
         {
@@ -50,6 +54,7 @@ void SudokuScene::animate()
     solve_thread ->wait();
     qDebug() << "Done Advancing";
     GridTile::s_advance_call_count = 0;
+    qDebug() << "is fully solved: " << m_board -> is_fully_solved();
 }
 
 /**
@@ -58,6 +63,8 @@ void SudokuScene::animate()
  */
 void SudokuScene::init()
 {
+    qDebug() << "My scene Id is : " << this;
+
     const auto& initial_board = m_board -> get_current_board();
     auto board_size = m_sudoku_grid -> getSize();
 
@@ -131,6 +138,7 @@ void SudokuScene::generate()
         for(auto tile : row)
         {
             this ->removeItem(tile);
+            delete tile;
         }
     }
     m_grid_ui.clear();
