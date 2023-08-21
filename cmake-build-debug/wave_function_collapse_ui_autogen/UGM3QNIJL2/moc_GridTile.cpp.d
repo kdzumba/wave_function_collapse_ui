@@ -7,6 +7,7 @@ C:/Users/User/CLionProjects/wave_function_collapse_ui/cmake-build-debug/wave_fun
   C:/Qt/6.5.1/mingw_64/include/QtCore/QRectF \
   C:/Qt/6.5.1/mingw_64/include/QtCore/QSize \
   C:/Qt/6.5.1/mingw_64/include/QtCore/QSizeF \
+  C:/Qt/6.5.1/mingw_64/include/QtCore/QTimer \
   C:/Qt/6.5.1/mingw_64/include/QtCore/q20memory.h \
   C:/Qt/6.5.1/mingw_64/include/QtCore/q20type_traits.h \
   C:/Qt/6.5.1/mingw_64/include/QtCore/qabstractitemmodel.h \
@@ -19,6 +20,7 @@ C:/Users/User/CLionProjects/wave_function_collapse_ui/cmake-build-debug/wave_fun
   C:/Qt/6.5.1/mingw_64/include/QtCore/qatomic.h \
   C:/Qt/6.5.1/mingw_64/include/QtCore/qatomic_cxx11.h \
   C:/Qt/6.5.1/mingw_64/include/QtCore/qbasicatomic.h \
+  C:/Qt/6.5.1/mingw_64/include/QtCore/qbasictimer.h \
   C:/Qt/6.5.1/mingw_64/include/QtCore/qbindingstorage.h \
   C:/Qt/6.5.1/mingw_64/include/QtCore/qbytearray.h \
   C:/Qt/6.5.1/mingw_64/include/QtCore/qbytearrayalgorithms.h \
@@ -112,6 +114,7 @@ C:/Users/User/CLionProjects/wave_function_collapse_ui/cmake-build-debug/wave_fun
   C:/Qt/6.5.1/mingw_64/include/QtCore/qtdeprecationmarkers.h \
   C:/Qt/6.5.1/mingw_64/include/QtCore/qtenvironmentvariables.h \
   C:/Qt/6.5.1/mingw_64/include/QtCore/qtextstream.h \
+  C:/Qt/6.5.1/mingw_64/include/QtCore/qtimer.h \
   C:/Qt/6.5.1/mingw_64/include/QtCore/qtmetamacros.h \
   C:/Qt/6.5.1/mingw_64/include/QtCore/qtnoop.h \
   C:/Qt/6.5.1/mingw_64/include/QtCore/qtpreprocessorsupport.h \

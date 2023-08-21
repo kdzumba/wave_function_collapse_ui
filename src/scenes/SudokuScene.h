@@ -19,6 +19,7 @@
 #include "../ui_forms/sudokuscenesidemenu.h"
 #include <QGroupBox>
 #include <QGraphicsProxyWidget>
+#include <QThread>
 
 class SudokuScene : public AbstractScene
 {
@@ -36,11 +37,14 @@ private:
     std::vector<std::vector<GridTile*>> m_grid_ui;
     SudokuBoard* m_board;
     int m_retries_count;
+    static int s_animate_count;
     BoardContainer* m_sudoku_grid;
     QGraphicsProxyWidget* m_sudoku_menu_proxy;
     SudokuSceneSideMenu* m_sudoku_menu;
     QGraphicsGridLayout* m_scene_layout;
     QGraphicsWidget* m_scene_container;
+    QThread* m_animation_thread;
+    QThread* m_reset_thread;
 };
 
 

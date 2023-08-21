@@ -18,6 +18,7 @@
 #include <QGraphicsTextItem>
 #include <QGraphicsGridLayout>
 #include <QGraphicsProxyWidget>
+#include <QTimer>
 
 class GridTile : public QObject, public QGraphicsLayoutItem, public QGraphicsItem
 {
@@ -50,6 +51,7 @@ private:
     std::pair<int, int> m_position;
     bool m_is_permanently_collapsed;
     SudokuBlock* m_tile_model;
+    QTimer* m_timer;
 public:
     static int s_advance_call_count;
 };

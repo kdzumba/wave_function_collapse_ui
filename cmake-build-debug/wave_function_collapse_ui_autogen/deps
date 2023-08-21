@@ -6,6 +6,8 @@ wave_function_collapse_ui_autogen/timestamp: \
 	C:/Qt/6.5.1/mingw_64/include/QtCore/QRectF \
 	C:/Qt/6.5.1/mingw_64/include/QtCore/QSize \
 	C:/Qt/6.5.1/mingw_64/include/QtCore/QSizeF \
+	C:/Qt/6.5.1/mingw_64/include/QtCore/QThread \
+	C:/Qt/6.5.1/mingw_64/include/QtCore/QTimer \
 	C:/Qt/6.5.1/mingw_64/include/QtCore/q20memory.h \
 	C:/Qt/6.5.1/mingw_64/include/QtCore/q20type_traits.h \
 	C:/Qt/6.5.1/mingw_64/include/QtCore/qabstractitemmodel.h \
@@ -18,6 +20,7 @@ wave_function_collapse_ui_autogen/timestamp: \
 	C:/Qt/6.5.1/mingw_64/include/QtCore/qatomic.h \
 	C:/Qt/6.5.1/mingw_64/include/QtCore/qatomic_cxx11.h \
 	C:/Qt/6.5.1/mingw_64/include/QtCore/qbasicatomic.h \
+	C:/Qt/6.5.1/mingw_64/include/QtCore/qbasictimer.h \
 	C:/Qt/6.5.1/mingw_64/include/QtCore/qbindingstorage.h \
 	C:/Qt/6.5.1/mingw_64/include/QtCore/qbytearray.h \
 	C:/Qt/6.5.1/mingw_64/include/QtCore/qbytearrayalgorithms.h \
@@ -40,7 +43,9 @@ wave_function_collapse_ui_autogen/timestamp: \
 	C:/Qt/6.5.1/mingw_64/include/QtCore/qdarwinhelpers.h \
 	C:/Qt/6.5.1/mingw_64/include/QtCore/qdatastream.h \
 	C:/Qt/6.5.1/mingw_64/include/QtCore/qdatetime.h \
+	C:/Qt/6.5.1/mingw_64/include/QtCore/qdeadlinetimer.h \
 	C:/Qt/6.5.1/mingw_64/include/QtCore/qdebug.h \
+	C:/Qt/6.5.1/mingw_64/include/QtCore/qelapsedtimer.h \
 	C:/Qt/6.5.1/mingw_64/include/QtCore/qexceptionhandling.h \
 	C:/Qt/6.5.1/mingw_64/include/QtCore/qflags.h \
 	C:/Qt/6.5.1/mingw_64/include/QtCore/qfloat16.h \
@@ -111,6 +116,8 @@ wave_function_collapse_ui_autogen/timestamp: \
 	C:/Qt/6.5.1/mingw_64/include/QtCore/qtdeprecationmarkers.h \
 	C:/Qt/6.5.1/mingw_64/include/QtCore/qtenvironmentvariables.h \
 	C:/Qt/6.5.1/mingw_64/include/QtCore/qtextstream.h \
+	C:/Qt/6.5.1/mingw_64/include/QtCore/qthread.h \
+	C:/Qt/6.5.1/mingw_64/include/QtCore/qtimer.h \
 	C:/Qt/6.5.1/mingw_64/include/QtCore/qtmetamacros.h \
 	C:/Qt/6.5.1/mingw_64/include/QtCore/qtnoop.h \
 	C:/Qt/6.5.1/mingw_64/include/QtCore/qtpreprocessorsupport.h \
@@ -526,6 +533,7 @@ wave_function_collapse_ui_autogen/timestamp: \
 	C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ext/string_conversions.h \
 	C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ext/type_traits.h \
 	C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/functional \
+	C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/future \
 	C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/initializer_list \
 	C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ios \
 	C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/iosfwd \

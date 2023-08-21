@@ -108,7 +108,6 @@ void SudokuBoard::propagate_collapse_info(int row_number, int col_number, const 
 
 void SudokuBoard::collapse(SudokuBlock* block)
 {
-    std::cout << "Collapsing block: " << block << std::endl;
     auto rand_index = generate_random_int(0, (int) block->get_available_states().size() - 1);
     auto next_state = std::make_unique<BlockState>(*(block->get_available_states().at(rand_index)));
 
@@ -130,7 +129,6 @@ void SudokuBoard::collapse(SudokuBlock* block)
 
     m_current_collapsed = block;
     propagate_collapse_info(row_number, col_number, block -> get_collapsed_state());
-    emit block_collapsed();
 }
 
 /**

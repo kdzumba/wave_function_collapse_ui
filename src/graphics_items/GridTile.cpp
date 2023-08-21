@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include "GridTile.h"
+#include <QThread>
 
 int GridTile::s_advance_call_count = 0;
 
@@ -11,6 +12,8 @@ GridTile::GridTile(SudokuBlock *model, int x, int y)
 {
     m_tile_model = model;
     m_value = new QLabel(QString::number(model -> get_collapsed_state() -> get_value()));
+    m_timer = new QTimer(this);
+
     QObject::connect(m_tile_model, SIGNAL(block_collapsed(int)), this, SLOT(advance(int)));
 
     if(!(m_tile_model -> get_is_permanently_collapsed()))
@@ -105,10 +108,9 @@ QSizeF GridTile::sizeHint(Qt::SizeHint which, const QSizeF &constraint) const
 
 void GridTile::advance(int step) {
     if(!step) return;
+//    QThread::sleep(1);
     update(this -> boundingRect());
     m_value ->setText(QString::number(m_tile_model -> get_collapsed_state() -> get_value()));
-    qDebug() << "Advanced block address: " << m_tile_model;
-    qDebug() << "Advances done: " << std::get<0>(m_tile_model -> get_coordinate()) << " " << std::get<1>(m_tile_model -> get_coordinate());
 }
 
 GridTile::~GridTile()

@@ -7,11 +7,15 @@
 #include "../widgets/Button.h"
 #include <QtConcurrent/QtConcurrent>
 
+int SudokuScene::s_animate_count = 0;
+
 SudokuScene::SudokuScene(const std::string& filename, QWidget* parent) : AbstractScene(parent), m_retries_count(0)
 {
     m_board = new SudokuBoard(filename);
     m_sudoku_grid = new BoardContainer;
     m_sudoku_menu = new SudokuSceneSideMenu;
+
+
     QObject::connect(m_sudoku_menu, SIGNAL(solveButtonClicked()), this, SLOT(animate()));
     QObject::connect(m_sudoku_menu, SIGNAL(resetButtonClicked()), this, SLOT(reset()));
     QObject::connect(m_sudoku_menu, SIGNAL(generateButtonClicked()), this, SLOT(generate()));
@@ -35,26 +39,24 @@ SudokuScene::SudokuScene(const std::string& filename, QWidget* parent) : Abstrac
 
 void SudokuScene::animate()
 {
-    reset();
     auto solve = [&]() -> void{
         //This guy just collapses the first block to kick star solve.
         //Need it in here after reset because the first solves removes
         //all available options (fully solved)
+        reset();
         m_board -> init_solve();
         m_retries_count = 0;
         while(!(m_board -> is_fully_solved()) && m_retries_count < 10000)
         {
+            reset();
             m_board -> solve();
             m_retries_count++;
         }
     };
 
-    auto solve_thread = QThread::create(solve);
-    solve_thread ->start();
-    solve_thread ->wait();
-    qDebug() << "Done Advancing";
-    GridTile::s_advance_call_count = 0;
-    qDebug() << "is fully solved: " << m_board -> is_fully_solved();
+    m_animation_thread = QThread::create(solve);
+    m_animation_thread ->start();
+    s_animate_count++;
 }
 
 /**
@@ -63,8 +65,6 @@ void SudokuScene::animate()
  */
 void SudokuScene::init()
 {
-    qDebug() << "My scene Id is : " << this;
-
     const auto& initial_board = m_board -> get_current_board();
     auto board_size = m_sudoku_grid -> getSize();
 
@@ -123,13 +123,14 @@ void SudokuScene::reset()
     auto reset = [&]() -> void{
         m_board -> reset();
     };
-    auto reset_thread = QThread::create(reset);
-    reset_thread->start();
-    reset_thread -> wait();
+    m_reset_thread = QThread::create(reset);
+    m_reset_thread->start();
+    m_reset_thread -> wait();
 }
 
 void SudokuScene::generate()
 {
+    m_animation_thread -> quit();
     qDebug() << "Before generating: " << this -> items().size();
 
     //Remove all items from m_grid_ui (messes up the indexing in arrangeItems()
