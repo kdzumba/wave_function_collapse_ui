@@ -135,7 +135,10 @@ wave_function_collapse_ui_autogen/timestamp: \
   C:/Qt/6.5.1/mingw_64/include/QtCore/qvarlengtharray.h \
   C:/Qt/6.5.1/mingw_64/include/QtCore/qversiontagging.h \
   C:/Qt/6.5.1/mingw_64/include/QtCore/qxptype_traits.h \
+  C:/Qt/6.5.1/mingw_64/include/QtGui/QBitmap \
+  C:/Qt/6.5.1/mingw_64/include/QtGui/QImage \
   C:/Qt/6.5.1/mingw_64/include/QtGui/QPainter \
+  C:/Qt/6.5.1/mingw_64/include/QtGui/QPixmap \
   C:/Qt/6.5.1/mingw_64/include/QtGui/QTransform \
   C:/Qt/6.5.1/mingw_64/include/QtGui/qaction.h \
   C:/Qt/6.5.1/mingw_64/include/QtGui/qbitmap.h \
@@ -639,13 +642,19 @@ wave_function_collapse_ui_autogen/timestamp: \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/graphics_items/BoardContainer.h \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/graphics_items/GridTile.cpp \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/graphics_items/GridTile.h \
+  C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/Cell.cpp \
+  C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/Cell.h \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/SudokuBlock.cpp \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/SudokuBlock.h \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/SudokuBoard.cpp \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/SudokuBoard.h \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/Tile.cpp \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/Tile.h \
+  C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/TiledModel_ImageGrid.cpp \
+  C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/TiledModel_ImageGrid.h \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/scenes/AbstractScene.h \
+  C:/Users/User/CLionProjects/wave_function_collapse_ui/src/scenes/ImageGenerationScene.cpp \
+  C:/Users/User/CLionProjects/wave_function_collapse_ui/src/scenes/ImageGenerationScene.h \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/scenes/SudokuScene.cpp \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/scenes/SudokuScene.h \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/ui_forms/graphicsworkspace.cpp \

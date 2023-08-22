@@ -2,6 +2,7 @@
 #include "UGM3QNIJL2/moc_BoardContainer.cpp"
 #include "UGM3QNIJL2/moc_GridTile.cpp"
 #include "M4YTXQ7V2H/moc_SudokuBlock.cpp"
+#include "EKW6RVOTGB/moc_ImageGenerationScene.cpp"
 #include "EKW6RVOTGB/moc_SudokuScene.cpp"
 #include "FM2YYINTCJ/moc_graphicsworkspace.cpp"
 #include "FM2YYINTCJ/moc_sudokuscenesidemenu.cpp"

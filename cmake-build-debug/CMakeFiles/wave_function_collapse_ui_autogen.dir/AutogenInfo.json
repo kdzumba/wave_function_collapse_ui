@@ -247,6 +247,12 @@
 			null
 		],
 		[
+			"C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/Cell.h",
+			"MU",
+			"M4YTXQ7V2H/moc_Cell.cpp",
+			null
+		],
+		[
 			"C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/SudokuBlock.h",
 			"MU",
 			"M4YTXQ7V2H/moc_SudokuBlock.cpp",
@@ -265,9 +271,21 @@
 			null
 		],
 		[
+			"C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/TiledModel_ImageGrid.h",
+			"MU",
+			"M4YTXQ7V2H/moc_TiledModel_ImageGrid.cpp",
+			null
+		],
+		[
 			"C:/Users/User/CLionProjects/wave_function_collapse_ui/src/scenes/AbstractScene.h",
 			"MU",
 			"EKW6RVOTGB/moc_AbstractScene.cpp",
+			null
+		],
+		[
+			"C:/Users/User/CLionProjects/wave_function_collapse_ui/src/scenes/ImageGenerationScene.h",
+			"MU",
+			"EKW6RVOTGB/moc_ImageGenerationScene.cpp",
 			null
 		],
 		[
@@ -400,6 +418,11 @@
 			null
 		],
 		[
+			"C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/Cell.cpp",
+			"MU",
+			null
+		],
+		[
 			"C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/SudokuBlock.cpp",
 			"MU",
 			null
@@ -411,6 +434,16 @@
 		],
 		[
 			"C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/Tile.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/TiledModel_ImageGrid.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/User/CLionProjects/wave_function_collapse_ui/src/scenes/ImageGenerationScene.cpp",
 			"MU",
 			null
 		],

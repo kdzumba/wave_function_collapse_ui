@@ -42,6 +42,12 @@ add_executable(wave_function_collapse_ui main.cpp
         src/widgets/Button.h
         src/widgets/ButtonGroup.cpp
         src/widgets/ButtonGroup.h
+        src/scenes/ImageGenerationScene.cpp
+        src/scenes/ImageGenerationScene.h
+        src/models/Cell.cpp
+        src/models/Cell.h
+        src/models/TiledModel_ImageGrid.cpp
+        src/models/TiledModel_ImageGrid.h
 )
 target_link_libraries(wave_function_collapse_ui
         Qt::Core
