@@ -33,7 +33,7 @@ add_executable(wave_function_collapse_ui main.cpp
         src/graphics_items/GridTile.h
         src/models/SudokuBoard.cpp
         src/models/SudokuBlock.cpp
-        src/models/Tile.cpp
+        src/models/BlockState.cpp
         src/graphics_items/BoardContainer.cpp
         src/graphics_items/BoardContainer.h
         src/utils.cpp
@@ -48,6 +48,10 @@ add_executable(wave_function_collapse_ui main.cpp
         src/models/Cell.h
         src/models/TiledModel_ImageGrid.cpp
         src/models/TiledModel_ImageGrid.h
+        src/models/CellState.cpp
+        src/models/CellState.h
+        src/graphics_items/CellGraphicsItem.cpp
+        src/graphics_items/CellGraphicsItem.h
 )
 target_link_libraries(wave_function_collapse_ui
         Qt::Core

@@ -4,7 +4,7 @@
 
 #include "ImageGenerationScene.h"
 #include "../utils.h"
-#include <QGraphicsPixmapItem>
+#include "../graphics_items/CellGraphicsItem.h"
 
 ImageGenerationScene::ImageGenerationScene(const std::string &img_directory, QWidget *parent)  : AbstractScene(parent)
 {
@@ -27,14 +27,9 @@ void ImageGenerationScene::init()
     {
         for(auto col = 0; col < height; col++)
         {
-            auto rando_tile_index = Utils::generate_random_int(0, 12);
-            auto tile = m_image_grid -> states().at(rando_tile_index);
-            auto x = row * tile->width();
-            auto y = col * tile -> height();
-            auto item = new QGraphicsPixmapItem;
-            item ->setPixmap(*tile);
-            item ->setPos(x, y);
-            this ->addItem(item);
+            auto state = m_image_grid->grid().at(row).at(col);
+            auto cell_graphics_item = new CellGraphicsItem(state, row, col);
+            this ->addItem(cell_graphics_item);
         }
     }
 }

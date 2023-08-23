@@ -8,7 +8,7 @@
 
 #include <vector>
 #include <memory>
-#include "Tile.h"
+#include "BlockState.h"
 #include <QObject>
 
 class SudokuBlock :public QObject

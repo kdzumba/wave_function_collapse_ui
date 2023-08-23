@@ -7,19 +7,23 @@
 
 #include <vector>
 #include <tuple>
+#include "CellState.h"
 
 class Cell
 {
 public:
     Cell(int x, int y);
-    void collapse(int state);
+    void collapse(int index);
     bool is_collapsed();
-    int get_collapsed_image_index();
-    const std::tuple<int,int>& get_position();
+    void remove_state(int index);
+    int collapsed_state_index();
+    CellState* state();
+    const std::tuple<int,int>& position();
+    void set_available_states(std::vector<CellState*> states);
 private:
+    CellState* m_collapsed_state;
+    std::vector<CellState*> m_available_states;
     bool m_is_collapsed;
-    int m_collapsed_index{};
-    std::vector<int> m_available_states;
     std::tuple<int, int> m_position;
 };
 

@@ -241,15 +241,33 @@
 			null
 		],
 		[
+			"C:/Users/User/CLionProjects/wave_function_collapse_ui/src/graphics_items/CellGraphicsItem.h",
+			"MU",
+			"UGM3QNIJL2/moc_CellGraphicsItem.cpp",
+			null
+		],
+		[
 			"C:/Users/User/CLionProjects/wave_function_collapse_ui/src/graphics_items/GridTile.h",
 			"MU",
 			"UGM3QNIJL2/moc_GridTile.cpp",
 			null
 		],
 		[
+			"C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/BlockState.h",
+			"MU",
+			"M4YTXQ7V2H/moc_BlockState.cpp",
+			null
+		],
+		[
 			"C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/Cell.h",
 			"MU",
 			"M4YTXQ7V2H/moc_Cell.cpp",
+			null
+		],
+		[
+			"C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/CellState.h",
+			"MU",
+			"M4YTXQ7V2H/moc_CellState.cpp",
 			null
 		],
 		[
@@ -262,12 +280,6 @@
 			"C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/SudokuBoard.h",
 			"MU",
 			"M4YTXQ7V2H/moc_SudokuBoard.cpp",
-			null
-		],
-		[
-			"C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/Tile.h",
-			"MU",
-			"M4YTXQ7V2H/moc_Tile.cpp",
 			null
 		],
 		[
@@ -413,12 +425,27 @@
 			null
 		],
 		[
+			"C:/Users/User/CLionProjects/wave_function_collapse_ui/src/graphics_items/CellGraphicsItem.cpp",
+			"MU",
+			null
+		],
+		[
 			"C:/Users/User/CLionProjects/wave_function_collapse_ui/src/graphics_items/GridTile.cpp",
 			"MU",
 			null
 		],
 		[
+			"C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/BlockState.cpp",
+			"MU",
+			null
+		],
+		[
 			"C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/Cell.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/CellState.cpp",
 			"MU",
 			null
 		],
@@ -429,11 +456,6 @@
 		],
 		[
 			"C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/SudokuBoard.cpp",
-			"MU",
-			null
-		],
-		[
-			"C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/Tile.cpp",
 			"MU",
 			null
 		],

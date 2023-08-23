@@ -160,7 +160,7 @@ SudokuBlock* SudokuBoard::backtrack()
     //Getting here means we found a block in the to_reprocess path(going backwards) that had more options to choose from
     //then the one it collapsed to. We need to first de-collapse the to_reprocess block (set it to de-collapsed state, and
     //propagate this de-collapse to other blocks so that they may also have this de-collapsed state in their available
-    //states again)
+    //state_index_mappings again)
     auto old_collapsed_state = std::make_unique<BlockState>(*( to_reprocess->get_collapsed_state()));
     to_reprocess->set_collapsed_state(std::make_unique<BlockState>(0));
     propagate_decollapse_info(std::get<0>(to_reprocess -> get_coordinate()), std::get<1>(to_reprocess -> get_coordinate()), old_collapsed_state);

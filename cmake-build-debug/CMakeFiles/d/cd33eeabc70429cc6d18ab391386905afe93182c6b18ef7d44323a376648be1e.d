@@ -640,16 +640,20 @@ wave_function_collapse_ui_autogen/timestamp: \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/AbstractSideMenu.h \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/graphics_items/BoardContainer.cpp \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/graphics_items/BoardContainer.h \
+  C:/Users/User/CLionProjects/wave_function_collapse_ui/src/graphics_items/CellGraphicsItem.cpp \
+  C:/Users/User/CLionProjects/wave_function_collapse_ui/src/graphics_items/CellGraphicsItem.h \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/graphics_items/GridTile.cpp \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/graphics_items/GridTile.h \
+  C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/BlockState.cpp \
+  C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/BlockState.h \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/Cell.cpp \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/Cell.h \
+  C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/CellState.cpp \
+  C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/CellState.h \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/SudokuBlock.cpp \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/SudokuBlock.h \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/SudokuBoard.cpp \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/SudokuBoard.h \
-  C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/Tile.cpp \
-  C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/Tile.h \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/TiledModel_ImageGrid.cpp \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/TiledModel_ImageGrid.h \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/scenes/AbstractScene.h \

@@ -422,5 +422,5 @@ C:/Users/User/CLionProjects/wave_function_collapse_ui/cmake-build-debug/wave_fun
   C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/mingw/x86_64-w64-mingw32/include/vadefs.h \
   C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/mingw/x86_64-w64-mingw32/include/wchar.h \
   C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/mingw/x86_64-w64-mingw32/include/wctype.h \
-  C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/SudokuBlock.h \
-  C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/Tile.h
+  C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/BlockState.h \
+  C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/SudokuBlock.h

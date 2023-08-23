@@ -138,7 +138,7 @@ bool SudokuBlock::get_is_permanently_collapsed() const
 
 void SudokuBlock::set_permanently_collapsed(bool is_collapsed)
 {
-    //permanently collapsed blocks should have a maximum entropy and no available states
+    //permanently collapsed blocks should have a maximum entropy and no available state_index_mappings
     m_is_permanently_collapsed = is_collapsed;
     m_available_states.clear();
 }
