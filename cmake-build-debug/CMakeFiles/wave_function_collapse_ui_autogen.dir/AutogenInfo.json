@@ -253,6 +253,12 @@
 			null
 		],
 		[
+			"C:/Users/User/CLionProjects/wave_function_collapse_ui/src/graphics_items/ImageGenerationCanvas.h",
+			"MU",
+			"UGM3QNIJL2/moc_ImageGenerationCanvas.cpp",
+			null
+		],
+		[
 			"C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/BlockState.h",
 			"MU",
 			"M4YTXQ7V2H/moc_BlockState.cpp",
@@ -304,6 +310,12 @@
 			"C:/Users/User/CLionProjects/wave_function_collapse_ui/src/scenes/SudokuScene.h",
 			"MU",
 			"EKW6RVOTGB/moc_SudokuScene.cpp",
+			null
+		],
+		[
+			"C:/Users/User/CLionProjects/wave_function_collapse_ui/src/ui_forms/ImageGenerationSideMenu.h",
+			"MU",
+			"FM2YYINTCJ/moc_ImageGenerationSideMenu.cpp",
 			null
 		],
 		[
@@ -435,6 +447,11 @@
 			null
 		],
 		[
+			"C:/Users/User/CLionProjects/wave_function_collapse_ui/src/graphics_items/ImageGenerationCanvas.cpp",
+			"MU",
+			null
+		],
+		[
 			"C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/BlockState.cpp",
 			"MU",
 			null
@@ -471,6 +488,11 @@
 		],
 		[
 			"C:/Users/User/CLionProjects/wave_function_collapse_ui/src/scenes/SudokuScene.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/User/CLionProjects/wave_function_collapse_ui/src/ui_forms/ImageGenerationSideMenu.cpp",
 			"MU",
 			null
 		],

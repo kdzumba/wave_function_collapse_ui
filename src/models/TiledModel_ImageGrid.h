@@ -24,6 +24,7 @@ public:
     static void collapse(Cell* cell);
     bool is_fully_generated();
     void generate();
+    void reset();
     Cell* least_entropy_cell();
 
 private:

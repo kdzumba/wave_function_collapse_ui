@@ -15,7 +15,7 @@ public:
     bool operator==(const CellState& other) const;
     bool operator!=(const CellState& other) const;
     int index() const;
-    const QPixmap* pixmap() const;
+    [[nodiscard]] const QPixmap* pixmap() const;
     void set_index(int index);
     void set_pixmap(QPixmap* pixmap);
 private:

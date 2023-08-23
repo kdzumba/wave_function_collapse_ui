@@ -29,11 +29,11 @@ SudokuScene::SudokuScene(const std::string& filename, QWidget* parent) : Abstrac
     this ->addItem(m_scene_container);
 
     //Generate a random number between 1 and 180 (QGradient::Present have values from 1 to 180)
-    auto rand_gradient = Utils::generate_random_int(1, 180);
-    auto gradient = QGradient(QGradient::Preset(rand_gradient));
-//    auto gradient = QGradient(QGradient::GentleCare);
-    auto brush = QBrush(gradient);
-    this ->setBackgroundBrush(brush);
+//    auto rand_gradient = Utils::generate_random_int(1, 180);
+//    auto gradient = QGradient(QGradient::Preset(rand_gradient));
+////    auto gradient = QGradient(QGradient::GentleCare);
+//    auto brush = QBrush(gradient);
+//    this ->setBackgroundBrush(brush);
     init();
 }
 

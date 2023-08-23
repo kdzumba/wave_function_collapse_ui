@@ -98,7 +98,7 @@ bool TiledModel_ImageGrid::is_fully_generated() {
         for(const auto& cell : row)
         {
             //Collapsed index less than 0 means the cell  hasn't been collapsed
-            if(cell->get_state() == nullptr)
+            if(cell->get_state() == nullptr || cell -> get_state() -> index() == 0)
                 return false;
         }
     }
@@ -138,4 +138,16 @@ Cell *TiledModel_ImageGrid::least_entropy_cell()
     auto rand_index = Utils::generate_random_int(0, (int)min_entropy.size() - 1);
     auto least_entropy_cell = min_entropy.at(rand_index);
     return least_entropy_cell;
+}
+
+void TiledModel_ImageGrid::reset()
+{
+    for(const auto& row : m_grid)
+    {
+        for(auto cell : row)
+        {
+            cell ->set_available_states(m_all_states);
+            cell -> collapse(0);
+        }
+    }
 }

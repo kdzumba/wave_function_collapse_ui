@@ -16,7 +16,7 @@ class BoardContainer : public QGraphicsWidget
     Q_OBJECT
 public:
     explicit BoardContainer(QGraphicsItem* parent = nullptr, int size = 9);
-    ~BoardContainer();
+    ~BoardContainer() override;
     void add(QGraphicsLayout* item, int row, int col, Qt::Alignment alignment = Qt::Alignment());
     QList<QGraphicsWidget*> getInnerGridWidgets();
     QList<QGraphicsGridLayout*> getInnerGridLayouts();

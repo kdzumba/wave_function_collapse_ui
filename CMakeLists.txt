@@ -52,6 +52,10 @@ add_executable(wave_function_collapse_ui main.cpp
         src/models/CellState.h
         src/graphics_items/CellGraphicsItem.cpp
         src/graphics_items/CellGraphicsItem.h
+        src/graphics_items/ImageGenerationCanvas.cpp
+        src/graphics_items/ImageGenerationCanvas.h
+        src/ui_forms/ImageGenerationSideMenu.cpp
+        src/ui_forms/ImageGenerationSideMenu.h
 )
 target_link_libraries(wave_function_collapse_ui
         Qt::Core

@@ -8,6 +8,8 @@
 #include "AbstractScene.h"
 #include "../models/Cell.h"
 #include "../models/TiledModel_ImageGrid.h"
+#include "../graphics_items/ImageGenerationCanvas.h"
+#include "../graphics_items/CellGraphicsItem.h"
 #include <QObject>
 #include <QWidget>
 #include <QPixmap>
@@ -25,15 +27,18 @@ public:
     void init();
 public slots:
     void animate() override;
+    void reset();
 public:
-    static constexpr int IMAGE_WIDTH = 13;
-    static constexpr int IMAGE_HEIGHT = 13;
+    static constexpr int IMAGE_WIDTH = 50;
+    static constexpr int IMAGE_HEIGHT = 30;
 private:
     TiledModel_ImageGrid* m_image_grid;
     int m_retries_count;
     QGraphicsGridLayout* m_scene_layout;
+    ImageGenerationCanvas* m_canvas;
     QGraphicsWidget* m_scene_container;
     QThread* m_animation_thread;
+    QThread* m_reset_thread;
 };
 
 

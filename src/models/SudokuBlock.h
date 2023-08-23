@@ -16,9 +16,9 @@ class SudokuBlock :public QObject
     Q_OBJECT
 public:
     SudokuBlock();
-    ~SudokuBlock();
+    ~SudokuBlock() override;
     std::vector<std::unique_ptr<BlockState>>& get_available_states();
-    const std::unique_ptr<BlockState>& get_collapsed_state() const;
+    [[nodiscard]] const std::unique_ptr<BlockState>& get_collapsed_state() const;
     void set_collapsed_state(std::unique_ptr<BlockState> option);
     void set_coordinate(int x, int y);
     std::tuple<int,int> get_coordinate();
@@ -26,12 +26,12 @@ public:
     void make_current_block(bool is_current);
     bool operator< (const SudokuBlock& other) const;
     bool operator== (const SudokuBlock& other) const;
-    unsigned int get_entropy() const;
-    SudokuBlock* get_previous_block() const;
+    [[nodiscard]] unsigned int get_entropy() const;
+    [[nodiscard]] SudokuBlock* get_previous_block() const;
     void set_previous_block(SudokuBlock* previous);
     void add_available_state(const std::unique_ptr<BlockState>& option);
     void set_available_states(const std::vector<std::unique_ptr<BlockState>>& options);
-    bool get_is_permanently_collapsed() const;
+    [[nodiscard]] bool get_is_permanently_collapsed() const;
     void set_permanently_collapsed(bool is_collapsed);
     void reset_available_states();
     bool is_current_block() const {return m_is_current_block;}

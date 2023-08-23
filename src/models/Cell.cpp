@@ -16,6 +16,14 @@ Cell::Cell(int x, int y)
 
 void Cell::collapse(int index)
 {
+    //An index of 0 should reset the collapse of the cell
+    if(index == 0)
+    {
+        m_collapsed_state = nullptr;
+        m_is_collapsed = false;
+        return;
+    }
+
     auto state_found = [=](CellState* state) -> bool{return state -> index() == index;};
     m_collapsed_state = *(std::find_if(m_available_states.begin(), m_available_states.end(), state_found));
     m_is_collapsed = true;

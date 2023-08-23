@@ -12,3 +12,24 @@ CellGraphicsItem::CellGraphicsItem(Cell *model, int x, int y)
     m_position = std::make_pair(x * pixmap -> width(), y * pixmap -> height());
     this ->setPos(m_position.first, m_position.second);
 }
+
+void CellGraphicsItem::setGeometry(const QRectF &geometry)
+{
+    prepareGeometryChange();
+    QGraphicsLayoutItem::setGeometry(geometry);
+    setPos(geometry.topLeft());
+}
+
+QSizeF CellGraphicsItem::sizeHint(Qt::SizeHint which, const QSizeF &constraint) const
+{
+    switch(which)
+    {
+        case Qt::MinimumSize:
+        case Qt::PreferredSize:
+        case Qt::MaximumSize:
+            return {14, 14};
+        default:
+            break;
+    }
+    return {};
+}
