@@ -6,7 +6,6 @@
 #define WAVE_FUNCTION_COLLAPSE_UI_CELL_H
 
 #include <vector>
-#include <tuple>
 #include "CellState.h"
 
 class Cell
@@ -16,15 +15,17 @@ public:
     void collapse(int index);
     bool is_collapsed();
     void remove_state(int index);
-    int collapsed_state_index();
-    CellState* state();
-    const std::tuple<int,int>& position();
+    int get_collapsed_state_index();
+    CellState* get_state();
+    std::vector<CellState*> get_available_states();
+    unsigned int get_entropy() const;
+    const std::pair<int,int>& get_position();
     void set_available_states(std::vector<CellState*> states);
 private:
     CellState* m_collapsed_state;
     std::vector<CellState*> m_available_states;
     bool m_is_collapsed;
-    std::tuple<int, int> m_position;
+    std::pair<int, int> m_position;
 };
 
 #endif //WAVE_FUNCTION_COLLAPSE_UI_CELL_H

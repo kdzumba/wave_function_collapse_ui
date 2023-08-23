@@ -19,6 +19,13 @@ public:
     const std::pair<int, int>& dimensions();
     std::vector<std::vector<Cell*>> grid();
     std::map<int, QPixmap*> index_state_mapping();
+    void init_generation();
+    Cell* get_initial_cell();
+    static void collapse(Cell* cell);
+    bool is_fully_generated();
+    void generate();
+    Cell* least_entropy_cell();
+
 private:
     std::vector<std::vector<Cell*>> m_grid;
     static int s_available_states_count;

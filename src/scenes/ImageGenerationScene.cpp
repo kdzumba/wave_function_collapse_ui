@@ -8,6 +8,7 @@
 
 ImageGenerationScene::ImageGenerationScene(const std::string &img_directory, QWidget *parent)  : AbstractScene(parent)
 {
+    m_retries_count = 0;
     m_image_grid = new TiledModel_ImageGrid(IMAGE_WIDTH, IMAGE_HEIGHT, img_directory);
     init();
 }
@@ -36,7 +37,18 @@ void ImageGenerationScene::init()
 
 void ImageGenerationScene::animate()
 {
-    qDebug() << "Animating image generation";
+    auto generate = [&]() -> void {
+        m_image_grid -> init_generation();
+        m_retries_count = 0;
+        while(!(m_image_grid -> is_fully_generated()) && m_retries_count < 10000)
+        {
+            m_image_grid->generate();
+            m_retries_count++;
+        }
+    };
+
+    m_animation_thread = QThread::create(generate);
+    m_animation_thread -> start();
 }
 
 

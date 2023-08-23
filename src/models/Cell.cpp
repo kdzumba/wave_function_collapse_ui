@@ -8,11 +8,9 @@
 
 Cell::Cell(int x, int y)
 {
-    m_position = std::make_tuple(x, y);
+    m_position = std::make_pair(x, y);
     m_is_collapsed = false;
     m_collapsed_state = nullptr;
-
-    auto available_states_count = TiledModel_ImageGrid::available_states_count();
     m_available_states = std::vector<CellState*>();
 }
 
@@ -28,12 +26,12 @@ bool Cell::is_collapsed()
     return m_is_collapsed;
 }
 
-int Cell::collapsed_state_index()
+int Cell::get_collapsed_state_index()
 {
     return m_collapsed_state->index();
 }
 
-const std::tuple<int, int> &Cell::position()
+const std::pair<int, int> &Cell::get_position()
 {
     return m_position;
 }
@@ -46,7 +44,7 @@ void Cell::remove_state(int index)
     }), m_available_states.end());
 }
 
-CellState *Cell::state()
+CellState *Cell::get_state()
 {
     return m_collapsed_state;
 }
@@ -54,4 +52,14 @@ CellState *Cell::state()
 void Cell::set_available_states(std::vector<CellState *> states)
 {
     m_available_states = states;
+}
+
+unsigned int Cell::get_entropy() const
+{
+    return m_available_states.size();
+}
+
+std::vector<CellState *> Cell::get_available_states()
+{
+    return m_available_states;
 }

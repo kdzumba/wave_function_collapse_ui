@@ -20,7 +20,7 @@ public:
     ~SudokuBoard();
     void init_solve();
     void reset();
-    const std::vector<std::vector<std::unique_ptr<SudokuBlock>>>& solve();
+    void solve();
     const std::vector<std::vector<std::unique_ptr<SudokuBlock>>>& get_current_board();
     void print_available_options();
     void print();

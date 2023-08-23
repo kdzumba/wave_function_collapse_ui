@@ -12,6 +12,7 @@
 #include <QWidget>
 #include <QPixmap>
 #include <QImage>
+#include <QThread>
 
 class ImageGenerationScene : public AbstractScene
 {
@@ -27,6 +28,8 @@ public:
     static constexpr int IMAGE_HEIGHT = 13;
 private:
     TiledModel_ImageGrid* m_image_grid;
+    int m_retries_count;
+    QThread* m_animation_thread;
 };
 
 

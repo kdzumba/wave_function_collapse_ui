@@ -105,7 +105,7 @@ SudokuBlock *SudokuBlock::get_previous_block() const
 
 void SudokuBlock::add_available_state(const std::unique_ptr<BlockState>& option)
 {
-    //We don't need to add 0 as an available option (can happen during a de-solve)
+    //We don't need to add 0 as an available option (can happen during a de-generate)
     if(option -> get_value() == 0)
         return;
 

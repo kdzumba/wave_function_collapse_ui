@@ -66,7 +66,7 @@ void SudokuBoard::propagate_collapse_info(int row_number, int col_number, const 
         block->remove_state(state);
         auto new_states = std::vector<std::unique_ptr<BlockState>>();
 
-        //We need options that haven't been excluded by the current solve, hence set_difference
+        //We need options that haven't been excluded by the current generate, hence set_difference
         std::set_difference(std::move_iterator(block -> get_available_states().begin()), std::move_iterator(block->get_available_states().end()),
                             row_exclusions.begin(), row_exclusions.end(), std::inserter(new_states, new_states.begin()));
 
@@ -151,15 +151,15 @@ SudokuBlock* SudokuBoard::backtrack()
     if(to_reprocess == nullptr)
     {
         //If we got here, it means we went all the way back to the first set block, which means the starting block
-        //Was not the right one to start with. We need to reset the board and re-solve from scratch.
-        //The option of finding another block that is unset doesn't solve the problem of there being a block in this
+        //Was not the right one to start with. We need to reset the board and re-generate from scratch.
+        //The option of finding another block that is unset doesn't generate the problem of there being a block in this
         //to_reprocess path that has an entropy of 0
         return nullptr;
     }
 
     //Getting here means we found a block in the to_reprocess path(going backwards) that had more options to choose from
-    //then the one it collapsed to. We need to first de-collapse the to_reprocess block (set it to de-collapsed state, and
-    //propagate this de-collapse to other blocks so that they may also have this de-collapsed state in their available
+    //then the one it collapsed to. We need to first de-collapse the to_reprocess block (set it to de-collapsed get_state, and
+    //propagate this de-collapse to other blocks so that they may also have this de-collapsed get_state in their available
     //state_index_mappings again)
     auto old_collapsed_state = std::make_unique<BlockState>(*( to_reprocess->get_collapsed_state()));
     to_reprocess->set_collapsed_state(std::make_unique<BlockState>(0));
@@ -173,7 +173,7 @@ SudokuBlock* SudokuBoard::backtrack()
  * Client code should control how many retries we make. This is s recursive function and can exhaust stack resources
  * @return A 2-dimensional vector of unique_ptr to SudokuBlock, which represents a fully solved sudoku
  */
-const std::vector<std::vector<std::unique_ptr<SudokuBlock>>>& SudokuBoard::solve()
+void SudokuBoard::solve()
 {
     s_stack_counter ++;
     auto next_block = least_entropy_block();
@@ -183,12 +183,12 @@ const std::vector<std::vector<std::unique_ptr<SudokuBlock>>>& SudokuBoard::solve
 
     if(s_backtrack_count > 5000)
     {
-        return m_grid;
+        return;
     }
 
     if(next_block == nullptr)
     {
-        return m_grid;
+        return;
     }
     else
     {
@@ -197,7 +197,6 @@ const std::vector<std::vector<std::unique_ptr<SudokuBlock>>>& SudokuBoard::solve
 
     if(!is_fully_solved())
         solve();
-    return m_grid;
 }
 
 /**
@@ -276,7 +275,7 @@ bool SudokuBoard::is_fully_solved() const
 }
 
 /**
- * Debug function to see the state of the sudoku board at any point in time
+ * Debug function to see the get_state of the sudoku board at any point in time
  */
 void SudokuBoard::print()
 {
@@ -304,7 +303,7 @@ void SudokuBoard::print()
 }
 
 /**
- * When a collapse/de-solve happens, we need to re-compute the values that aren't available to blocks in the same row
+ * When a collapse/de-generate happens, we need to re-compute the values that aren't available to blocks in the same row
  * as the collapsed/de-collapsed block
  * @param row_number The row number for which we want to compute the values that aren't available to blocks in that row
  * @return A vector of values that blocks in row_number can't take
@@ -324,7 +323,7 @@ std::vector<std::unique_ptr<BlockState>> SudokuBoard::get_row_exclusions(int row
 }
 
 /**
- * When a collapse/de-solve happens, we need to re-compute the values that aren't available to blocks in the same row
+ * When a collapse/de-generate happens, we need to re-compute the values that aren't available to blocks in the same row
  * as the collapsed/de-collapsed block
  * @param col_number The col number for which we want to compute the values that aren't available to blocks in that col
  * @return A vector of values that blocks in col_number can't take
@@ -374,16 +373,16 @@ std::vector<std::unique_ptr<BlockState>> SudokuBoard::get_sqr_exclusions(int row
  *
  * @param row The row number for the de-collapsed block
  * @param col The col number for the de-collapsed block
- * @param state The state the block was de-collapsed to
+ * @param state The get_state the block was de-collapsed to
  * During backtracking, we need to reset some blocks that were previously collapsed before the current block. Doing so
- * entails putting the block's state back to available_options for that block
+ * entails putting the block's get_state back to available_options for that block
  */
 void SudokuBoard::propagate_decollapse_info(int row, int col, const std::unique_ptr<BlockState>& state)
 {
     const auto& being_decollapsed = m_grid.at(row).at(col).get();
     update_processing_chain(being_decollapsed);
 
-    //Every block in row should get state added to their available options
+    //Every block in row should get get_state added to their available options
     for(const auto& block : m_grid.at(row))
     {
         auto current_row = std::get<0>(block -> get_coordinate());
@@ -395,7 +394,7 @@ void SudokuBoard::propagate_decollapse_info(int row, int col, const std::unique_
         }
     }
 
-    //Every block in col should get state added back to their available options
+    //Every block in col should get get_state added back to their available options
     for(const auto& _row : m_grid)
     {
         const auto& block = _row.at(col);
@@ -406,7 +405,7 @@ void SudokuBoard::propagate_decollapse_info(int row, int col, const std::unique_
             block->add_available_state(state);
     }
 
-    //Every block in the 3x3 square grid should get state added back to their available options
+    //Every block in the 3x3 square grid should get get_state added back to their available options
     int start_row_index = row - row % MIN_FULL_BLOCK_SIZE;
     int start_col_index = col - col % MIN_FULL_BLOCK_SIZE;
 
@@ -447,11 +446,11 @@ void SudokuBoard::print_available_options()
 }
 
 /**
- * Before adding a state back to a block's available options, we need to check if it's still a safe option for the block
+ * Before adding a get_state back to a block's available options, we need to check if it's still a safe option for the block
  * as this might have changed due to some change that has already happened on the board
  * @param row The row number at which the block is found
  * @param col The col number at which the block is found
- * @param state The state we'd like to place back into available options for the block
+ * @param state The get_state we'd like to place back into available options for the block
  * @return True if placing the option doesn't violate constraints of the game, false otherwise
  */
 bool SudokuBoard::is_safe(int row, int col, const std::unique_ptr<BlockState>& state)
@@ -564,8 +563,8 @@ void SudokuBoard::reset()
 }
 
 /**
- * We need the initial block with which we start to solve to not be one of the default_collapsed_blocks
- * @return A Non-default_collapsed first block with which we initiate the solve
+ * We need the initial block with which we start to generate to not be one of the default_collapsed_blocks
+ * @return A Non-default_collapsed first block with which we initiate the generate
  */
 SudokuBlock *SudokuBoard::get_initial_block()
 {

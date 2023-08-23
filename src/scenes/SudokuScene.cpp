@@ -40,7 +40,7 @@ SudokuScene::SudokuScene(const std::string& filename, QWidget* parent) : Abstrac
 void SudokuScene::animate()
 {
     auto solve = [&]() -> void{
-        //This guy just collapses the first block to kick star solve.
+        //This guy just collapses the first block to kick star generate.
         //Need it in here after reset because the first solves removes
         //all available options (fully solved)
         reset();
