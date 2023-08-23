@@ -14,13 +14,14 @@ public:
     Cell(int x, int y);
     void collapse(int index);
     bool is_collapsed();
+    void clear_available_states();
     void remove_state(int index);
     int get_collapsed_state_index();
     CellState* get_state();
     std::vector<CellState*> get_available_states();
     unsigned int get_entropy() const;
     const std::pair<int,int>& get_position();
-    void set_available_states(std::vector<CellState*> states);
+    void set_available_states(const std::vector<CellState*>& states);
 private:
     CellState* m_collapsed_state;
     std::vector<CellState*> m_available_states;

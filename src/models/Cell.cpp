@@ -49,9 +49,18 @@ CellState *Cell::get_state()
     return m_collapsed_state;
 }
 
-void Cell::set_available_states(std::vector<CellState *> states)
+void Cell::set_available_states(const std::vector<CellState *>& states)
 {
-    m_available_states = states;
+    auto new_available_states = std::vector<CellState*>();
+
+    for(const auto& state : states)
+    {
+        auto pixmap_copy = new QPixmap(*(state->pixmap()));
+        auto new_state = new CellState(state->index(), pixmap_copy);
+        new_available_states.emplace_back(new_state);
+    }
+    clear_available_states();
+    m_available_states = new_available_states;
 }
 
 unsigned int Cell::get_entropy() const
@@ -62,4 +71,13 @@ unsigned int Cell::get_entropy() const
 std::vector<CellState *> Cell::get_available_states()
 {
     return m_available_states;
+}
+
+void Cell::clear_available_states()
+{
+    for(auto state : m_available_states)
+    {
+        delete state;
+    }
+    m_available_states.clear();
 }

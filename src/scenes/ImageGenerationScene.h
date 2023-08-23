@@ -13,6 +13,8 @@
 #include <QPixmap>
 #include <QImage>
 #include <QThread>
+#include <QGraphicsGridLayout>
+#include <QGraphicsWidget>
 
 class ImageGenerationScene : public AbstractScene
 {
@@ -29,6 +31,8 @@ public:
 private:
     TiledModel_ImageGrid* m_image_grid;
     int m_retries_count;
+    QGraphicsGridLayout* m_scene_layout;
+    QGraphicsWidget* m_scene_container;
     QThread* m_animation_thread;
 };
 

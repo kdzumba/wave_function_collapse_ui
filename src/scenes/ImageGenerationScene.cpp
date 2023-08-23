@@ -10,6 +10,10 @@ ImageGenerationScene::ImageGenerationScene(const std::string &img_directory, QWi
 {
     m_retries_count = 0;
     m_image_grid = new TiledModel_ImageGrid(IMAGE_WIDTH, IMAGE_HEIGHT, img_directory);
+    m_scene_container = new QGraphicsWidget;
+    m_scene_layout = new QGraphicsGridLayout(m_scene_container);
+
+    this ->addItem(m_scene_container);
     init();
 }
 
@@ -46,7 +50,6 @@ void ImageGenerationScene::animate()
             m_retries_count++;
         }
     };
-
     m_animation_thread = QThread::create(generate);
     m_animation_thread -> start();
 }

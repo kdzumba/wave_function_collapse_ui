@@ -88,7 +88,7 @@ Cell *TiledModel_ImageGrid::get_initial_cell()
 
 void TiledModel_ImageGrid::collapse(Cell *cell)
 {
-    auto rand_index = Utils::generate_random_int(0, (int) cell -> get_available_states().size());
+    auto rand_index = Utils::generate_random_int(1, (int) cell -> get_available_states().size());
     cell ->collapse(rand_index);
 }
 
