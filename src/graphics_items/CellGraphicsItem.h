@@ -8,15 +8,20 @@
 #include <QGraphicsPixmapItem>
 #include <QGraphicsLayoutItem>
 #include "../models/Cell.h"
+#include <QObject>
 
-class CellGraphicsItem : public QGraphicsPixmapItem, public QGraphicsLayoutItem
-{
+class CellGraphicsItem : public QObject, public QGraphicsPixmapItem, public QGraphicsLayoutItem
+{   Q_OBJECT
 public:
     CellGraphicsItem(Cell* model, int x, int y);
     void setGeometry(const QRectF& geometry) override;
     QSizeF sizeHint(Qt::SizeHint which, const QSizeF &constraint) const override;
+    QRectF boundingRect() const override;
+public slots:
+    void advance(int step) override;
 private:
-    std::pair<int, int> m_position;
+    static int constexpr IMAGE_WIDTH = 14;
+    static int constexpr IMAGE_HEIGHT = 14;
     Cell* m_cell_model;
 };
 

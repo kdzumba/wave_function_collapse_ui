@@ -33,7 +33,7 @@ class GridTile : public QObject, public QGraphicsLayoutItem, public QGraphicsIte
 public:
     GridTile(SudokuBlock* model, int x, int y);
     ~GridTile() override;
-    [[nodiscard]] QRectF boundingRect() const override;
+    QRectF boundingRect() const override;
     void paint(QPainter* painter, const QStyleOptionGraphicsItem * option, QWidget* widget) override;
     void setGeometry(const QRectF& geometry) override;
     QSizeF sizeHint(Qt::SizeHint which, const QSizeF &constraint) const override;

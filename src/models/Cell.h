@@ -7,9 +7,11 @@
 
 #include <vector>
 #include "CellState.h"
+#include <QObject>
 
-class Cell
+class Cell : public QObject
 {
+    Q_OBJECT
 public:
     Cell(int x, int y);
     void collapse(int index);
@@ -22,6 +24,8 @@ public:
     unsigned int get_entropy() const;
     const std::pair<int,int>& get_position();
     void set_available_states(const std::vector<CellState*>& states);
+signals:
+    void cell_collapsed(int phase);
 private:
     CellState* m_collapsed_state;
     std::vector<CellState*> m_available_states;

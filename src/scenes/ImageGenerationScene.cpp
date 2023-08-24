@@ -13,8 +13,13 @@ ImageGenerationScene::ImageGenerationScene(const std::string &img_directory, QWi
     m_scene_container = new QGraphicsWidget;
     m_scene_layout = new QGraphicsGridLayout(m_scene_container);
     m_canvas = new ImageGenerationCanvas;
+    m_generation_menu = new ImageGenerationSideMenu;
+    m_generation_menu_proxy = this ->addWidget(m_generation_menu);
+
+    QObject::connect(m_generation_menu, SIGNAL(generateButtonClicked()), this, SLOT(animate()));
 
     m_scene_layout ->addItem(m_canvas, 0, 0);
+    m_scene_layout ->addItem(m_generation_menu_proxy, 1, 0);
 
     this ->addItem(m_scene_container);
 
@@ -44,18 +49,21 @@ void ImageGenerationScene::init()
         std::vector<CellGraphicsItem*> ui_row;
         for(auto col = 0; col < height; col++)
         {
-            auto state = m_image_grid->grid().at(row).at(col);
-            auto cell_graphics_item = new CellGraphicsItem(state, row, col);
+            auto cell_model = m_image_grid->grid().at(row).at(col);
+            auto cell_graphics_item = new CellGraphicsItem(cell_model, row, col);
+            auto map = m_image_grid->index_state_mapping();
+            cell_graphics_item ->setPixmap(*map.at(2));
             this ->addItem(cell_graphics_item);
             ui_row.emplace_back(cell_graphics_item);
             m_canvas ->add_item(cell_graphics_item, row, col);
         }
     }
-    animate();
 }
 
 void ImageGenerationScene::animate()
 {
+    qDebug() << "Generating Image";
+
     auto generate = [&]() -> void {
         reset();
         m_image_grid -> init_generation();

@@ -24,9 +24,6 @@ TiledModel_ImageGrid::TiledModel_ImageGrid(int width, int height, const std::str
         }
         m_grid.emplace_back(row_);
     }
-
-    init_generation();
-    generate();
 }
 
 int TiledModel_ImageGrid::available_states_count()

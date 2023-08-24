@@ -186,6 +186,7 @@ wave_function_collapse_ui_autogen/timestamp: \
   C:/Qt/6.5.1/mingw_64/include/QtWidgets/QGraphicsItem \
   C:/Qt/6.5.1/mingw_64/include/QtWidgets/QGraphicsLayout \
   C:/Qt/6.5.1/mingw_64/include/QtWidgets/QGraphicsLayoutItem \
+  C:/Qt/6.5.1/mingw_64/include/QtWidgets/QGraphicsPixmapItem \
   C:/Qt/6.5.1/mingw_64/include/QtWidgets/QGraphicsProxyWidget \
   C:/Qt/6.5.1/mingw_64/include/QtWidgets/QGraphicsScene \
   C:/Qt/6.5.1/mingw_64/include/QtWidgets/QGraphicsTextItem \
@@ -644,6 +645,8 @@ wave_function_collapse_ui_autogen/timestamp: \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/graphics_items/CellGraphicsItem.h \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/graphics_items/GridTile.cpp \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/graphics_items/GridTile.h \
+  C:/Users/User/CLionProjects/wave_function_collapse_ui/src/graphics_items/ImageGenerationCanvas.cpp \
+  C:/Users/User/CLionProjects/wave_function_collapse_ui/src/graphics_items/ImageGenerationCanvas.h \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/BlockState.cpp \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/BlockState.h \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/Cell.cpp \
@@ -661,6 +664,8 @@ wave_function_collapse_ui_autogen/timestamp: \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/scenes/ImageGenerationScene.h \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/scenes/SudokuScene.cpp \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/scenes/SudokuScene.h \
+  C:/Users/User/CLionProjects/wave_function_collapse_ui/src/ui_forms/ImageGenerationSideMenu.cpp \
+  C:/Users/User/CLionProjects/wave_function_collapse_ui/src/ui_forms/ImageGenerationSideMenu.h \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/ui_forms/graphicsworkspace.cpp \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/ui_forms/graphicsworkspace.h \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/ui_forms/sudokuscenesidemenu.cpp \

@@ -7,10 +7,7 @@
 CellGraphicsItem::CellGraphicsItem(Cell *model, int x, int y)
 {
     m_cell_model = model;
-    auto pixmap = m_cell_model->get_state() -> pixmap();
-    this ->setPixmap(*pixmap);
-    m_position = std::make_pair(x * pixmap -> width(), y * pixmap -> height());
-    this ->setPos(m_position.first, m_position.second);
+    QObject::connect(m_cell_model, SIGNAL(cell_collapsed(int)), this, SLOT(advance(int)));
 }
 
 void CellGraphicsItem::setGeometry(const QRectF &geometry)
@@ -32,4 +29,19 @@ QSizeF CellGraphicsItem::sizeHint(Qt::SizeHint which, const QSizeF &constraint) 
             break;
     }
     return {};
+}
+
+void CellGraphicsItem::advance(int step)
+{
+    if(!step) return;
+
+    auto pixmap = m_cell_model->get_state() -> pixmap();
+    this ->setPixmap(*pixmap);
+    update(this -> boundingRect());
+}
+
+QRectF CellGraphicsItem::boundingRect() const
+{
+    return {0, 0, IMAGE_WIDTH, IMAGE_HEIGHT};
+
 }
