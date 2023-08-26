@@ -110,6 +110,26 @@ void TiledModel_ImageGrid::collapse(Cell *next_cell)
     auto x = next_cell -> get_position().first;
     auto y = next_cell -> get_position().second;
 
+    Cell* left = nullptr;
+    Cell* right = nullptr;
+
+    std::cout << "POSITION: " << x << " " << y << std::endl;
+
+    if(y > 0)
+        left = m_grid.at(x).at(y - 1);
+    if(y < dimensions().second - 1)
+        right = m_grid.at(x).at(y + 1);
+
+    if(left != nullptr && left -> get_state() != nullptr && right != nullptr && right -> get_state() != nullptr) {
+        std::cout << "RULE: left=" << left->get_state()->get_name() << " " << "right=" << right->get_state()->get_name()
+                  << std::endl;
+    }
+
+    if(y == 0 && right != nullptr && right -> get_state() != nullptr)
+        std::cout << "RULE: " << right -> get_state() -> get_name() << std::endl;
+    if(y == dimensions().second - 1 && left != nullptr && left -> get_state() != nullptr)
+        std::cout << "RULE: " << left -> get_state() -> get_name() << std::endl;
+
     propagate_collapse_info(x, y, next_state);
     m_current_collapsed = next_cell;
 }
@@ -167,14 +187,12 @@ Cell *TiledModel_ImageGrid::least_entropy_cell()
 
 void TiledModel_ImageGrid::reset()
 {
-    std::cout << "RESETTING" << std::endl;
     for(const auto& row : m_grid)
     {
         for(auto cell : row)
         {
             cell ->set_available_states(m_all_states);
-            cell -> collapse(0);
-            cell ->make_current_block(false);
+            cell -> reset();
         }
     }
 }
@@ -268,7 +286,7 @@ void TiledModel_ImageGrid::propagate_collapse_info(int x, int y, CellState *stat
     }
 }
 
-//When we collapse a cell into a specific current_state, the cell to it's left can't take certain states anymore
+//When we reset a cell into a specific current_state, the cell to it's left can't take certain states anymore
 //and these are defined from the loaded rules.
 //Since it constraints cells to it's left, this makes it the right tile (in the rules)
 std::vector<CellState *> TiledModel_ImageGrid::get_left_allowed(CellState* current_state)
@@ -293,7 +311,7 @@ std::vector<CellState *> TiledModel_ImageGrid::get_left_allowed(CellState* curre
 }
 
 
-//When we collapse a cell into a specific current_state, the cell to it's right can't take certain states anymore
+//When we reset a cell into a specific current_state, the cell to it's right can't take certain states anymore
 //and these are defined from the loaded rules
 //Since it constraints cells to it's right, this makes it the left tile (in the rules)
 std::vector<CellState*> TiledModel_ImageGrid::get_right_allowed(CellState *current_state)

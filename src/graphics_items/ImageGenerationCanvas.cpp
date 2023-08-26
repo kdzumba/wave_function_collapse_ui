@@ -7,7 +7,7 @@
 ImageGenerationCanvas::ImageGenerationCanvas(QGraphicsItem *parent) : QGraphicsWidget(parent)
 {
     m_canvas_layout = new QGraphicsGridLayout(this);
-    m_canvas_layout ->setSpacing(0);
+    m_canvas_layout ->setSpacing(10);
 }
 
 void ImageGenerationCanvas::add_item(QGraphicsLayoutItem *item, int row, int col, Qt::Alignment alignment)

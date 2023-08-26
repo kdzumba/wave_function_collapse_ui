@@ -26,7 +26,7 @@ QSizeF CellGraphicsItem::sizeHint(Qt::SizeHint which, const QSizeF &constraint) 
         case Qt::MinimumSize:
         case Qt::PreferredSize:
         case Qt::MaximumSize:
-            return {7, 7};
+            return {14, 14};
         default:
             break;
     }
@@ -38,7 +38,7 @@ void CellGraphicsItem::advance(int step)
     if(!step) return;
     auto pixmap = m_cell_model->get_state() -> pixmap();
     this ->setPixmap(*pixmap);
-    update(this -> boundingRect());
+    this ->setTransformOriginPoint(this->boundingRect().center());
     this ->setRotation(m_cell_model -> get_state() -> get_orientation() * 90);
 }
 

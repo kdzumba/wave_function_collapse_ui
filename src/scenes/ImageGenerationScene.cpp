@@ -45,7 +45,9 @@ void ImageGenerationScene::init()
             auto cell_graphics_item = new CellGraphicsItem(cell_model, row, col);
 
             auto map = m_image_grid->get_name_image_mapping();
-            cell_graphics_item ->setPixmap(*(m_image_grid->get_name_image_mapping().at("component")));
+            auto default_pixmap = new QPixmap();
+            default_pixmap -> fill();
+            cell_graphics_item ->setPixmap(*default_pixmap);
             this ->addItem(cell_graphics_item);
             m_canvas ->add_item(cell_graphics_item, row, col);
         }

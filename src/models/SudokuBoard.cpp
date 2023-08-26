@@ -158,8 +158,8 @@ SudokuBlock* SudokuBoard::backtrack()
     }
 
     //Getting here means we found a block in the to_reprocess path(going backwards) that had more options to choose from
-    //then the one it collapsed to. We need to first de-collapse the to_reprocess block (set it to de-collapsed get_state, and
-    //propagate this de-collapse to other blocks so that they may also have this de-collapsed get_state in their available
+    //then the one it collapsed to. We need to first de-reset the to_reprocess block (set it to de-collapsed get_state, and
+    //propagate this de-reset to other blocks so that they may also have this de-collapsed get_state in their available
     //state_index_mappings again)
     auto old_collapsed_state = std::make_unique<BlockState>(*( to_reprocess->get_collapsed_state()));
     to_reprocess->set_collapsed_state(std::make_unique<BlockState>(0));
@@ -169,7 +169,7 @@ SudokuBlock* SudokuBoard::backtrack()
 }
 
 /**
- * Continuously solves a sudoku puzzle using wave function collapse and backtracking
+ * Continuously solves a sudoku puzzle using wave function reset and backtracking
  * Client code should control how many retries we make. This is s recursive function and can exhaust stack resources
  * @return A 2-dimensional vector of unique_ptr to SudokuBlock, which represents a fully solved sudoku
  */
@@ -303,7 +303,7 @@ void SudokuBoard::print()
 }
 
 /**
- * When a collapse/de-generate happens, we need to re-compute the values that aren't available to blocks in the same row
+ * When a reset/de-generate happens, we need to re-compute the values that aren't available to blocks in the same row
  * as the collapsed/de-collapsed block
  * @param row_number The row number for which we want to compute the values that aren't available to blocks in that row
  * @return A vector of values that blocks in row_number can't take
@@ -323,7 +323,7 @@ std::vector<std::unique_ptr<BlockState>> SudokuBoard::get_row_exclusions(int row
 }
 
 /**
- * When a collapse/de-generate happens, we need to re-compute the values that aren't available to blocks in the same row
+ * When a reset/de-generate happens, we need to re-compute the values that aren't available to blocks in the same row
  * as the collapsed/de-collapsed block
  * @param col_number The col number for which we want to compute the values that aren't available to blocks in that col
  * @return A vector of values that blocks in col_number can't take
@@ -480,7 +480,7 @@ bool SudokuBoard::is_safe(int row, int col, const std::unique_ptr<BlockState>& s
 }
 
 /**
- * During de-collapse, we need to update the old block for all the blocks whose old was the block that's
+ * During de-reset, we need to update the old block for all the blocks whose old was the block that's
  * being de-collapsed. Sometimes the block being de-collapsed is the same as the m_current_collapsed_block, and
  * we don't want a block to be itself's previous
  * @param old The block being de-collapsed

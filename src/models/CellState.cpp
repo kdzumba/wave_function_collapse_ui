@@ -10,7 +10,7 @@ const std::map<std::string, int> CellState::SYMMETRY_CARDINALITY_MAP = {
         {"I", 2},
         {"\\",2},
         {"F", 8},
-        {"X", 0}
+        {"X", 1}
 };
 
 CellState::CellState(int index, QPixmap* pixmap) : m_index(index), m_pixmap(pixmap)

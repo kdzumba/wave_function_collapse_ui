@@ -17,21 +17,12 @@ Cell::Cell(int x, int y)
     m_is_current_cell = false;
 }
 
-void Cell::collapse(int index)
+void Cell::reset()
 {
-    //An index of 0 should reset the collapse of the cell
-    if(index == 0)
-    {
-        m_collapsed_state = nullptr;
-        m_is_collapsed = false;
-        return;
-    }
-
-    auto state_found = [=](CellState* state) -> bool{return state -> index() == index;};
-    m_collapsed_state = *(std::find_if(m_available_states.begin(), m_available_states.end(), state_found));
-
-    m_is_collapsed = true;
-    emit cell_collapsed(1);
+    m_collapsed_state = nullptr;
+    m_is_collapsed = false;
+    m_previous = nullptr;
+    m_is_current_cell = false;
 }
 
 void Cell::set_collapsed_state(CellState *state)

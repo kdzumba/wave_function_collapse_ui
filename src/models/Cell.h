@@ -14,7 +14,7 @@ class Cell : public QObject
     Q_OBJECT
 public:
     Cell(int x, int y);
-    void collapse(int index);
+    void reset();
     void set_collapsed_state(CellState* state);
     void remove_state(CellState* state);
     bool is_collapsed() const;
