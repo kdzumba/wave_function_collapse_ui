@@ -10,6 +10,7 @@ set(CMAKE_PREFIX_PATH "C:/Qt/6.5.1/mingw_64/lib/cmake")
 
 find_package(Qt6 COMPONENTS
         Core
+        Xml
         Gui
         Widgets
         Concurrent
@@ -56,9 +57,12 @@ add_executable(wave_function_collapse_ui main.cpp
         src/graphics_items/ImageGenerationCanvas.h
         src/ui_forms/ImageGenerationSideMenu.cpp
         src/ui_forms/ImageGenerationSideMenu.h
+        src/models/TiledModelRule.cpp
+        src/models/TiledModelRule.h
 )
 target_link_libraries(wave_function_collapse_ui
         Qt::Core
+        Qt6::Xml
         Qt::Gui
         Qt::Widgets
         Qt::Concurrent

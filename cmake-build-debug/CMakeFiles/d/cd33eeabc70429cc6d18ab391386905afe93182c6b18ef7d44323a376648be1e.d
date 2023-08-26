@@ -232,6 +232,11 @@ wave_function_collapse_ui_autogen/timestamp: \
   C:/Qt/6.5.1/mingw_64/include/QtWidgets/qtwidgetsexports.h \
   C:/Qt/6.5.1/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
   C:/Qt/6.5.1/mingw_64/include/QtWidgets/qwidget.h \
+  C:/Qt/6.5.1/mingw_64/include/QtXml/QDomDocument \
+  C:/Qt/6.5.1/mingw_64/include/QtXml/qdom.h \
+  C:/Qt/6.5.1/mingw_64/include/QtXml/qtxml-config.h \
+  C:/Qt/6.5.1/mingw_64/include/QtXml/qtxmlexports.h \
+  C:/Qt/6.5.1/mingw_64/include/QtXml/qtxmlglobal.h \
   C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6/FindWrapAtomic.cmake \
   C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6/FindWrapVulkanHeaders.cmake \
   C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6/Qt6Config.cmake \
@@ -368,48 +373,56 @@ wave_function_collapse_ui_autogen/timestamp: \
   C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6WidgetsTools/Qt6WidgetsToolsTargets-relwithdebinfo.cmake \
   C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6WidgetsTools/Qt6WidgetsToolsTargets.cmake \
   C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6WidgetsTools/Qt6WidgetsToolsVersionlessTargets.cmake \
+  C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6Xml/Qt6XmlAdditionalTargetInfo.cmake \
+  C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6Xml/Qt6XmlConfig.cmake \
+  C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6Xml/Qt6XmlConfigVersion.cmake \
+  C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6Xml/Qt6XmlConfigVersionImpl.cmake \
+  C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6Xml/Qt6XmlDependencies.cmake \
+  C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6Xml/Qt6XmlTargets-relwithdebinfo.cmake \
+  C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6Xml/Qt6XmlTargets.cmake \
+  C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6Xml/Qt6XmlVersionlessTargets.cmake \
   C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6ZlibPrivate/Qt6ZlibPrivateAdditionalTargetInfo.cmake \
   C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6ZlibPrivate/Qt6ZlibPrivateConfig.cmake \
   C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6ZlibPrivate/Qt6ZlibPrivateConfigVersion.cmake \
   C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6ZlibPrivate/Qt6ZlibPrivateConfigVersionImpl.cmake \
   C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6ZlibPrivate/Qt6ZlibPrivateTargets.cmake \
   C:/Qt/6.5.1/mingw_64/lib/cmake/Qt6ZlibPrivate/Qt6ZlibPrivateVersionlessTargets.cmake \
-  C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeCInformation.cmake \
-  C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeCXXInformation.cmake \
-  C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake \
-  C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeCommonLanguageInclude.cmake \
-  C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeFindDependencyMacro.cmake \
-  C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeGenericSystem.cmake \
-  C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeInitializeConfigs.cmake \
-  C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeLanguageInformation.cmake \
-  C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeRCInformation.cmake \
-  C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInformation.cmake \
-  C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInitialize.cmake \
-  C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/cmake/win/x64/share/cmake-3.26/Modules/CheckCSourceCompiles.cmake \
-  C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/cmake/win/x64/share/cmake-3.26/Modules/CheckCXXCompilerFlag.cmake \
-  C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/cmake/win/x64/share/cmake-3.26/Modules/CheckCXXSourceCompiles.cmake \
-  C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/cmake/win/x64/share/cmake-3.26/Modules/CheckIncludeFile.cmake \
-  C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/cmake/win/x64/share/cmake-3.26/Modules/CheckLibraryExists.cmake \
-  C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/CMakeCommonCompilerMacros.cmake \
-  C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/GNU-C.cmake \
-  C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/GNU-CXX.cmake \
-  C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/GNU.cmake \
-  C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/cmake/win/x64/share/cmake-3.26/Modules/FindPackageHandleStandardArgs.cmake \
-  C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/cmake/win/x64/share/cmake-3.26/Modules/FindPackageMessage.cmake \
-  C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/cmake/win/x64/share/cmake-3.26/Modules/FindThreads.cmake \
-  C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/cmake/win/x64/share/cmake-3.26/Modules/FindVulkan.cmake \
-  C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/cmake/win/x64/share/cmake-3.26/Modules/GNUInstallDirs.cmake \
-  C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/cmake/win/x64/share/cmake-3.26/Modules/Internal/CheckCompilerFlag.cmake \
-  C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/cmake/win/x64/share/cmake-3.26/Modules/Internal/CheckFlagCommonConfig.cmake \
-  C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/cmake/win/x64/share/cmake-3.26/Modules/Internal/CheckSourceCompiles.cmake \
-  C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-C-ABI.cmake \
-  C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-C.cmake \
-  C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-CXX-ABI.cmake \
-  C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-CXX.cmake \
-  C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU.cmake \
-  C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-windres.cmake \
-  C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows.cmake \
-  C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/WindowsPaths.cmake \
+  C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeCInformation.cmake \
+  C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeCXXInformation.cmake \
+  C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake \
+  C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeCommonLanguageInclude.cmake \
+  C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeFindDependencyMacro.cmake \
+  C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeGenericSystem.cmake \
+  C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeInitializeConfigs.cmake \
+  C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeLanguageInformation.cmake \
+  C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeRCInformation.cmake \
+  C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeSystemSpecificInformation.cmake \
+  C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeSystemSpecificInitialize.cmake \
+  C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CheckCSourceCompiles.cmake \
+  C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CheckCXXCompilerFlag.cmake \
+  C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CheckCXXSourceCompiles.cmake \
+  C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CheckIncludeFile.cmake \
+  C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CheckLibraryExists.cmake \
+  C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/CMakeCommonCompilerMacros.cmake \
+  C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/GNU-C.cmake \
+  C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/GNU-CXX.cmake \
+  C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/GNU.cmake \
+  C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/FindPackageHandleStandardArgs.cmake \
+  C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/FindPackageMessage.cmake \
+  C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/FindThreads.cmake \
+  C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/FindVulkan.cmake \
+  C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/GNUInstallDirs.cmake \
+  C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/Internal/CheckCompilerFlag.cmake \
+  C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/Internal/CheckFlagCommonConfig.cmake \
+  C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/Internal/CheckSourceCompiles.cmake \
+  C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/Platform/Windows-GNU-C-ABI.cmake \
+  C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/Platform/Windows-GNU-C.cmake \
+  C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/Platform/Windows-GNU-CXX-ABI.cmake \
+  C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/Platform/Windows-GNU-CXX.cmake \
+  C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/Platform/Windows-GNU.cmake \
+  C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/Platform/Windows-windres.cmake \
+  C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/Platform/Windows.cmake \
+  C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/Platform/WindowsPaths.cmake \
   C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/algorithm \
   C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/array \
   C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/atomic \
@@ -632,10 +645,10 @@ wave_function_collapse_ui_autogen/timestamp: \
   C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/mingw/x86_64-w64-mingw32/include/wchar.h \
   C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/mingw/x86_64-w64-mingw32/include/wctype.h \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/CMakeLists.txt \
-  CMakeFiles/3.26.4/CMakeCCompiler.cmake \
-  CMakeFiles/3.26.4/CMakeCXXCompiler.cmake \
-  CMakeFiles/3.26.4/CMakeRCCompiler.cmake \
-  CMakeFiles/3.26.4/CMakeSystem.cmake \
+  CMakeFiles/3.24.2/CMakeCCompiler.cmake \
+  CMakeFiles/3.24.2/CMakeCXXCompiler.cmake \
+  CMakeFiles/3.24.2/CMakeRCCompiler.cmake \
+  CMakeFiles/3.24.2/CMakeSystem.cmake \
   wave_function_collapse_ui_autogen/moc_predefs.h \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/main.cpp \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/AbstractSideMenu.h \
@@ -657,6 +670,8 @@ wave_function_collapse_ui_autogen/timestamp: \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/SudokuBlock.h \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/SudokuBoard.cpp \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/SudokuBoard.h \
+  C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/TiledModelRule.cpp \
+  C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/TiledModelRule.h \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/TiledModel_ImageGrid.cpp \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/TiledModel_ImageGrid.h \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/scenes/AbstractScene.h \
@@ -681,4 +696,4 @@ wave_function_collapse_ui_autogen/timestamp: \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/ui_forms/graphicsworkspace.ui \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/ui_forms/sudokuscenesidemenu.ui \
   C:/Users/User/CLionProjects/wave_function_collapse_ui/src/ui_forms/wavefunctioncollapseapp.ui \
-  C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/cmake/win/x64/bin/cmake.exe
+  C:/Qt/Tools/CMake_64/bin/cmake.exe

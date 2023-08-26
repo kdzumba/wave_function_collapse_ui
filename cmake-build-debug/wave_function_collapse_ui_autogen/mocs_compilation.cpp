@@ -5,6 +5,7 @@
 #include "UGM3QNIJL2/moc_ImageGenerationCanvas.cpp"
 #include "M4YTXQ7V2H/moc_Cell.cpp"
 #include "M4YTXQ7V2H/moc_SudokuBlock.cpp"
+#include "M4YTXQ7V2H/moc_TiledModel_ImageGrid.cpp"
 #include "EKW6RVOTGB/moc_ImageGenerationScene.cpp"
 #include "EKW6RVOTGB/moc_SudokuScene.cpp"
 #include "FM2YYINTCJ/moc_ImageGenerationSideMenu.cpp"

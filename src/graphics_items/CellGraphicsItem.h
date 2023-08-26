@@ -9,11 +9,14 @@
 #include <QGraphicsLayoutItem>
 #include "../models/Cell.h"
 #include <QObject>
+#include <QPainter>
+#include<QWidget>
 
 class CellGraphicsItem : public QObject, public QGraphicsPixmapItem, public QGraphicsLayoutItem
 {   Q_OBJECT
 public:
     CellGraphicsItem(Cell* model, int x, int y);
+    void paint(QPainter* painter, const QStyleOptionGraphicsItem * option, QWidget* widget) override;
     void setGeometry(const QRectF& geometry) override;
     QSizeF sizeHint(Qt::SizeHint which, const QSizeF &constraint) const override;
     QRectF boundingRect() const override;

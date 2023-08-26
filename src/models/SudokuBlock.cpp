@@ -10,7 +10,6 @@
 SudokuBlock::SudokuBlock(): m_previous(nullptr), m_is_current_block(false), m_coordinate(std::make_tuple(0, 0)),
 m_is_permanently_collapsed(false)
 {
-    std::cout << "Memory address of new block: " << this << std::endl;
     reset_available_states();
 }
 

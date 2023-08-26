@@ -32,7 +32,7 @@ public slots:
     void reset();
 public:
     static constexpr int IMAGE_WIDTH = 50;
-    static constexpr int IMAGE_HEIGHT = 30;
+    static constexpr int IMAGE_HEIGHT = 20;
 private:
     TiledModel_ImageGrid* m_image_grid;
     int m_retries_count;
