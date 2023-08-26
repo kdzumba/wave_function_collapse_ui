@@ -31,8 +31,8 @@ public slots:
     void animate() override;
     void reset();
 public:
-    static constexpr int IMAGE_WIDTH = 50;
-    static constexpr int IMAGE_HEIGHT = 20;
+    static constexpr int IMAGE_WIDTH = 150;
+    static constexpr int IMAGE_HEIGHT = 80;
 private:
     TiledModel_ImageGrid* m_image_grid;
     int m_retries_count;

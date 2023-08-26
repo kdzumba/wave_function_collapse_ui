@@ -5,7 +5,6 @@
 #include <iostream>
 #include "ImageGenerationScene.h"
 #include "../utils.h"
-#include "../graphics_items/CellGraphicsItem.h"
 
 ImageGenerationScene::ImageGenerationScene(const std::string &img_directory, QWidget *parent)  : AbstractScene(parent)
 {
@@ -46,7 +45,7 @@ void ImageGenerationScene::init()
             auto cell_graphics_item = new CellGraphicsItem(cell_model, row, col);
 
             auto map = m_image_grid->get_name_image_mapping();
-            cell_graphics_item ->setPixmap(*map.at("component"));
+            cell_graphics_item ->setPixmap(*(m_image_grid->get_name_image_mapping().at("component")));
             this ->addItem(cell_graphics_item);
             m_canvas ->add_item(cell_graphics_item, row, col);
         }
@@ -55,8 +54,6 @@ void ImageGenerationScene::init()
 
 void ImageGenerationScene::animate()
 {
-    qDebug() << "Generating Image";
-
     auto generate = [&]() -> void {
         reset();
         m_image_grid -> init_generation();
@@ -71,7 +68,6 @@ void ImageGenerationScene::animate()
     };
     m_animation_thread = QThread::create(generate);
     m_animation_thread -> start();
-    qDebug() << "Reached the End of Animation";
 }
 
 void ImageGenerationScene::reset()

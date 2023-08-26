@@ -29,8 +29,6 @@ void Cell::collapse(int index)
 
     auto state_found = [=](CellState* state) -> bool{return state -> index() == index;};
     m_collapsed_state = *(std::find_if(m_available_states.begin(), m_available_states.end(), state_found));
-    if(m_collapsed_state == nullptr)
-        std::cout << "collapsed to nothing" << std::endl;
 
     m_is_collapsed = true;
     emit cell_collapsed(1);

@@ -22,14 +22,12 @@ TiledModel_ImageGrid::TiledModel_ImageGrid(int width, int height, const std::str
     for(auto row = 0; row < width; row++)
     {
         auto row_ = std::vector<Cell*>();
-        auto rules_row = std::vector<std::string>();
         for(auto col = 0; col < height; col++)
         {
             auto cell = new Cell(row, col);
             //Initially, all cells "are" every possible state at the same time
             cell ->set_available_states(m_all_states);
             row_.emplace_back(cell);
-            rules_row.emplace_back("");
         }
         m_grid.emplace_back(row_);
     }
@@ -42,12 +40,12 @@ void TiledModel_ImageGrid::load_state_images(const std::string &img_directory)
         const auto& file_path = file.path();
         //Image name with extension
         auto filename = file_path.filename().string();
-        auto pixmap = new QPixmap(QString::fromStdString(filename));
+        auto pixmap = new QPixmap(QString::fromStdString(img_directory + filename));
 
         //Remove extension from the filename
         auto state_image_name = filename.substr(0, filename.find_last_of('.'));
         //More than 1 CellState can be created for a pixmap, it just needs to be rotated/reflected
-        m_name_image_map.insert({state_image_name, pixmap});
+        m_name_image_map.insert(std::make_pair(state_image_name, pixmap));
     }
 
     for(auto state : m_all_states)
@@ -91,21 +89,7 @@ Cell *TiledModel_ImageGrid::get_initial_cell()
 
 void TiledModel_ImageGrid::collapse(Cell *next_cell)
 {
-    int non_zero_index = 0;
-    for(auto row : m_grid)
-    {
-        for(auto cell : row)
-        {
-            if(cell -> get_entropy() > 0)
-                non_zero_index++;
-        }
-    }
-
     auto rand_index = Utils::generate_random_int(0, (int) next_cell -> get_available_states().size() - 1);
-    if(next_cell -> get_available_states().empty()) {
-        std::cout << "ENTROPY: " << next_cell -> get_entropy() << std::endl;
-        std::cout << "Empty available options" << std::endl;
-    }
     auto next_state = next_cell -> get_available_states().at(rand_index);
 
     next_cell -> set_collapsed_state(next_state);
@@ -228,7 +212,6 @@ void TiledModel_ImageGrid::load_tile_set_specification(const std::string &spec_f
             {
                 auto state_name = i == 0 ? name  : name + " " + std::to_string(i);
                 m_all_states.emplace_back(new CellState(tile_index, state_name, symmetry, i));
-                //Other orientations of the same
                 tile_index++;
             }
             tile = tile.nextSiblingElement("tile");
