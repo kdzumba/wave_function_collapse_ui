@@ -10,6 +10,8 @@
 namespace Utils
 {
     int generate_random_int(int start, int end);
-    QJsonObject load_style(const QString& filename);
+    double generate_random_double(int start, double end);
+    double get_min_abs_half(const std::vector<double>& v);
+    std::vector<double> get_plogp(const std::vector<double>& distribution);
 }
 #endif //WAVE_FUNCTION_COLLAPSE_UI_UTILS_H

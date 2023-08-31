@@ -568,6 +568,7 @@ wave_function_collapse_ui_autogen/timestamp: \
 	C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/pstl/glue_algorithm_defs.h \
 	C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/pstl/glue_memory_defs.h \
 	C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/pstl/glue_numeric_defs.h \
+	C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/random \
 	C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/stdexcept \
 	C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/stdlib.h \
 	C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/streambuf \
@@ -670,10 +671,10 @@ wave_function_collapse_ui_autogen/timestamp: \
 	C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/SudokuBlock.h \
 	C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/SudokuBoard.cpp \
 	C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/SudokuBoard.h \
-	C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/TiledModelRule.cpp \
-	C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/TiledModelRule.h \
 	C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/TiledModel_ImageGrid.cpp \
 	C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/TiledModel_ImageGrid.h \
+	C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/TiledRuleModel.cpp \
+	C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/TiledRuleModel.h \
 	C:/Users/User/CLionProjects/wave_function_collapse_ui/src/scenes/AbstractScene.h \
 	C:/Users/User/CLionProjects/wave_function_collapse_ui/src/scenes/ImageGenerationScene.cpp \
 	C:/Users/User/CLionProjects/wave_function_collapse_ui/src/scenes/ImageGenerationScene.h \

@@ -9,7 +9,7 @@
 ImageGenerationScene::ImageGenerationScene(const std::string &img_directory, QWidget *parent)  : AbstractScene(parent)
 {
     m_retries_count = 0;
-    m_image_grid = new TiledModel_ImageGrid(IMAGE_WIDTH, IMAGE_HEIGHT, img_directory);
+    m_image_grid = new TiledModel_ImageGrid(NUMBER_OF_ROWS, NUMBER_OF_COLS, img_directory);
     m_scene_container = new QGraphicsWidget;
     m_scene_layout = new QGraphicsGridLayout(m_scene_container);
     m_canvas = new ImageGenerationCanvas;
@@ -34,20 +34,20 @@ ImageGenerationScene::~ImageGenerationScene()
 
 void ImageGenerationScene::init()
 {
-    auto width = std::get<0>(m_image_grid -> dimensions());
-    auto height = std::get<1>(m_image_grid -> dimensions());
+    auto number_of_rows = std::get<0>(m_image_grid -> dimensions());
+    auto number_of_cols = std::get<1>(m_image_grid -> dimensions());
 
-    for(auto row = 0; row < width; row++)
+    for(auto row = 0; row < number_of_rows; row++)
     {
-        for(auto col = 0; col < height; col++)
+        for(auto col = 0; col < number_of_cols; col++)
         {
             auto cell_model = m_image_grid->grid().at(row).at(col);
             auto cell_graphics_item = new CellGraphicsItem(cell_model, row, col);
 
             auto map = m_image_grid->get_name_image_mapping();
             auto default_pixmap = new QPixmap();
-            default_pixmap -> fill();
-            cell_graphics_item ->setPixmap(*default_pixmap);
+            default_pixmap -> fill(Qt::white);
+//            cell_graphics_item ->setPixmap(*map.at("component"));
             this ->addItem(cell_graphics_item);
             m_canvas ->add_item(cell_graphics_item, row, col);
         }

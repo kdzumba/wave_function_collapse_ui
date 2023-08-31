@@ -58,7 +58,8 @@ void Cell::set_available_states(const std::vector<CellState *>& states)
         auto new_name = state->get_name();
         auto new_symmetry = state -> get_symmetry();
         auto new_orientation = state -> get_orientation();
-        auto new_state = new CellState(state->index(), new_name, new_symmetry, new_orientation, pixmap_copy);
+        auto new_weight = state -> get_weight();
+        auto new_state = new CellState(state->index(), new_name, new_symmetry, new_orientation, new_weight, pixmap_copy);
         new_available_states.emplace_back(new_state);
     }
     clear_available_states();

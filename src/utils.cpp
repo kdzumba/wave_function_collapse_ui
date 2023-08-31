@@ -24,17 +24,31 @@ int Utils::generate_random_int(int start, int end)
     return distribution(generator);
 }
 
-QJsonObject Utils::load_style(const QString& path)
+double Utils::generate_random_double(int start, double end)
 {
-    QDir directory(path);
-    QStringList files = directory.entryList(QStringList() << "*.json", QDir::Files);
-    QFile file(path);
-    file.open(QIODevice::ReadOnly | QIODevice::Text);
-    QByteArray data = file.readAll();
-    file.close();
+    std::random_device rd;
+    std::mt19937 generator(rd());
+    std::uniform_real_distribution<> distribution(start, end);
+    return distribution(generator);
+}
 
-    QJsonDocument document = QJsonDocument::fromJson(data);
-    QJsonObject jsonObject = document.object();
-    return jsonObject;
+double Utils::get_min_abs_half(const std::vector<double> &v)
+{
+    double min_abs_half = std::numeric_limits<double>::infinity();
+    for(double i : v)
+    {
+        min_abs_half = std::min(min_abs_half, std::abs(i / 2.0));
+    }
+    return min_abs_half;
+}
+
+std::vector<double> Utils::get_plogp(const std::vector<double> &distribution)
+{
+    std::vector<double> plogp;
+    for(double i : distribution)
+    {
+        plogp.emplace_back(i * log(i));
+    }
+    return plogp;
 }
 

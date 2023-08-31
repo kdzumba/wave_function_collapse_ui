@@ -57,8 +57,8 @@ add_executable(wave_function_collapse_ui main.cpp
         src/graphics_items/ImageGenerationCanvas.h
         src/ui_forms/ImageGenerationSideMenu.cpp
         src/ui_forms/ImageGenerationSideMenu.h
-        src/models/TiledModelRule.cpp
-        src/models/TiledModelRule.h
+        src/models/TiledRuleModel.cpp
+        src/models/TiledRuleModel.h
 )
 target_link_libraries(wave_function_collapse_ui
         Qt::Core

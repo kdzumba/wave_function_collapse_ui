@@ -39,7 +39,7 @@ void CellGraphicsItem::advance(int step)
     auto pixmap = m_cell_model->get_state() -> pixmap();
     this ->setPixmap(*pixmap);
     this ->setTransformOriginPoint(this->boundingRect().center());
-    this ->setRotation(m_cell_model -> get_state() -> get_orientation() * 90);
+    this ->setRotation(m_cell_model -> get_state() -> get_orientation() * -90);
 }
 
 QRectF CellGraphicsItem::boundingRect() const
