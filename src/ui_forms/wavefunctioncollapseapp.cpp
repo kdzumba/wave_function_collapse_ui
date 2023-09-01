@@ -2,7 +2,7 @@
 // Created by User on 2023/08/14.
 //
 
-// You may need to build the project (run Qt uic code generator) to get "ui_WaveFunctionCollapseApp.h" resolved
+// You may need to build the project (run Qt uic code m_generator) to get "ui_WaveFunctionCollapseApp.h" resolved
 
 #include "wavefunctioncollapseapp.h"
 #include "ui_WaveFunctionCollapseApp.h"

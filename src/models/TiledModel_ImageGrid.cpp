@@ -10,7 +10,7 @@
 #include "TiledModel_ImageGrid.h"
 #include "../utils.h"
 
-TiledModel_ImageGrid::TiledModel_ImageGrid(int number_of_rows, int number_of_cols, const std::string& image_dir): generator(1)
+TiledModel_ImageGrid::TiledModel_ImageGrid(int number_of_rows, int number_of_cols, const std::string& image_dir): m_generator(std::random_device{}())
 {
     m_dimensions = std::make_pair(number_of_rows, number_of_cols);
     m_tile_set_doc = new QDomDocument;
@@ -73,25 +73,9 @@ void TiledModel_ImageGrid::init_generation()
     observe();
 }
 
-Cell *TiledModel_ImageGrid::get_initial_cell()
-{
-    std::vector<std::pair<int,int>> positions_to_consider;
-
-    for(const auto& row : m_wave)
-    {
-        for(const auto& cell : row)
-        {
-            positions_to_consider.emplace_back(cell->get_position());
-        }
-    }
-    auto rand_index = Utils::generate_random_int(0, (int) positions_to_consider.size());
-    auto initial_coordinate = positions_to_consider.at(rand_index);
-    return m_wave.at(initial_coordinate.first).at(initial_coordinate.second);
-}
-
 void TiledModel_ImageGrid::observe()
 {
-    auto next_cell = get_min_entropy(generator);
+    auto next_cell = get_min_entropy();
     //Need to factor in pattern frequencies (weights) before selecting next_state
     double weight_sum = 0;
     for(const auto& state : next_cell -> get_available_states())
@@ -112,26 +96,45 @@ void TiledModel_ImageGrid::observe()
         }
     }
 
+    if(next_cell -> get_state() == next_state)
+        return;
+
     next_cell -> set_collapsed_state(next_state);
 
-    next_cell ->make_current_block(true);
-    if(m_current_collapsed != nullptr)
-        m_current_collapsed ->make_current_block(false);
-
-    if(m_initial_cell != nullptr && next_cell != m_current_collapsed)
-    {
-        next_cell->set_previous_cell(m_current_collapsed);
-    }
-    else
-    {
-        m_initial_cell = next_cell;
-    }
+    //Update wave state
 
     auto x = next_cell -> get_position().first;
     auto y = next_cell -> get_position().second;
 
+    unsigned state_index = 0;
+
+    for(unsigned index = 0; index < m_all_states.size(); index++)
+    {
+        if(m_all_states.at(index) == next_state)
+            state_index = index;
+    }
+
+    m_wave_state->log_weights_sum[x][y]-= m_plogp_pattern_weights.at(state_index);
+    m_wave_state->weights_sum[x][y] -= m_pattern_weights.at(state_index);
+    m_wave_state->log_weights_sum[x][y] = log(m_wave_state->weights_sum[x][y]);
+    m_wave_state->number_of_patterns[x][y]--;
+    m_wave_state->entropy[x][y] = m_wave_state->log_weights_sum.at(x).at(y) - m_wave_state->plogp_weights_sum.at(x).at(y) / m_wave_state->weights_sum.at(x).at(y);
+
+    if(m_wave_state->number_of_patterns.at(x).at(y) == 0)
+    {
+        std::cout << "Reached a contradiction" << std::endl;
+    }
+
+    for(auto & number_of_pattern : m_wave_state->number_of_patterns)
+    {
+        for(unsigned int j : number_of_pattern)
+        {
+            std::cout << j << std::setw(5);
+        }
+        std::cout << std::endl;
+    }
+
     propagate_collapse_info(x, y, next_state);
-    print_entropies();
     m_current_collapsed = next_cell;
 }
 
@@ -150,41 +153,15 @@ bool TiledModel_ImageGrid::is_fully_generated() {
 
 void TiledModel_ImageGrid::generate()
 {
-    observe();
-    if(!(is_fully_generated()))
-        generate();
-}
-
-Cell *TiledModel_ImageGrid::least_entropy_cell()
-{
-    std::map<unsigned int, std::vector<Cell*>> entropy_to_cell_map;
-    auto possible_cells = std::vector<Cell*>();
-
-    for(const auto& row : m_wave)
+    while(true)
     {
-        for(const auto& cell : row)
+        observe();
+        if(is_fully_generated())
         {
-            if(!(cell -> is_collapsed()))
-            {
-                auto key = cell -> get_entropy();
-                if(entropy_to_cell_map.find(key) != entropy_to_cell_map.end())
-                {
-                    entropy_to_cell_map.at(key).emplace_back(cell);
-                }
-                else if(key != 0)
-                {
-                    auto value = std::vector<Cell*>{cell};
-                    entropy_to_cell_map.insert({key, value});
-                }
-            }
+            std::cout << "Done" << std::endl;
+            return;
         }
     }
-    auto min_entropy=  entropy_to_cell_map.begin() -> second;
-    if(min_entropy.empty())
-        std::cout << "No more least entropies " << std::endl;
-
-    auto rand_index = Utils::generate_random_int(0, (int) min_entropy.size() - 1);
-    return min_entropy.at(rand_index);
 }
 
 void TiledModel_ImageGrid::reset()
@@ -238,11 +215,13 @@ void TiledModel_ImageGrid::load_tile_set_specification(const std::string &spec_f
                 m_all_states.emplace_back(new CellState(tile_index, state_name, symmetry, i, weight_value));
 
                 m_pattern_weights.emplace_back(weight_value);
-                m_plogp_pattern_weights = Utils::get_plogp(m_pattern_weights);
                 tile_index++;
             }
             tile = tile.nextSiblingElement("tile");
         }
+
+        Utils::normalize(m_pattern_weights);
+        m_plogp_pattern_weights = Utils::get_plogp(m_pattern_weights);
 
         auto neighbours_element = tiles_element.nextSibling();
         read_neighbour_rules((neighbours_element));
@@ -461,14 +440,16 @@ void TiledModel_ImageGrid::calculate_initial_entropy()
         m_wave_state->plogp_weights_sum.emplace_back(plogp_sum);
         auto log_sum = std::vector<double>(m_dimensions.second, log_base_s);
         m_wave_state->log_weights_sum.emplace_back(log_sum);
-        m_wave_state->number_of_patterns.emplace_back(m_all_states.size());
+        m_wave_state->number_of_patterns.emplace_back(m_dimensions.second, m_all_states.size());
         auto entropies = std::vector<double>(dimensions().second, entropy_base);
         m_wave_state->entropy.emplace_back(entropies);
+        auto weights_sum = std::vector<double>(m_dimensions.second, base_s);
+        m_wave_state->weights_sum.emplace_back(weights_sum);
     }
     m_min_abs_half_plogp = Utils::get_min_abs_half(m_plogp_pattern_weights);
 }
 
-Cell* TiledModel_ImageGrid::get_min_entropy(const std::minstd_rand &gen)
+Cell* TiledModel_ImageGrid::get_min_entropy()
 {
     std::uniform_real_distribution<> distribution(0, m_min_abs_half_plogp);
     double min = std::numeric_limits<double>::infinity();
@@ -478,13 +459,13 @@ Cell* TiledModel_ImageGrid::get_min_entropy(const std::minstd_rand &gen)
     {
         for(unsigned j = 0; j < dimensions().second; j++)
         {
-            if(m_wave_state->entropy.at(i).at(j) == 1)
+            if(m_wave_state->number_of_patterns.at(i).at(j) == 1)
                 continue;
 
             double entropy = m_wave_state->entropy.at(i).at(j);
             if(entropy <= min)
             {
-                double noise = distribution(this->generator);
+                double noise = distribution(this->m_generator);
                 if(entropy + noise < min)
                 {
                     min = entropy + noise;

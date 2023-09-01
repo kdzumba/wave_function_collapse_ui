@@ -52,3 +52,18 @@ std::vector<double> Utils::get_plogp(const std::vector<double> &distribution)
     return plogp;
 }
 
+const std::vector<double>& Utils::normalize(std::vector<double> &v)
+{
+    double sum_weights = 0.0;
+    for(auto weight : v)
+    {
+        sum_weights += weight;
+    }
+    double inverse_sum_weights = 1.0/sum_weights;
+    for(auto& weight : v)
+    {
+        weight *= inverse_sum_weights;
+    }
+    return v;
+}
+

@@ -13,5 +13,6 @@ namespace Utils
     double generate_random_double(int start, double end);
     double get_min_abs_half(const std::vector<double>& v);
     std::vector<double> get_plogp(const std::vector<double>& distribution);
+    const std::vector<double>& normalize(std::vector<double>& v);
 }
 #endif //WAVE_FUNCTION_COLLAPSE_UI_UTILS_H

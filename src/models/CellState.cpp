@@ -47,12 +47,12 @@ CellState::CellState(int index, const std::string &name,const  std::string &symm
 
 bool CellState::operator==(const CellState &other) const
 {
-    return this -> m_index == other.m_index;
+    return this -> m_name == other.m_name;
 }
 
 bool CellState::operator!=(const CellState &other) const
 {
-    return this -> m_index != other.m_index;
+    return this -> m_name != other.m_name;
 }
 
 int CellState::index() const {return m_index; }

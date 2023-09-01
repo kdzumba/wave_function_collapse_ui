@@ -32,12 +32,10 @@ public:
     std::vector<std::vector<Cell*>> grid();
     std::map<std::string, QPixmap*> get_name_image_mapping();
     void init_generation();
-    Cell* get_initial_cell();
     void observe();
     bool is_fully_generated();
     void generate();
     void reset();
-    Cell* least_entropy_cell();
 private:
     void load_state_images(const std::string& img_directory);
     void load_tile_set_specification(const std::string& spec_file, const std::string& images_path);
@@ -49,7 +47,7 @@ private:
     void print_entropies();
     void read_neighbour_rules(QDomNode neighbours_node);
     void calculate_initial_entropy();
-    Cell* get_min_entropy(const std::minstd_rand & gen);
+    Cell* get_min_entropy();
 private:
     std::vector<std::vector<Cell*>> m_wave;
     std::pair<int, int> m_dimensions;
@@ -64,6 +62,6 @@ private:
     std::vector<double> m_plogp_pattern_weights;
     double m_min_abs_half_plogp;
     WaveState* m_wave_state;
-    std::minstd_rand generator;
+    std::minstd_rand m_generator;
 };
 #endif //WAVE_FUNCTION_COLLAPSE_UI_TILEDMODEL_IMAGEGRID_H
