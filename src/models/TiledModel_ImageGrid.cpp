@@ -543,6 +543,7 @@ void TiledModel_ImageGrid::generate_and_add_rule(const QString& left, const QStr
         };
 
         auto sub_rule = new TiledRuleModel;
+        auto reflection_rule = new TiledRuleModel;
         switch(rotation_count)
         {
             case 1:
@@ -551,6 +552,12 @@ void TiledModel_ImageGrid::generate_and_add_rule(const QString& left, const QStr
                 sub_rule->m_rule.insert({Direction::LEFT, ""});
                 sub_rule->m_rule.insert({Direction::RIGHT, ""});
                 try_insert_rule(sub_rule);
+
+                auto reflection_pair = get_reflection_pair(left_rotated, right_rotated, left_orientation, right_orientation, left_symmetry, right_symmetry, Axis::X);
+                reflection_rule->m_rule.insert({Direction::UP, reflection_pair.first});
+                reflection_rule->m_rule.insert({Direction::DOWN, reflection_pair.second});
+                reflection_rule->m_rule.insert({Direction::LEFT, ""});
+                reflection_rule->m_rule.insert({Direction::RIGHT, ""});
                 break;
             case 2:
                 sub_rule->m_rule.insert({Direction::LEFT, right_rotated});
@@ -575,6 +582,153 @@ void TiledModel_ImageGrid::generate_and_add_rule(const QString& left, const QStr
 
 bool TiledModel_ImageGrid::in_contradiction() const {
     return m_in_contradiction;
+}
+
+TiledRuleModel* TiledModel_ImageGrid::generate_reflection_rule(const std::string &left, const std::string &right,
+                                                               const std::string &symmetry, Axis axis)
+{
+    std::string left_name, right_name;
+    int left_orientation, right_orientation;
+    std::tie(left_name, left_orientation) = get_name_orientation(QString::fromStdString(left));
+    std::tie(right_name, right_orientation) = get_name_orientation(QString::fromStdString(right));
+
+    auto right_cardinality = std::get<0>(m_name_cardinality_symmetry_map.at(right_name));
+    auto left_cardinality = std::get<0>(m_name_cardinality_symmetry_map.at(left_name));
+
+    auto append_orientation = [&](const std::string& name, int orientation) -> std::string{
+        if(orientation == 0)
+            return name;
+        else
+            return name + " " + std::to_string(orientation);
+    };
+
+    switch (axis)
+    {
+        case Axis::X:
+            if(symmetry == "I" || symmetry == "X" || symmetry == "T")
+            {
+                auto rule = new TiledRuleModel;
+                rule->m_rule.insert({Direction::LEFT, right});
+                rule->m_rule.insert({Direction::RIGHT, left});
+                rule->m_rule.insert({Direction::UP, ""});
+                rule->m_rule.insert({Direction::DOWN, ""});
+                return rule;
+            }
+            if(symmetry == "L")
+            {
+
+                auto rule = new TiledRuleModel;
+                auto right_reflected = append_orientation(right_name, (++right_orientation) % right_cardinality);
+                auto left_reflected = append_orientation(left_name, (++left_orientation) % left_cardinality);
+                rule-> m_rule.insert({Direction::LEFT, right_reflected});
+                rule-> m_rule.insert({Direction::RIGHT, left_reflected});
+                rule-> m_rule.insert({Direction::UP, ""});
+                rule-> m_rule.insert({Direction::DOWN, ""});
+                return rule;
+            }
+        case Axis::Y:
+            if(symmetry == "I" || symmetry == "X")
+            {
+                auto rule = new TiledRuleModel;
+                rule->m_rule.insert({Direction::LEFT, right});
+                rule->m_rule.insert({Direction::RIGHT, left});
+                rule->m_rule.insert({Direction::UP, ""});
+                rule->m_rule.insert({Direction::DOWN, ""});
+                return rule;
+            }
+
+            if(symmetry == "T")
+            {
+                auto rule = new TiledRuleModel;
+                auto up_reflected = append_orientation(right_name, (right_orientation + 2) % right_cardinality);
+                auto down_reflected = append_orientation(left_name, (left_orientation + 2) % left_cardinality);
+                rule->m_rule.insert({Direction::UP, down_reflected});
+                rule->m_rule.insert({Direction::DOWN, up_reflected});
+                rule->m_rule.insert({Direction::UP, ""});
+                rule->m_rule.insert({Direction::UP, ""});
+                return rule;
+            }
+
+            if(symmetry == "L")
+            {
+                auto rule = new TiledRuleModel;
+                auto up_reflected = append_orientation(right_name, (right_orientation + 3) % right_cardinality);
+                auto down_reflected = append_orientation(left_name, (left_orientation + 3) % left_cardinality);
+                rule->m_rule.insert({Direction::UP, down_reflected});
+                rule->m_rule.insert({Direction::DOWN, up_reflected});
+                rule->m_rule.insert({Direction::UP, ""});
+                rule->m_rule.insert({Direction::UP, ""});
+                return rule;
+            }
+    }
+}
+
+std::pair<std::string, std::string>
+TiledModel_ImageGrid::get_reflection_pair(const std::string &first, const std::string &second, int first_orientation,
+                                          int second_orientation, const std::string &first_symmetry,
+                                          const std::string &second_symmetry, Axis axis) {
+
+    auto append_orientation = [&](const std::string& name, int orientation) -> std::string{
+        if(orientation == 0)
+            return name;
+        else
+            return name + " " + std::to_string(orientation);
+    };
+
+    std::string first_;
+    std::string second_;
+
+    switch (axis)
+    {
+        //This is horrible, but I don't have time to think about it right now
+        case Axis::X:
+            if(first_symmetry == "I" || first_symmetry == "X" || first_symmetry == "T")
+            {
+                first_ = append_orientation(first, first_orientation);
+            }
+            else if(first_symmetry == "L")
+            {
+                first_ = append_orientation(first, (++first_orientation) % 4);
+            }
+
+            if(second_symmetry == "I" || second_symmetry == "X" || second_symmetry == "T")
+            {
+                second_ = append_orientation(second, second_orientation);
+            }
+            else if(second_symmetry == "L")
+            {
+                second_ = append_orientation(second, (++second_orientation) % 4);
+            }
+            return std::make_pair(second_, first_);
+
+        case Axis::Y:
+            if(first_symmetry == "I" || first_symmetry == "X")
+            {
+                first_ = append_orientation(first, first_orientation);
+            }
+            else if(first_symmetry == "T")
+            {
+                first_ = append_orientation(first, (first_orientation + 2) % 4);
+            }
+            else if(first_symmetry == "L")
+            {
+                first_ = append_orientation(first, (first_orientation + 3) % 4);
+            }
+
+            if(second_symmetry == "I" || second_symmetry == "X")
+            {
+                second_ = append_orientation(second, second_orientation);
+            }
+            else if(second_symmetry == "T")
+            {
+                second_ = append_orientation(second, (second_orientation + 2) % 4);
+            }
+            else if(second_symmetry == "L")
+            {
+                second_ = append_orientation(second, (second_orientation + 4) % 4);
+            }
+            return std::make_pair(second_, first_);
+    }
 }
 
 

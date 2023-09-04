@@ -27,6 +27,7 @@ constexpr int directions_x[4] = {0, -1, 1, 0};
 constexpr int directions_y[4] = {-1, 0, 0, 1};
 
 enum  Direction{LEFT = 1, RIGHT = 3, UP = 0, DOWN = 2};
+enum Axis{X, Y};
 
 constexpr unsigned get_opposite_direction(unsigned direction)
 {
@@ -74,6 +75,10 @@ private:
     static std::tuple<std::string, int> get_name_orientation(const QString& rule);
     Cell* get_min_entropy();
     void generate_and_add_rule(const QString& left, const QString& right);
+    TiledRuleModel* generate_reflection_rule(const std::string& left, const std::string& right, const std::string& symmetry, Axis axis);
+    std::pair<std::string, std::string> get_reflection_pair(const std::string& first, const std::string& second,
+                                                            int first_orientation, int second_orientation, const std::string& first_symmetry,
+                                                            const std::string& second_symmetry, Axis axis);
 private:
     std::vector<std::vector<Cell*>> m_wave;
     std::pair<int, int> m_dimensions;
