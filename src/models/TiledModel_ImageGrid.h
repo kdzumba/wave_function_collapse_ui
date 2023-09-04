@@ -58,6 +58,7 @@ public:
     bool is_fully_generated() const;
     void generate();
     void reset();
+    bool in_contradiction() const;
 private:
     void load_state_images(const std::string& img_directory);
     void load_tile_set_specification(const std::string& spec_file, const std::string& images_path);
@@ -87,7 +88,7 @@ private:
     WaveState* m_wave_state;
     std::minstd_rand m_generator;
     PropagatorState m_propagator_state;
-    std::vector<std::tuple<int, int, std::string>> m_elements_to_remove;
+    std::vector<std::tuple<int, int, std::string>> m_propagating;
     bool m_in_contradiction;
 };
 #endif //WAVE_FUNCTION_COLLAPSE_UI_TILEDMODEL_IMAGEGRID_H

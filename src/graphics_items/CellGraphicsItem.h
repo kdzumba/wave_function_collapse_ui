@@ -20,8 +20,8 @@ public:
 public slots:
     void advance(int step) override;
 private:
-    static int constexpr IMAGE_WIDTH = 14;
-    static int constexpr IMAGE_HEIGHT = 14;
+    static int constexpr IMAGE_WIDTH = 48;
+    static int constexpr IMAGE_HEIGHT = 48;
     Cell* m_cell_model;
 };
 

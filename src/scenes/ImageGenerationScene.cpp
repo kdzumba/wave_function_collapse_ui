@@ -59,7 +59,7 @@ void ImageGenerationScene::animate()
     auto generate = [&]() -> void {
         reset();
         m_retries_count = 0;
-        while(!(m_image_grid -> is_fully_generated()) && m_retries_count < 10000)
+        while(!(m_image_grid->in_contradiction()))
         {
             m_image_grid->generate();
             m_retries_count++;

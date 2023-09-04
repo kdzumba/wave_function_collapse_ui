@@ -15,8 +15,9 @@ TiledModel_ImageGrid::TiledModel_ImageGrid(int number_of_rows, int number_of_col
     m_dimensions = std::make_pair(number_of_rows, number_of_cols);
     m_tile_set_doc = new QDomDocument;
     m_wave_state = new WaveState;
+    m_in_contradiction = false;
     //Load the tileset and it's defined constraints
-    load_tile_set_specification("tilesets/Circuit.xml", image_dir);
+    load_tile_set_specification("tilesets/Summer.xml", image_dir);
     calculate_initial_entropy();
 
     for(auto row = 0; row < number_of_rows; row++)
@@ -72,7 +73,9 @@ void TiledModel_ImageGrid::observe()
     auto next_cell = get_min_entropy();
     if(next_cell == nullptr)
     {
+        m_in_contradiction = true;
         std::cout << "No least entropy cell found" << std::endl;
+        return;
     }
     //Need to factor in pattern frequencies (weights) before selecting next_state
     double weight_sum = 0;
@@ -102,13 +105,18 @@ void TiledModel_ImageGrid::observe()
     if(next_cell -> get_state() == next_state)
         return;
 
-    next_cell -> set_collapsed_state(next_state);
-
     //Update wave state
 
     auto x = next_cell -> get_position().first;
     auto y = next_cell -> get_position().second;
-    m_elements_to_remove.emplace_back(x, y, next_state->get_name());
+
+    for(const auto& element : next_cell -> get_superposition())
+    {
+        next_cell->remove_state(element);
+        update_wave_state(x, y, element->get_name());
+    }
+    next_cell -> set_collapsed_state(next_state);
+    m_propagating.emplace_back(x, y, next_state->get_name());
 }
 
 bool TiledModel_ImageGrid::is_fully_generated() const {
@@ -347,7 +355,8 @@ Cell* TiledModel_ImageGrid::get_min_entropy()
     {
         for(unsigned j = 0; j < dimensions().second; j++)
         {
-            if(m_wave_state->number_of_patterns.at(i).at(j) == 1)
+            //This cell has already collapsed into a single state and we don't want to consider it for entropy
+            if(m_wave_state->number_of_patterns.at(i).at(j) == 0)
                 continue;
 
             double entropy = m_wave_state->entropy.at(i).at(j);
@@ -407,16 +416,15 @@ void TiledModel_ImageGrid::update_wave_state(int x, int y, const std::string& ne
 
 void TiledModel_ImageGrid::propagate_collapse_info()
 {
-    while(!m_elements_to_remove.empty())
+    while(!m_propagating.empty())
     {
-        std::cout << "m_elements_to_remove size: " << m_elements_to_remove.size() << std::endl;
-        //The cell that has been set to a single state and the state name it was set to
+        std::cout << "m_propagating size: " << m_propagating.size() << std::endl;
         int x, y;
         std::string state_name;
-        std::tie(x, y, state_name) = m_elements_to_remove.back();
+        std::tie(x, y, state_name) = m_propagating.back();
 
         //Pop the info off the stack once read
-        m_elements_to_remove.pop_back();
+        m_propagating.pop_back();
 
         //We want to propagate this information in all 4 directions that are neighbours to the current cell
         for(unsigned direction = 0; direction < 4; direction++)
@@ -438,32 +446,29 @@ void TiledModel_ImageGrid::propagate_collapse_info()
             if(next_cell->is_collapsed())
                 continue;
 
+            //These are the states still possible in direction for next_cell
             const auto& patterns = m_propagator_state.at(state_name)[direction];
             if(patterns.empty()) {
-                m_in_contradiction = true;
-                return;
+//                m_in_contradiction = true;
+                std::cout << "CONTRADICTION: " << state_name << ": " << direction << std::endl;
+//                return;
             }
 
-            //We need to propagate the consequences of collapse to the whole wave
-            //All eliminated elements need to be propagated through the whole wave so that cells that are
-            //affected by this collapse can update their superpositions accordingly
-
+            //Let's remove all states that aren't possible anymore for next_cell and put them in elements to remove
             for(const auto& state : next_cell->get_superposition())
             {
-                //Check if we have a rule that allows for state to be in direction of collapsed cell
-                auto found_iter = std::find_if(m_rules.begin(), m_rules.end(), [&](TiledRuleModel* r) -> bool
+                if(std::find(patterns.begin(), patterns.end(), state) == patterns.end())
                 {
-                    return r->m_rule.at(direction) == state->get_name() && r->m_rule.at(get_opposite_direction(direction)) == state_name;
-                });
-                //If a rule exists, this state is still a possible solution and should be kept
-                if(found_iter != m_rules.end()) { break; }
-                else
-                {
-                    m_elements_to_remove.emplace_back(x2, y2, state->get_name());
                     next_cell->remove_state(state);
                     update_wave_state(x2, y2, state->get_name());
                 }
+                else
+                {
+                    continue;
+                }
             }
+
+            std::cout << "Done removing from next cell in direction : " << direction << std::endl;
         }
     }
 }
@@ -510,6 +515,7 @@ void TiledModel_ImageGrid::generate_and_add_rule(const QString& left, const QStr
 
     //If both tiles can be rotated, rotate to get up-down rule
     auto rotation_count = 1;
+
     while(rotation_count < 4)
     {
         std::string right_rotated = right_name;
@@ -565,6 +571,10 @@ void TiledModel_ImageGrid::generate_and_add_rule(const QString& left, const QStr
         }
         rotation_count++;
     }
+}
+
+bool TiledModel_ImageGrid::in_contradiction() const {
+    return m_in_contradiction;
 }
 
 

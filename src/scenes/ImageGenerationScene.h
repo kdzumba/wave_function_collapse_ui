@@ -31,8 +31,8 @@ public slots:
     void animate() override;
     void reset();
 public:
-    static constexpr int NUMBER_OF_ROWS = 3;
-    static constexpr int NUMBER_OF_COLS = 3;
+    static constexpr int NUMBER_OF_ROWS = 15;
+    static constexpr int NUMBER_OF_COLS = 25;
 private:
     TiledModel_ImageGrid* m_image_grid;
     int m_retries_count;
