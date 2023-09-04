@@ -112,17 +112,8 @@ void TiledModel_ImageGrid::observe()
 //    propagate_collapse_info(x, y, next_state);
 }
 
-bool TiledModel_ImageGrid::is_fully_generated() {
-    for(const auto& row : m_wave)
-    {
-        for(const auto& cell : row)
-        {
-            //Collapsed index less than 0 means the cell  hasn't been collapsed
-            if(cell-> get_entropy() > 0)
-                return false;
-        }
-    }
-    return true;
+bool TiledModel_ImageGrid::is_fully_generated() const {
+    return m_in_contradiction;
 }
 
 void TiledModel_ImageGrid::generate()
@@ -131,11 +122,6 @@ void TiledModel_ImageGrid::generate()
     {
         observe();
         propagate_collapse_info();
-        if(is_fully_generated())
-        {
-            std::cout << "Done" << std::endl;
-            return;
-        }
     }
 }
 
@@ -269,9 +255,26 @@ void TiledModel_ImageGrid::read_neighbour_rules(const QDomNode& neighbours_node)
         neighbour = neighbour.nextSiblingElement("neighbor");
     }
 
+    unsigned rotation_group = 0;
     for(const auto& rule : m_rules)
     {
-        std::cout << "LEFT: " << rule->m_left << " " << "RIGHT: " << rule->m_right << " UP: " << rule->m_up << " DOWN: " << rule->m_down << std::endl;
+        if(rotation_group >= 4)
+        {
+            std::cout << std::endl;
+            rotation_group = 0;
+        }
+
+        if(!rule->m_left.empty())
+            std::cout << "LEFT: " << rule->m_left;
+        if(!rule->m_right.empty())
+            std::cout << " " << "RIGHT: " << rule->m_right;
+
+        if(!rule->m_up.empty())
+            std::cout << "UP: " << rule->m_up;
+        if(!rule->m_down.empty())
+            std::cout << " DOWN: " << rule->m_down;
+        std::cout << std::endl;
+        rotation_group++;
     }
 
     generate_propagator_states();
@@ -414,6 +417,7 @@ void TiledModel_ImageGrid::propagate_collapse_info()
 {
     while(!m_propagating.empty())
     {
+        std::cout << "m_propagating size: " << m_propagating.size() << std::endl;
         //The cell that has been set to a single state and the state name it was set to
         int x, y;
         std::string state_name;
@@ -433,28 +437,38 @@ void TiledModel_ImageGrid::propagate_collapse_info()
 
             if(x2 < 0 || x2 >= dimensions().first)
                 continue;
+
             if(y2 < 0 || y2 >= dimensions().second)
                 continue;
 
             //The next cell in direction=direction and states that are compatible to that location
             auto next_cell = m_wave.at(x2).at(y2);
+            if(next_cell->is_collapsed())
+                continue;
+
             const auto& patterns = m_propagator_state.at(state_name)[direction];
+//
+            if(patterns.empty()) {
+                m_in_contradiction = true;
+                return;
+            }
 
             //All elements that are to be removed from next_cell's available states need to be propagated
             //This should then extend to the neighbours of those tiles as well
-            for(const auto & state : next_cell -> get_available_states())
-            {
-                if(std::find(patterns.begin(), patterns.end(), state) == patterns.end())
-                {
-                    m_propagating.emplace_back(x2, y2, state->get_name());
-                    update_wave_state(x2, y2, state);
-                }
-            }
+//            for(const auto & state : next_cell -> get_available_states())
+//            {
+//                if(std::find(patterns.begin(), patterns.end(), state) == patterns.end())
+//                {
+//                    m_propagating.emplace_back(x2, y2, state->get_name());
+//                    update_wave_state(x2, y2, state);
+//                }
+//            }
             next_cell->set_available_states(patterns);
 
             if(patterns.size() == 1)
             {
                 next_cell->set_collapsed_state(patterns.at(0));
+                m_propagating.emplace_back(x2, y2, patterns.at(0)->get_name());
             }
         }
     }
@@ -475,28 +489,73 @@ void TiledModel_ImageGrid::generate_and_add_rule(const QString& left, const QStr
     std::tie(left_name, left_orientation) = get_name_orientation(left);
     std::tie(right_name, right_orientation) = get_name_orientation(right);
 
-    //The two neighbours should together form a left-right rule
-    m_rules.emplace_back(new TiledRuleModel(left_name, right_name, "", ""));
-
     int left_cardinality, right_cardinality;
     std::string right_symmetry, left_symmetry;
     right_symmetry = std::get<1>(m_name_cardinality_symmetry_map.at(right_name));
     left_symmetry = std::get<1>(m_name_cardinality_symmetry_map.at(left_name));
 
-    right_cardinality = right_symmetry == "X" ? 4 : std::get<0>(m_name_cardinality_symmetry_map.at(right_name));
-    left_cardinality = left_symmetry == "X" ? 4 : std::get<0>(m_name_cardinality_symmetry_map.at(left_name));
+    right_cardinality = std::get<0>(m_name_cardinality_symmetry_map.at(right_name));
+    left_cardinality = std::get<0>(m_name_cardinality_symmetry_map.at(left_name));
 
     auto append_orientation = [&](const std::string& name, int orientation) -> std::string{
-        return name + " " + std::to_string(orientation);
+        if(orientation == 0)
+            return name;
+        else
+            return name + " " + std::to_string(orientation);
     };
 
+    //Add left-right rule as we read it from the specification
+    auto left_read = append_orientation(left_name, left_orientation);
+    auto right_read = append_orientation(right_name, right_orientation);
+    m_rules.emplace_back(new TiledRuleModel(left_read, right_read, "", ""));
+
     //If both tiles can be rotated, rotate to get up-down rule
-    while(left_orientation + 1 < left_cardinality && right_orientation + 1 < right_cardinality)
+    auto rotation_count = 1;
+    while(rotation_count < 4)
     {
-        //Left as the pivot
-        auto right_rotated = right_name + " " + std::to_string(++right_orientation);
-        auto left_rotated = left_name + " " + std::to_string(++left_orientation);
-        m_rules.emplace_back(new TiledRuleModel("", "", right_rotated, left_rotated));
+        std::string right_rotated = right_name;
+        std::string left_rotated = left_name;
+
+        if(right_symmetry != "X")
+        {
+            right_rotated = append_orientation(right_name, (++right_orientation) % right_cardinality);
+        }
+
+        if(left_symmetry != "X")
+        {
+            left_rotated = append_orientation(left_name, (++left_orientation) % left_cardinality);
+        }
+
+        auto try_insert_rule = [&](TiledRuleModel* rule) -> void {
+            for(const auto& r : m_rules)
+            {
+                if(r->m_right == rule->m_right && r->m_left == rule->m_left && r->m_up == rule->m_up && r->m_down == rule->m_down)
+                {
+                    return;
+                }
+            }
+            m_rules.emplace_back(rule);
+        };
+
+        switch(rotation_count)
+        {
+            TiledRuleModel *rule;
+            case 1:
+                rule = new TiledRuleModel("", "", right_rotated, left_rotated);
+                try_insert_rule(rule);
+                break;
+            case 2:
+                rule = new TiledRuleModel(right_rotated, left_rotated, "", "");
+                try_insert_rule(rule);
+                break;
+            case 3:
+                rule = new TiledRuleModel("", "", left_rotated, right_rotated);
+                try_insert_rule(rule);
+                break;
+            default:
+                std::cout << "Unexpected rotation" << std::endl;
+        }
+        rotation_count++;
     }
 }
 

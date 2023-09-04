@@ -41,7 +41,7 @@ public:
     std::vector<std::vector<Cell*>> grid();
     std::map<std::string, QPixmap*> get_name_image_mapping();
     void observe();
-    bool is_fully_generated();
+    bool is_fully_generated() const;
     void generate();
     void reset();
 private:
@@ -74,5 +74,6 @@ private:
     std::minstd_rand m_generator;
     PropagatorState m_propagator_state;
     std::vector<std::tuple<int, int, std::string>> m_propagating;
+    bool m_in_contradiction;
 };
 #endif //WAVE_FUNCTION_COLLAPSE_UI_TILEDMODEL_IMAGEGRID_H

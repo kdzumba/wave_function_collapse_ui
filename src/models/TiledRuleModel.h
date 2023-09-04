@@ -16,6 +16,9 @@ public:
     std::string m_left;
     std::string m_up;
     std::string m_down;
+public:
+    bool operator==(const TiledRuleModel& other) const;
+    bool operator!=(const TiledRuleModel& other) const;
 };
 
 
