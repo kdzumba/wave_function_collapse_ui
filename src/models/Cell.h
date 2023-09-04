@@ -20,17 +20,17 @@ public:
     bool is_collapsed() const;
     void clear_available_states();
     CellState* get_state();
-    std::vector<CellState*> get_available_states();
+    std::vector<CellState*> get_superposition();
     unsigned int get_entropy() const;
     const std::pair<int,int>& get_position();
-    void set_available_states(const std::vector<CellState*>& states);
+    void set_superposition(const std::vector<CellState*>& states);
     void make_current_block(bool is_current);
     void set_previous_cell(Cell* cell);
 signals:
     void cell_collapsed(int phase);
 private:
     CellState* m_collapsed_state;
-    std::vector<CellState*> m_available_states;
+    std::vector<CellState*> m_superposition;
     bool m_is_collapsed;
     std::pair<int, int> m_position;
     bool m_is_current_cell;

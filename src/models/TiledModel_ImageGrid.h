@@ -26,9 +26,23 @@ public:
 constexpr int directions_x[4] = {0, -1, 1, 0};
 constexpr int directions_y[4] = {-1, 0, 0, 1};
 
+enum  Direction{LEFT = 1, RIGHT = 3, UP = 0, DOWN = 2};
+
 constexpr unsigned get_opposite_direction(unsigned direction)
 {
-    return 3 - direction;
+    switch (direction)
+    {
+        case Direction::UP:
+            return 2u;
+        case Direction::LEFT:
+            return 3u;
+        case Direction::DOWN:
+            return 0u;
+        case Direction::RIGHT:
+            return 1u;
+        default:
+            return INT_MAX;
+    }
 }
 
 class TiledModel_ImageGrid : public QObject
@@ -53,7 +67,7 @@ private:
     std::vector<CellState*> get_up_allowed(const std::string& state_name);
     std::vector<CellState*> get_down_allowed(const std::string& state_name);
     void generate_propagator_states();
-    void update_wave_state(int x, int y, CellState* next_state);
+    void update_wave_state(int x, int y,const std::string& next_state_name);
     void read_neighbour_rules(const QDomNode& neighbours_node);
     void calculate_initial_entropy();
     static std::tuple<std::string, int> get_name_orientation(const QString& rule);
@@ -73,7 +87,7 @@ private:
     WaveState* m_wave_state;
     std::minstd_rand m_generator;
     PropagatorState m_propagator_state;
-    std::vector<std::tuple<int, int, std::string>> m_propagating;
+    std::vector<std::tuple<int, int, std::string>> m_elements_to_remove;
     bool m_in_contradiction;
 };
 #endif //WAVE_FUNCTION_COLLAPSE_UI_TILEDMODEL_IMAGEGRID_H

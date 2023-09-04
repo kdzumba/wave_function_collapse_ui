@@ -12,7 +12,7 @@ Cell::Cell(int x, int y)
     m_position = std::make_pair(x, y);
     m_is_collapsed = false;
     m_collapsed_state = nullptr;
-    m_available_states = std::vector<CellState*>();
+    m_superposition = std::vector<CellState*>();
     m_previous = nullptr;
     m_is_current_cell = false;
 }
@@ -48,7 +48,7 @@ CellState *Cell::get_state()
     return m_collapsed_state;
 }
 
-void Cell::set_available_states(const std::vector<CellState *>& states)
+void Cell::set_superposition(const std::vector<CellState *>& states)
 {
 //    auto new_available_states = std::vector<CellState*>();
 //
@@ -63,28 +63,28 @@ void Cell::set_available_states(const std::vector<CellState *>& states)
 //        new_available_states.emplace_back(new_state);
 //    }
 //    clear_available_states();
-    m_available_states = states;
+    m_superposition = states;
 }
 
 unsigned int Cell::get_entropy() const
 {
     if(m_is_current_cell)
         return INT_MAX;
-    return m_available_states.size();
+    return m_superposition.size();
 }
 
-std::vector<CellState *> Cell::get_available_states()
+std::vector<CellState *> Cell::get_superposition()
 {
-    return m_available_states;
+    return m_superposition;
 }
 
 void Cell::clear_available_states()
 {
-    for(auto state : m_available_states)
+    for(auto state : m_superposition)
     {
         delete state;
     }
-    m_available_states.clear();
+    m_superposition.clear();
 }
 
 void Cell::make_current_block(bool is_current)
@@ -99,9 +99,9 @@ void Cell::set_previous_cell(Cell *cell)
 
 void Cell::remove_state(CellState *state)
 {
-    m_available_states.erase(std::remove_if(m_available_states.begin(), m_available_states.end(),
-                                            [&](CellState* s) -> bool{
+    m_superposition.erase(std::remove_if(m_superposition.begin(), m_superposition.end(),
+                                         [&](CellState* s) -> bool{
         return state != nullptr && s != nullptr && state -> get_name() == s -> get_name();
-    }), m_available_states.end());
+    }), m_superposition.end());
 }
 

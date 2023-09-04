@@ -7,18 +7,12 @@
 
 
 #include <string>
+#include <map>
 
 class TiledRuleModel
 {
 public:
-    TiledRuleModel(const std::string& left, const std::string& right, const std::string& up, const std::string& down);
-    std::string m_right;
-    std::string m_left;
-    std::string m_up;
-    std::string m_down;
-public:
-    bool operator==(const TiledRuleModel& other) const;
-    bool operator!=(const TiledRuleModel& other) const;
+    std::map<unsigned, std::string> m_rule;
 };
 
 
