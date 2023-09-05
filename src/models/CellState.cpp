@@ -12,7 +12,7 @@ const std::map<std::string, int> CellState::symmetry_cardinality_map = {
         {"L", 4},
         {"T", 4},
         {"I", 2},
-        {"\\",1},
+        {"\\",2},
         {"F", 8},
         {"X", 1}
 };

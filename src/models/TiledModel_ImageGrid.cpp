@@ -17,7 +17,7 @@ TiledModel_ImageGrid::TiledModel_ImageGrid(int number_of_rows, int number_of_col
     m_wave_state = new WaveState;
     m_in_contradiction = false;
     //Load the tileset and it's defined constraints
-    load_tile_set_specification("tilesets/Summer.xml", image_dir);
+    load_tile_set_specification("tilesets/Circuit.xml", image_dir);
     calculate_initial_entropy();
 
     for(auto row = 0; row < number_of_rows; row++)
@@ -650,6 +650,10 @@ TiledModel_ImageGrid::get_reflection_pair(const std::string &first, const std::s
             {
                 first_ = append_orientation(first, (first_orientation + 1) % 4);
             }
+            else if(first_symmetry == "\\")
+            {
+                first_ = append_orientation(first, (first_orientation + 1) % 2);
+            }
 
             if(second_symmetry == "I" || second_symmetry == "X")
             {
@@ -670,6 +674,10 @@ TiledModel_ImageGrid::get_reflection_pair(const std::string &first, const std::s
             else if(second_symmetry == "L" && !is_even(second_orientation))
             {
                 second_ = append_orientation(second, (second_orientation + 1) % 4);
+            }
+            else if(second_symmetry == "\\")
+            {
+                second_ = append_orientation(second, (second_orientation + 1) % 2);
             }
             std::cout << "Original Up: " << append_orientation(first, first_orientation) << " Original Down:" << append_orientation(second, second_orientation) << std::endl;
             std::cout << "Reflected Up: " << second_ << " Reflected Down: " << first_ << std::endl;
@@ -692,6 +700,10 @@ TiledModel_ImageGrid::get_reflection_pair(const std::string &first, const std::s
             {
                 first_ = append_orientation(first, (first_orientation + 3) % 4);
             }
+            else if(first_symmetry == "\\")
+            {
+                first_ = append_orientation(first, (first_orientation + 1) % 2);
+            }
 
             if(second_symmetry == "I" || second_symmetry == "X" || (second_symmetry == "T" && is_even(second_orientation)))
             {
@@ -709,6 +721,11 @@ TiledModel_ImageGrid::get_reflection_pair(const std::string &first, const std::s
             {
                 second_ = append_orientation(second, (second_orientation + 3) % 4);
             }
+            else if(second_symmetry == "\\")
+            {
+                second_ = append_orientation(second, (second_orientation + 1) % 2);
+            }
+
             std::cout << "Original Left: " << append_orientation(first, first_orientation) << " Original Right:" << append_orientation(second, second_orientation) << std::endl;
             std::cout << "Reflected Left: " << second_ << " Reflected Right: " << first_ << std::endl;
             return std::make_pair(second_, first_);
