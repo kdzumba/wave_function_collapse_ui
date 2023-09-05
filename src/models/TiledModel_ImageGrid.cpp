@@ -17,7 +17,7 @@ TiledModel_ImageGrid::TiledModel_ImageGrid(int number_of_rows, int number_of_col
     m_wave_state = new WaveState;
     m_in_contradiction = false;
     //Load the tileset and it's defined constraints
-    load_tile_set_specification("tilesets/Circuit.xml", image_dir);
+    load_tile_set_specification("tilesets/Circles.xml", image_dir);
     calculate_initial_entropy();
 
     for(auto row = 0; row < number_of_rows; row++)
@@ -79,10 +79,10 @@ void TiledModel_ImageGrid::observe()
     }
     //Need to factor in pattern frequencies (weights) before selecting next_state
     double weight_sum = 0;
-    std::cout << "Next Cell: " << next_cell << std::endl;
-    std::cout << "Next Cell Position: " << next_cell->get_position().first << " " << next_cell->get_position().second << std::endl;
-    std::cout << "Next Cell Available States Count: " << next_cell->get_superposition().size() << std::endl;
-    std::cout << "Wave states possible states for cell: " << m_wave_state->number_of_patterns.at(next_cell->get_position().first).at(next_cell->get_position().second) << std::endl;
+//    std::cout << "Next Cell: " << next_cell << std::endl;
+    std::cout << "Next Cell Position: " << next_cell->get_position().first << " " << next_cell->get_position().second;
+//    std::cout << "Next Cell Available States Count: " << next_cell->get_superposition().size() << std::endl;
+//    std::cout << "Wave states possible states for cell: " << m_wave_state->number_of_patterns.at(next_cell->get_position().first).at(next_cell->get_position().second) << std::endl;
 
     for(const auto& state : next_cell->get_superposition())
     {
@@ -101,6 +101,7 @@ void TiledModel_ImageGrid::observe()
             break;
         }
     }
+    std::cout << " --> state: " << next_state->get_name() << std::endl;
 
     if(next_cell -> get_state() == next_state)
         return;
@@ -385,8 +386,8 @@ void TiledModel_ImageGrid::generate_propagator_states()
         auto down_compatible = get_down_allowed(state_name);
 
         std::array<std::vector<CellState*>, 4> state_compatible = {};
-        state_compatible[0] = up_compatible;
-        state_compatible[1] = left_compatible;
+        state_compatible[1] = up_compatible;
+        state_compatible[0] = left_compatible;
         state_compatible[2] = down_compatible;
         state_compatible[3] = right_compatible;
 
@@ -514,7 +515,7 @@ void TiledModel_ImageGrid::generate_and_add_rule(const QString& left, const QStr
     m_rules.emplace_back(rule);
 
     auto read_reflection_pair = get_reflection_pair(left_name, right_name, left_orientation,
-                                          right_orientation, left_symmetry, right_symmetry, Axis::X);
+                                          right_orientation, left_symmetry, right_symmetry, Axis::Y);
     auto read_reflection_rule = new TiledRuleModel;
     read_reflection_rule->m_rule.insert({Direction::LEFT, read_reflection_pair.first});
     read_reflection_rule->m_rule.insert({Direction::RIGHT, read_reflection_pair.second});
@@ -531,12 +532,14 @@ void TiledModel_ImageGrid::generate_and_add_rule(const QString& left, const QStr
 
         if(right_symmetry != "X")
         {
-            right_rotated = append_orientation(right_name, (++right_orientation) % right_cardinality);
+            right_orientation = (++right_orientation) % right_cardinality;
+            right_rotated = append_orientation(right_name, right_orientation);
         }
 
         if(left_symmetry != "X")
         {
-            left_rotated = append_orientation(left_name, (++left_orientation) % left_cardinality);
+            left_orientation = (++left_orientation) % left_cardinality;
+            left_rotated = append_orientation(left_name, left_orientation);
         }
 
         auto try_insert_rule = [&](TiledRuleModel* rule) -> void {
@@ -657,32 +660,28 @@ TiledModel_ImageGrid::get_reflection_pair(const std::string &first, const std::s
             {
                 second_ = append_orientation(second, second_orientation);
             }
-            else if(first_symmetry == "T" && is_even(second_orientation))
+            else if(second_symmetry == "T" && is_even(second_orientation))
             {
                 second_ = append_orientation(second, (second_orientation + 2) % 4);
             }
-            else if(first_symmetry == "T" && !is_even(second_orientation))
+            else if(second_symmetry == "T" && !is_even(second_orientation))
             {
                 second_ = append_orientation(second, (second_orientation));
             }
-            else if(first_symmetry == "L" && is_even(second_orientation))
+            else if(second_symmetry == "L" && is_even(second_orientation))
             {
                 second_ = append_orientation(second, (second_orientation + 3) % 4);
             }
-            else if(first_symmetry == "L" && !is_even(second_orientation))
+            else if(second_symmetry == "L" && !is_even(second_orientation))
             {
                 second_ = append_orientation(second, (second_orientation + 1) % 4);
             }
-            std::cout << "Original Left: " << append_orientation(first, first_orientation) << " Original Right:" << append_orientation(second, second_orientation) << std::endl;
-            std::cout << "Reflected Left: " << second_ << " Reflected Right: " << first_ << std::endl;
+            std::cout << "Original Up: " << append_orientation(first, first_orientation) << " Original Down:" << append_orientation(second, second_orientation) << std::endl;
+            std::cout << "Reflected Up: " << second_ << " Reflected Down: " << first_ << std::endl;
             return std::make_pair(second_, first_);
 
         case Axis::Y:
-            if(first_symmetry == "I" || first_symmetry == "X")
-            {
-                first_ = append_orientation(first, first_orientation);
-            }
-            else if(first_symmetry == "T" && is_even(first_orientation))
+            if(first_symmetry == "I" || first_symmetry == "X" || (first_symmetry == "T" == is_even(first_orientation)))
             {
                 first_ = append_orientation(first, first_orientation);
             }
@@ -699,11 +698,7 @@ TiledModel_ImageGrid::get_reflection_pair(const std::string &first, const std::s
                 first_ = append_orientation(first, (first_orientation + 3) % 4);
             }
 
-            if(second_symmetry == "I" || second_symmetry == "X")
-            {
-                second_ = append_orientation(second, second_orientation);
-            }
-            else if(second_symmetry == "T" && is_even(second_orientation))
+            if(second_symmetry == "I" || second_symmetry == "X" || (second_symmetry == "T" && is_even(second_orientation)))
             {
                 second_ = append_orientation(second, second_orientation);
             }
@@ -719,8 +714,8 @@ TiledModel_ImageGrid::get_reflection_pair(const std::string &first, const std::s
             {
                 second_ = append_orientation(second, (second_orientation + 3) % 4);
             }
-            std::cout << "Original Up: " << append_orientation(first, first_orientation) << " Original Down:" << append_orientation(second, second_orientation) << std::endl;
-            std::cout << "Reflected Up: " << second_ << " Reflected Down: " << first_ << std::endl;
+            std::cout << "Original Left: " << append_orientation(first, first_orientation) << " Original Right:" << append_orientation(second, second_orientation) << std::endl;
+            std::cout << "Reflected Left: " << second_ << " Reflected Right: " << first_ << std::endl;
             return std::make_pair(second_, first_);
     }
     return std::make_pair(second_, first_);

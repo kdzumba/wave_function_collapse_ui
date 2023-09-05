@@ -33,7 +33,7 @@ void GraphicsWorkspace::init_default_scenes()
 {
     //Initialize scenes at the same time as their menus
     auto sudoku_scene = new SudokuScene("puzzles/puzzle8.txt", this);
-    auto image_generation_scene = new ImageGenerationScene("images/Circuit/", this);
+    auto image_generation_scene = new ImageGenerationScene("images/Circles/", this);
 
     m_scene_states.emplace_back(sudoku_scene);
     m_scene_states.emplace_back(image_generation_scene);
