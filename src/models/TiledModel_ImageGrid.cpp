@@ -17,7 +17,7 @@ TiledModel_ImageGrid::TiledModel_ImageGrid(int number_of_rows, int number_of_col
     m_wave_state = new WaveState;
     m_in_contradiction = false;
     //Load the tileset and it's defined constraints
-    load_tile_set_specification("tilesets/Circles.xml", image_dir);
+    load_tile_set_specification("tilesets/Summer.xml", image_dir);
     calculate_initial_entropy();
 
     for(auto row = 0; row < number_of_rows; row++)
@@ -77,12 +77,9 @@ void TiledModel_ImageGrid::observe()
         std::cout << "No least entropy cell found" << std::endl;
         return;
     }
-    //Need to factor in pattern frequencies (weights) before selecting next_state
+
     double weight_sum = 0;
-//    std::cout << "Next Cell: " << next_cell << std::endl;
     std::cout << "Next Cell Position: " << next_cell->get_position().first << " " << next_cell->get_position().second;
-//    std::cout << "Next Cell Available States Count: " << next_cell->get_superposition().size() << std::endl;
-//    std::cout << "Wave states possible states for cell: " << m_wave_state->number_of_patterns.at(next_cell->get_position().first).at(next_cell->get_position().second) << std::endl;
 
     for(const auto& state : next_cell->get_superposition())
     {
@@ -460,16 +457,14 @@ void TiledModel_ImageGrid::propagate_collapse_info()
             {
                 if(std::find(patterns.begin(), patterns.end(), state) == patterns.end())
                 {
+                    if(next_cell -> get_superposition().size() == 1)
+                    {
+                        std::cout << std::endl;
+                    }
                     next_cell->remove_state(state);
                     update_wave_state(x2, y2, state->get_name());
                 }
-                else
-                {
-                    continue;
-                }
             }
-
-            std::cout << "Done removing from next cell in direction : " << direction << std::endl;
         }
     }
 }
@@ -566,8 +561,8 @@ void TiledModel_ImageGrid::generate_and_add_rule(const QString& left, const QStr
                 sub_rule->m_rule.insert({Direction::RIGHT, ""});
                 try_insert_rule(sub_rule);
 
-                reflection_pair = get_reflection_pair(left_name, right_name, left_orientation,
-                                                      right_orientation, left_symmetry, right_symmetry, Axis::X);
+                reflection_pair = get_reflection_pair(right_name, left_name, right_orientation,
+                                                      left_orientation, right_symmetry, left_symmetry, Axis::X);
                 reflection_rule->m_rule.insert({Direction::UP, reflection_pair.first});
                 reflection_rule->m_rule.insert({Direction::DOWN, reflection_pair.second});
                 reflection_rule->m_rule.insert({Direction::LEFT, ""});
@@ -581,8 +576,8 @@ void TiledModel_ImageGrid::generate_and_add_rule(const QString& left, const QStr
                 sub_rule->m_rule.insert({Direction::DOWN, ""});
                 try_insert_rule(sub_rule);
 
-                reflection_pair = get_reflection_pair(left_name, right_name, left_orientation,
-                                                      right_orientation, left_symmetry, right_symmetry, Axis::Y);
+                reflection_pair = get_reflection_pair(right_name, left_name, right_orientation,
+                                                      left_orientation, right_symmetry, left_symmetry, Axis::Y);
                 reflection_rule->m_rule.insert({Direction::UP, ""});
                 reflection_rule->m_rule.insert({Direction::DOWN, ""});
                 reflection_rule->m_rule.insert({Direction::LEFT, reflection_pair.first});

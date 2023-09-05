@@ -26,7 +26,7 @@ public:
 constexpr int directions_x[4] = {0, -1, 1, 0};
 constexpr int directions_y[4] = {-1, 0, 0, 1};
 
-enum  Direction{LEFT = 1, RIGHT = 3, UP = 0, DOWN = 2};
+enum  Direction{LEFT = 0, RIGHT = 3, UP = 1, DOWN = 2};
 enum Axis{X, Y};
 
 constexpr unsigned get_opposite_direction(unsigned direction)
