@@ -75,8 +75,7 @@ private:
     static std::tuple<std::string, int> get_name_orientation(const QString& rule);
     Cell* get_min_entropy();
     void generate_and_add_rule(const QString& left, const QString& right);
-    TiledRuleModel* generate_reflection_rule(const std::string& left, const std::string& right, const std::string& symmetry, Axis axis);
-    std::pair<std::string, std::string> get_reflection_pair(const std::string& first, const std::string& second,
+    static std::pair<std::string, std::string> get_reflection_pair(const std::string& first, const std::string& second,
                                                             int first_orientation, int second_orientation, const std::string& first_symmetry,
                                                             const std::string& second_symmetry, Axis axis);
 private:
