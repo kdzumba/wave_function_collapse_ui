@@ -17,7 +17,7 @@ TiledModel_ImageGrid::TiledModel_ImageGrid(int number_of_rows, int number_of_col
     m_wave_state = new WaveState;
     m_in_contradiction = false;
     //Load the tileset and it's defined constraints
-    load_tile_set_specification("tilesets/Circuit.xml", image_dir);
+    load_tile_set_specification("tilesets/Summer.xml", image_dir);
     calculate_initial_entropy();
 
     for(auto row = 0; row < number_of_rows; row++)

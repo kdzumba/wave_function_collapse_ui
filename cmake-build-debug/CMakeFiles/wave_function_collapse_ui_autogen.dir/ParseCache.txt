@@ -1573,11 +1573,11 @@ C:/Users/User/CLionProjects/wave_function_collapse_ui/src/graphics_items/ImageGe
  mdp:C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/mingw/x86_64-w64-mingw32/include/vadefs.h
  mdp:C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/mingw/x86_64-w64-mingw32/include/wchar.h
  mdp:C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/mingw/x86_64-w64-mingw32/include/wctype.h
-C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/TiledRuleModel.cpp
 C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/BlockState.h
+C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/TiledRuleModel.cpp
 C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/TiledModelRule.cpp
-C:/Users/User/CLionProjects/wave_function_collapse_ui/src/widgets/Button.cpp
 C:/Users/User/CLionProjects/wave_function_collapse_ui/src/ui_forms/ImageGenerationSideMenu.cpp
+C:/Users/User/CLionProjects/wave_function_collapse_ui/src/widgets/Button.cpp
 C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/Cell.h
  mmc:Q_OBJECT
  mdp:C:/Users/User/CLionProjects/wave_function_collapse_ui/src/models/Cell.h
