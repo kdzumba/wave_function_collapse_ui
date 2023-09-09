@@ -108,7 +108,6 @@ QSizeF GridTile::sizeHint(Qt::SizeHint which, const QSizeF &constraint) const
 
 void GridTile::advance(int step) {
     if(!step) return;
-//    QThread::sleep(1);
     update(this -> boundingRect());
     m_value ->setText(QString::number(m_tile_model -> get_collapsed_state() -> get_value()));
 }

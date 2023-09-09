@@ -20,6 +20,7 @@
 #include <QGroupBox>
 #include <QGraphicsProxyWidget>
 #include <QThread>
+#include <QGraphicsLinearLayout>
 
 class SudokuScene : public AbstractScene
 {
@@ -41,7 +42,7 @@ private:
     BoardContainer* m_sudoku_grid;
     QGraphicsProxyWidget* m_sudoku_menu_proxy;
     SudokuSceneSideMenu* m_sudoku_menu;
-    QGraphicsGridLayout* m_scene_layout;
+    QGraphicsLinearLayout* m_scene_layout;
     QGraphicsWidget* m_scene_container;
     QThread* m_animation_thread;
     QThread* m_reset_thread;

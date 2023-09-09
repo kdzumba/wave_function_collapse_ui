@@ -17,7 +17,7 @@ TiledModel_ImageGrid::TiledModel_ImageGrid(int number_of_rows, int number_of_col
     m_wave_state = new WaveState;
     m_in_contradiction = false;
     //Load the tileset and it's defined constraints
-    load_tile_set_specification("tilesets/Summer.xml", image_dir);
+    load_tile_set_specification("tilesets/Circles.xml", image_dir);
     calculate_initial_entropy();
 
     for(auto row = 0; row < number_of_rows; row++)
@@ -332,11 +332,14 @@ void TiledModel_ImageGrid::calculate_initial_entropy()
     {
         auto plogp_sum = std::vector<double>(m_dimensions.second, base_entropy);
         m_wave_state->plogp_weights_sum.emplace_back(plogp_sum);
+
         auto log_sum = std::vector<double>(m_dimensions.second, log_base_s);
         m_wave_state->log_weights_sum.emplace_back(log_sum);
+
         m_wave_state->number_of_patterns.emplace_back(m_dimensions.second, m_all_states.size());
         auto entropies = std::vector<double>(dimensions().second, entropy_base);
         m_wave_state->entropy.emplace_back(entropies);
+
         auto weights_sum = std::vector<double>(m_dimensions.second, base_s);
         m_wave_state->weights_sum.emplace_back(weights_sum);
     }

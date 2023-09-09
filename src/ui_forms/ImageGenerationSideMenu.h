@@ -15,8 +15,10 @@ public:
     explicit ImageGenerationSideMenu(QWidget* parent = nullptr);
 private slots:
     void handleGenerateButtonClicked();
+    void handleResetButtonClicked();
 signals:
     void generateButtonClicked();
+    void resetButtonClicked();
 private:
     ButtonGroup* m_controls_button_group;
 

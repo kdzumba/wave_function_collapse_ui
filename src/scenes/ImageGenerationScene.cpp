@@ -22,6 +22,9 @@ ImageGenerationScene::ImageGenerationScene(const std::string &img_directory, QWi
     m_scene_layout ->addItem(m_generation_menu_proxy, 1, 0);
 
     this ->addItem(m_scene_container);
+    auto gradient = QGradient(QGradient::GentleCare);
+    auto brush = QBrush(gradient);
+    this ->setBackgroundBrush(brush);
 
     init();
 }
@@ -47,7 +50,6 @@ void ImageGenerationScene::init()
             auto map = m_image_grid->get_name_image_mapping();
             auto default_pixmap = new QPixmap();
             default_pixmap -> fill(Qt::white);
-//            cell_graphics_item ->setPixmap(*map.at("component"));
             this ->addItem(cell_graphics_item);
             m_canvas ->add_item(cell_graphics_item, row, col);
         }
@@ -64,8 +66,6 @@ void ImageGenerationScene::animate()
             m_image_grid->generate();
             m_retries_count++;
         }
-        qDebug() << "is_fully_generated: " << m_image_grid -> is_fully_generated();
-        qDebug() << "The End of animation: Retries = " << m_retries_count;
     };
     m_animation_thread = QThread::create(generate);
     m_animation_thread -> start();

@@ -7,6 +7,7 @@
 class AbstractSideMenu : public QWidget
 {
 public:
-    virtual void activate() = 0;
+    explicit AbstractSideMenu(QWidget* parent) : QWidget(parent){}
+//    virtual void activate() = 0;
 };
 #endif //WAVE_FUNCTION_COLLAPSE_UI_ABSTRACTSIDEMENU_H

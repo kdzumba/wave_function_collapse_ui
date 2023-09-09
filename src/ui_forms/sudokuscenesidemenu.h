@@ -14,7 +14,7 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class SudokuSceneSideMenu; }
 QT_END_NAMESPACE
 
-class SudokuSceneSideMenu : public QWidget
+class SudokuSceneSideMenu : public AbstractSideMenu
 {
 Q_OBJECT
 

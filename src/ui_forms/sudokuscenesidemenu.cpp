@@ -9,7 +9,7 @@
 #include "../widgets/Button.h"
 
 
-SudokuSceneSideMenu::SudokuSceneSideMenu(QWidget *parent) :QWidget(parent), ui(new Ui::SudokuSceneSideMenu)
+SudokuSceneSideMenu::SudokuSceneSideMenu(QWidget *parent) :AbstractSideMenu(parent), ui(new Ui::SudokuSceneSideMenu)
 {
     ui->setupUi(this);
     m_controls_button_group = new ButtonGroup(this);

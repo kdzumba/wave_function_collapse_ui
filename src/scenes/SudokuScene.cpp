@@ -6,6 +6,7 @@
 #include "../utils.h"
 #include "../widgets/Button.h"
 #include <QtConcurrent/QtConcurrent>
+#include <QGraphicsView>
 
 int SudokuScene::s_animate_count = 0;
 
@@ -22,10 +23,11 @@ SudokuScene::SudokuScene(const std::string& filename, QWidget* parent) : Abstrac
 
     m_sudoku_menu_proxy = this ->addWidget(m_sudoku_menu);
     m_scene_container = new QGraphicsWidget;
-    m_scene_layout = new QGraphicsGridLayout(m_scene_container);
 
-    m_scene_layout ->addItem(m_sudoku_grid, 0,0);
-    m_scene_layout ->addItem(m_sudoku_menu_proxy, 1, 0);
+    m_scene_layout = new QGraphicsLinearLayout(m_scene_container);
+    m_scene_layout ->addItem(m_sudoku_grid);
+    m_scene_layout ->addItem(m_sudoku_menu_proxy);
+    m_scene_layout->setSpacing(10);
     this ->addItem(m_scene_container);
 
     //Generate a random number between 1 and 180 (QGradient::Present have values from 1 to 180)

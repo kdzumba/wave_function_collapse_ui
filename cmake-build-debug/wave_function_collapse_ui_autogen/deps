@@ -186,6 +186,7 @@ wave_function_collapse_ui_autogen/timestamp: \
 	C:/Qt/6.5.1/mingw_64/include/QtWidgets/QGraphicsItem \
 	C:/Qt/6.5.1/mingw_64/include/QtWidgets/QGraphicsLayout \
 	C:/Qt/6.5.1/mingw_64/include/QtWidgets/QGraphicsLayoutItem \
+	C:/Qt/6.5.1/mingw_64/include/QtWidgets/QGraphicsLinearLayout \
 	C:/Qt/6.5.1/mingw_64/include/QtWidgets/QGraphicsPixmapItem \
 	C:/Qt/6.5.1/mingw_64/include/QtWidgets/QGraphicsProxyWidget \
 	C:/Qt/6.5.1/mingw_64/include/QtWidgets/QGraphicsScene \
@@ -209,6 +210,7 @@ wave_function_collapse_ui_autogen/timestamp: \
 	C:/Qt/6.5.1/mingw_64/include/QtWidgets/qgraphicsitem.h \
 	C:/Qt/6.5.1/mingw_64/include/QtWidgets/qgraphicslayout.h \
 	C:/Qt/6.5.1/mingw_64/include/QtWidgets/qgraphicslayoutitem.h \
+	C:/Qt/6.5.1/mingw_64/include/QtWidgets/qgraphicslinearlayout.h \
 	C:/Qt/6.5.1/mingw_64/include/QtWidgets/qgraphicsproxywidget.h \
 	C:/Qt/6.5.1/mingw_64/include/QtWidgets/qgraphicsscene.h \
 	C:/Qt/6.5.1/mingw_64/include/QtWidgets/qgraphicsview.h \

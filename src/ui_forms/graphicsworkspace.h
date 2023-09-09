@@ -24,12 +24,11 @@ public:
     ~GraphicsWorkspace() override;
 private:
     void init_default_scenes();
-private slots:
-    static void sceneChanged();
 
 private:
     Ui::GraphicsWorkspace *ui;
     std::vector<AbstractScene*> m_scene_states;
+    std::vector<AbstractSideMenu*> m_menus;
     QGridLayout* m_main_grid_layout;
 };
 

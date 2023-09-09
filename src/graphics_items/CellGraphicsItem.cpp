@@ -26,7 +26,7 @@ QSizeF CellGraphicsItem::sizeHint(Qt::SizeHint which, const QSizeF &constraint) 
         case Qt::MinimumSize:
         case Qt::PreferredSize:
         case Qt::MaximumSize:
-            return {48, 48};
+            return {32, 32};
         default:
             break;
     }
