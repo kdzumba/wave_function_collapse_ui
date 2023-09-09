@@ -14,3 +14,6 @@
 #include "FM2YYINTCJ/moc_wavefunctioncollapseapp.cpp"
 #include "RZ4CM6YYJ6/moc_Button.cpp"
 #include "RZ4CM6YYJ6/moc_ButtonGroup.cpp"
+#include "RZ4CM6YYJ6/moc_CheckBox.cpp"
+#include "RZ4CM6YYJ6/moc_Slider.cpp"
+#include "RZ4CM6YYJ6/moc_SliderGroup.cpp"

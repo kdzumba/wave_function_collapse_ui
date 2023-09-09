@@ -39,10 +39,11 @@ public:
     QSizeF sizeHint(Qt::SizeHint which, const QSizeF &constraint) const override;
 public slots:
     void advance(int step) override;
+    void show_superpositions(bool show);
 public:
-    static int constexpr TILE_SIZE = 80;
+    static int constexpr TILE_SIZE = 70;
     static int constexpr POSITION_OFFSET = 10;
-    static int constexpr PEN_WIDTH = 2;
+    static int constexpr PEN_WIDTH = 4;
     static int constexpr STATES_LABEL_SIZE = TILE_SIZE / 3;
 private:
     QLabel* m_value;
@@ -52,6 +53,7 @@ private:
     bool m_is_permanently_collapsed;
     SudokuBlock* m_tile_model;
     QTimer* m_timer;
+    bool m_show_superpositions;
 public:
     static int s_advance_call_count;
 };

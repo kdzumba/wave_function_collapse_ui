@@ -11,6 +11,7 @@ Button::Button(const QString &text, QWidget *parent) : QPushButton(text, parent)
                          "border-radius: 10px; "
                          "font-family: Arial;"
                          "font-size: 18px;"
-                         "padding: 20px;"
-                         "color: black");
+                         "padding: 15px 20px 15px 20px;"
+                         "color: black;"
+                         "margin: 5;");
 }

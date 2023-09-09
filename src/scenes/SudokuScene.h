@@ -31,6 +31,10 @@ public slots:
     void animate() override;
     void reset();
     void generate();
+    void enableBacktracking(bool isBacktrackingEnabled);
+    void showSuperpositions(bool shouldShowSuperpositions);
+    void setBacktrackCount(int count);
+    void setRetriesCount(int count);
 private:
     void init();
     void arrangeItems();

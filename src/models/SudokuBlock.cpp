@@ -146,3 +146,8 @@ SudokuBlock::~SudokuBlock()
 {
     std::cout << "Destroying Sudoku Block: " << this << std::endl;
 }
+
+void SudokuBlock::should_show_superpositions(bool show)
+{
+    emit show_superpositions(show);
+}

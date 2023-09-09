@@ -27,6 +27,9 @@ public:
     bool is_fully_solved() const;
     void read_from_file(const std::string& filename);
     void reset_available_states();
+    void setBacktrackingEnabled(bool enabled);
+    void setShowSuperpositions(bool showSuperpositions);
+    void setBacktrackCount(int value);
 private:
     void init_board();
     void collapse(SudokuBlock* block);
@@ -48,6 +51,9 @@ private:
     SudokuBlock* m_current_collapsed;
     SudokuBlock* m_initial_block;
     std::string m_puzzle_file;
+    bool m_is_backtracking_enabled;
+    bool m_show_super_positions;
+    int m_backtrack_count;
     static int constexpr BOARD_SIZE = 9;
     static int constexpr MIN_FULL_BLOCK_SIZE = 3;
     static int s_stack_counter;

@@ -8,6 +8,7 @@
 #include <QFrame>
 #include "../AbstractSideMenu.h"
 #include "../widgets/ButtonGroup.h"
+#include "../widgets/SliderGroup.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -25,14 +26,23 @@ private slots:
     void handleSolveButtonClicked();
     void handleResetButtonClicked();
     void handleGenerateButtonClicked();
+    void handleBacktrackToggled(bool isSelected);
+    void handleSuperpositionsToggled(bool isSelected);
+    void handleBacktrackCountChanged(int value);
+    void handleRetriesCountChanged(int value);
 signals:
     void solveButtonClicked();
     void resetButtonClicked();
     void generateButtonClicked();
+    void backtrackOptionSelected(bool isSelected);
+    void showSuperpositionsSelected(bool isSelected);
+    void backtrackCountChanged(int value);
+    void retriesCountChanged(int value);
 
 private:
     Ui::SudokuSceneSideMenu *ui;
     ButtonGroup* m_controls_button_group;
+    SliderGroup* m_controls_slider_group;
 };
 
 

@@ -14,6 +14,7 @@ class ButtonGroup : public QWidget
 public:
     explicit ButtonGroup(QWidget* parent = nullptr, QBoxLayout::Direction direction = QBoxLayout::Direction::TopToBottom);
     void add(QAbstractButton* button);
+    QBoxLayout* get_layout() const {return m_layout;}
 private:
     QBoxLayout* m_layout;
 };

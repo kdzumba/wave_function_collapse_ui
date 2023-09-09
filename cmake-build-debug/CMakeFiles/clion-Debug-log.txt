@@ -1,4 +1,4 @@
-C:\Users\User\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\232.8660.186\bin\cmake\win\x64\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/ninja/win/x64/ninja.exe -G Ninja -S C:\Users\User\CLionProjects\wave_function_collapse_ui -B C:\Users\User\CLionProjects\wave_function_collapse_ui\cmake-build-debug
+C:\Users\User\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\232.9559.58\bin\cmake\win\x64\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=C:/Users/User/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/232.9559.58/bin/ninja/win/x64/ninja.exe -G Ninja -S C:\Users\User\CLionProjects\wave_function_collapse_ui -B C:\Users\User\CLionProjects\wave_function_collapse_ui\cmake-build-debug
 -- Could NOT find WrapVulkanHeaders (missing: Vulkan_INCLUDE_DIR) 
 -- Configuring done (0.3s)
 -- Generating done (0.0s)

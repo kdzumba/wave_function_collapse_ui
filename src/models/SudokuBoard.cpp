@@ -19,6 +19,9 @@ SudokuBoard::SudokuBoard()
     init_board();
     m_current_collapsed = nullptr;
     m_initial_block = nullptr;
+    m_is_backtracking_enabled = false;
+    m_show_super_positions = false;
+    m_backtrack_count = 0;
 }
 
 SudokuBoard::SudokuBoard(const std::string &filename): SudokuBoard{}
@@ -178,10 +181,16 @@ void SudokuBoard::solve()
     s_stack_counter ++;
     auto next_block = least_entropy_block();
 
-    if(next_block -> get_entropy() == 0)
+    if(next_block -> get_entropy() == 0 && m_is_backtracking_enabled)
+    {
         next_block = backtrack();
+    }
+    else if(next_block -> get_entropy() == 0)
+    {
+        return;
+    }
 
-    if(s_backtrack_count > 5000)
+    if(s_backtrack_count > m_backtrack_count)
     {
         return;
     }
@@ -604,4 +613,25 @@ void SudokuBoard::reset_available_states()
 SudokuBoard::~SudokuBoard()
 {
     std::cout << "Deleting Board" << std::endl;
+}
+
+void SudokuBoard::setBacktrackingEnabled(bool enabled)
+{
+    m_is_backtracking_enabled = enabled;
+}
+
+void SudokuBoard::setShowSuperpositions(bool showSuperpositions)
+{
+    for(const auto& row : m_grid)
+    {
+        for(const auto & block : row)
+        {
+            block->should_show_superpositions(showSuperpositions);
+        }
+    }
+}
+
+void SudokuBoard::setBacktrackCount(int value)
+{
+    this -> m_backtrack_count = value;
 }

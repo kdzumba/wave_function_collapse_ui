@@ -59,6 +59,12 @@ add_executable(wave_function_collapse_ui main.cpp
         src/ui_forms/ImageGenerationSideMenu.h
         src/models/TiledRuleModel.cpp
         src/models/TiledRuleModel.h
+        src/widgets/CheckBox.cpp
+        src/widgets/CheckBox.h
+        src/widgets/Slider.cpp
+        src/widgets/Slider.h
+        src/widgets/SliderGroup.cpp
+        src/widgets/SliderGroup.h
 )
 target_link_libraries(wave_function_collapse_ui
         Qt::Core

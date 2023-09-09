@@ -15,14 +15,24 @@ SudokuScene::SudokuScene(const std::string& filename, QWidget* parent) : Abstrac
     m_board = new SudokuBoard(filename);
     m_sudoku_grid = new BoardContainer;
     m_sudoku_menu = new SudokuSceneSideMenu;
-
+    m_animation_thread = nullptr;
+    m_reset_thread = nullptr;
+    m_retries_count = 1;
 
     QObject::connect(m_sudoku_menu, SIGNAL(solveButtonClicked()), this, SLOT(animate()));
     QObject::connect(m_sudoku_menu, SIGNAL(resetButtonClicked()), this, SLOT(reset()));
     QObject::connect(m_sudoku_menu, SIGNAL(generateButtonClicked()), this, SLOT(generate()));
-
+    QObject::connect(m_sudoku_menu, SIGNAL(backtrackOptionSelected(bool)), this, SLOT(enableBacktracking(bool)));
+    QObject::connect(m_sudoku_menu, SIGNAL(showSuperpositionsSelected(bool)), this, SLOT(showSuperpositions(bool)));
+    QObject::connect(m_sudoku_menu, SIGNAL(backtrackCountChanged(int)), this, SLOT(setBacktrackCount(int)));
+    QObject::connect(m_sudoku_menu, SIGNAL(retriesCountChanged(int)), this, SLOT(setRetriesCount(int)));
     m_sudoku_menu_proxy = this ->addWidget(m_sudoku_menu);
     m_scene_container = new QGraphicsWidget;
+
+    m_scene_container -> setAttribute(Qt::WA_NoSystemBackground);
+    m_scene_container -> setAttribute(Qt::WA_TranslucentBackground);
+    m_scene_container -> setAttribute(Qt::WA_PaintOnScreen);
+//    setWindowOpacity(0.5);
 
     m_scene_layout = new QGraphicsLinearLayout(m_scene_container);
     m_scene_layout ->addItem(m_sudoku_grid);
@@ -33,7 +43,7 @@ SudokuScene::SudokuScene(const std::string& filename, QWidget* parent) : Abstrac
     //Generate a random number between 1 and 180 (QGradient::Present have values from 1 to 180)
     auto rand_gradient = Utils::generate_random_int(1, 180);
     auto gradient = QGradient(QGradient::Preset(rand_gradient));
-//    auto gradient = QGradient(QGradient::GentleCare);
+//    auto gradient = QGradient(QGradient::HealthyWater);
     auto brush = QBrush(gradient);
     this ->setBackgroundBrush(brush);
     init();
@@ -47,12 +57,12 @@ void SudokuScene::animate()
         //all available options (fully solved)
         reset();
         m_board -> init_solve();
-        m_retries_count = 0;
-        while(!(m_board -> is_fully_solved()) && m_retries_count < 10000)
+        auto retries_count = 0;
+        while(!(m_board -> is_fully_solved()) && retries_count < m_retries_count)
         {
             reset();
             m_board -> solve();
-            m_retries_count++;
+            retries_count++;
         }
     };
 
@@ -132,7 +142,8 @@ void SudokuScene::reset()
 
 void SudokuScene::generate()
 {
-    m_animation_thread -> quit();
+    if(m_animation_thread != nullptr && m_animation_thread->isRunning())
+        m_animation_thread -> quit();
     qDebug() << "Before generating: " << this -> items().size();
 
     //Remove all items from m_grid_ui (messes up the indexing in arrangeItems()
@@ -159,4 +170,24 @@ void SudokuScene::generate()
     m_sudoku_grid = new BoardContainer;
     init();
     qDebug() << "After generating: " << this -> items().size();
+}
+
+void SudokuScene::enableBacktracking(bool isBacktrackingEnabled)
+{
+    m_board -> setBacktrackingEnabled(isBacktrackingEnabled);
+}
+
+void SudokuScene::showSuperpositions(bool shouldShowSuperpositions)
+{
+    m_board -> setShowSuperpositions(shouldShowSuperpositions);
+}
+
+void SudokuScene::setBacktrackCount(int count)
+{
+    m_board -> setBacktrackCount(count);
+}
+
+void SudokuScene::setRetriesCount(int count)
+{
+    this -> m_retries_count = count;
 }

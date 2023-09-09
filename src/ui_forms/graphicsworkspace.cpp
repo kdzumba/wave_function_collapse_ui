@@ -21,6 +21,12 @@ GraphicsWorkspace::GraphicsWorkspace(QWidget *parent) : QGraphicsView(parent), u
     m_main_grid_layout = new QGridLayout;
     this ->setLayout(m_main_grid_layout);
     this ->setRenderHint(QPainter::Antialiasing);
+    this->setStyleSheet("background: transparent");
+
+    setAttribute(Qt::WA_NoSystemBackground);
+    setAttribute(Qt::WA_TranslucentBackground);
+    setAttribute(Qt::WA_PaintOnScreen);
+//    setWindowOpacity(0.5);
 }
 
 GraphicsWorkspace::~GraphicsWorkspace()

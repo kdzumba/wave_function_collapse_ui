@@ -35,8 +35,11 @@ public:
     void set_permanently_collapsed(bool is_collapsed);
     void reset_available_states();
     bool is_current_block() const {return m_is_current_block;}
+public slots:
+    void should_show_superpositions(bool show);
 signals:
     void block_collapsed(int phase);
+    void show_superpositions(bool show);
 
 private:
     SudokuBlock* m_previous;

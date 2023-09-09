@@ -13,8 +13,10 @@ GridTile::GridTile(SudokuBlock *model, int x, int y)
     m_tile_model = model;
     m_value = new QLabel(QString::number(model -> get_collapsed_state() -> get_value()));
     m_timer = new QTimer(this);
+    m_show_superpositions = false;
 
     QObject::connect(m_tile_model, SIGNAL(block_collapsed(int)), this, SLOT(advance(int)));
+    QObject::connect(m_tile_model, SIGNAL(show_superpositions(bool)), this, SLOT(show_superpositions(bool)));
 
     if(!(m_tile_model -> get_is_permanently_collapsed()))
     {
@@ -55,7 +57,7 @@ QRectF GridTile::boundingRect() const
 void GridTile::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     painter ->setBrush(Qt::white);
-    auto boxPen = QPen(Qt::gray);
+    auto boxPen = QPen(QColor(120, 120, 120));
     boxPen.setWidth(PEN_WIDTH);
     painter ->setPen(boxPen);
     painter ->drawRoundedRect(boundingRect(), 0, 0);
@@ -68,7 +70,7 @@ void GridTile::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
         painter ->setFont(QFont("Arial", 20, QFont::Bold));
         painter ->drawText(boundingRect(), Qt::AlignCenter,  m_value -> text());
     }
-    else
+    else if(m_show_superpositions)
     {
         painter ->setPen(permanentlyCollapsedPen);
         painter ->setFont(QFont("Arial", 12, QFont::DemiBold));
@@ -78,7 +80,7 @@ void GridTile::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
             {
                 auto x = row * STATES_LABEL_SIZE + POSITION_OFFSET - PEN_WIDTH / 2.0;
                 auto y = col * STATES_LABEL_SIZE + POSITION_OFFSET - PEN_WIDTH / 2.0;
-                const auto& state_label = m_available_states.at(row).at(col);
+                const auto& state_label = m_available_states.at(col).at(row);
                 painter ->drawText((int)x, (int)y, STATES_LABEL_SIZE, STATES_LABEL_SIZE, Qt::AlignCenter, state_label -> text());
             }
         }
@@ -115,5 +117,12 @@ void GridTile::advance(int step) {
 GridTile::~GridTile()
 {
     std::cout << "Destroying a tile: " << this << std::endl;
+}
+
+void GridTile::show_superpositions(bool show)
+{
+    m_show_superpositions = show;
+//    update(this->boundingRect());
+    advance(1);
 }
 
