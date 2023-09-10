@@ -35,21 +35,21 @@ double Utils::generate_random_double(int start, double end)
 double Utils::get_min_abs_half(const std::vector<double> &v)
 {
     double min_abs_half = std::numeric_limits<double>::infinity();
-    for(double i : v)
+    for(double weight_log_weight : v)
     {
-        min_abs_half = std::min(min_abs_half, std::abs(i / 2.0));
+        min_abs_half = std::min(min_abs_half, std::abs(weight_log_weight / 2.0));
     }
     return min_abs_half;
 }
 
-std::vector<double> Utils::get_plogp(const std::vector<double> &distribution)
+std::vector<double> Utils::get_weight_log_weight(const std::vector<double> &pattern_weights)
 {
-    std::vector<double> plogp;
-    for(double i : distribution)
+    std::vector<double> weight_log_weight;
+    for(double weight : pattern_weights)
     {
-        plogp.emplace_back(i * log(i));
+        weight_log_weight.emplace_back(weight * log(weight));
     }
-    return plogp;
+    return weight_log_weight;
 }
 
 const std::vector<double>& Utils::normalize(std::vector<double> &v)

@@ -17,6 +17,7 @@ ImageGenerationScene::ImageGenerationScene(const std::string &img_directory, QWi
     m_generation_menu_proxy = this ->addWidget(m_generation_menu);
 
     QObject::connect(m_generation_menu, SIGNAL(generateButtonClicked()), this, SLOT(animate()));
+    QObject::connect(m_generation_menu, SIGNAL(resetButtonClicked()), this, SLOT(reset()));
 
     m_scene_layout ->addItem(m_canvas);
     m_scene_layout ->addItem(m_generation_menu_proxy);
@@ -50,8 +51,9 @@ void ImageGenerationScene::init()
             auto cell_graphics_item = new CellGraphicsItem(cell_model, row, col);
 
             auto map = m_image_grid->get_name_image_mapping();
-            auto default_pixmap = new QPixmap();
-            default_pixmap -> fill(Qt::white);
+            auto default_pixmap = new QPixmap("C:\\Users\\User\\CLionProjects\\wave_function_collapse_ui\\cmake-build-debug\\images\\summer-background.png");
+
+            cell_graphics_item->setPixmap(*default_pixmap);
             this ->addItem(cell_graphics_item);
             m_canvas ->add_item(cell_graphics_item, row, col);
         }

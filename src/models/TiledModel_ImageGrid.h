@@ -16,9 +16,9 @@
 class WaveState
 {
 public:
-    std::vector<std::vector<double>> plogp_weights_sum;
-    std::vector<std::vector<double>> weights_sum;
-    std::vector<std::vector<double>> log_weights_sum;
+    std::vector<std::vector<double>> weight_log_weight;
+    std::vector<std::vector<double>> weights;
+    std::vector<std::vector<double>> log_weight;
     std::vector<std::vector<unsigned>> number_of_patterns;
     std::vector<std::vector<double>> entropy;
 };
@@ -87,8 +87,8 @@ private:
     std::vector<TiledRuleModel*> m_rules;
     std::map<std::string, std::tuple<int, std::string>> m_name_cardinality_symmetry_map;
     std::vector<double> m_pattern_weights;
-    std::vector<double> m_plogp_pattern_weights;
-    double m_min_abs_half_plogp;
+    std::vector<double> m_weight_log_weight;
+    double m_min_abs_half_weight_log_weight;
     WaveState* m_wave_state;
     std::minstd_rand m_generator;
     PropagatorState m_propagator_state;

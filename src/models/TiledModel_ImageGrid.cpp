@@ -17,7 +17,7 @@ TiledModel_ImageGrid::TiledModel_ImageGrid(int number_of_rows, int number_of_col
     m_wave_state = new WaveState;
     m_in_contradiction = false;
     //Load the tileset and it's defined constraints
-    load_tile_set_specification("tilesets/Circuit.xml", image_dir);
+    load_tile_set_specification("tilesets/Summer.xml", image_dir);
     calculate_initial_entropy();
 
     for(auto row = 0; row < number_of_rows; row++)
@@ -192,7 +192,7 @@ void TiledModel_ImageGrid::load_tile_set_specification(const std::string &spec_f
         }
 
         Utils::normalize(m_pattern_weights);
-        m_plogp_pattern_weights = Utils::get_plogp(m_pattern_weights);
+        m_weight_log_weight = Utils::get_weight_log_weight(m_pattern_weights);
 
         auto neighbours_element = tiles_element.nextSibling();
         read_neighbour_rules((neighbours_element));
@@ -324,36 +324,37 @@ std::vector<CellState *> TiledModel_ImageGrid::get_down_allowed(const std::strin
 void TiledModel_ImageGrid::calculate_initial_entropy()
 {
     double base_entropy = 0;
-    double base_s = 0;
+    double base_weight_sum = 0;
+
     for(unsigned i = 0; i < m_all_states.size(); i++)
     {
-        base_entropy += m_plogp_pattern_weights.at(i);
-        base_s += m_pattern_weights.at(i);
+        base_entropy += m_weight_log_weight.at(i);
+        base_weight_sum += m_pattern_weights.at(i);
     }
-    double log_base_s = log(base_s);
-    double entropy_base = log_base_s - base_entropy / base_s;
+    double log_base_weight_sum = log(base_weight_sum);
+    double entropy_base = log_base_weight_sum - base_entropy / base_weight_sum;
 
     for(unsigned i = 0; i < m_dimensions.first; i++)
     {
-        auto plogp_sum = std::vector<double>(m_dimensions.second, base_entropy);
-        m_wave_state->plogp_weights_sum.emplace_back(plogp_sum);
+        auto weight_log_weight_sum = std::vector<double>(m_dimensions.second, base_entropy);
+        m_wave_state->weight_log_weight.emplace_back(weight_log_weight_sum);
 
-        auto log_sum = std::vector<double>(m_dimensions.second, log_base_s);
-        m_wave_state->log_weights_sum.emplace_back(log_sum);
+        auto log_sum = std::vector<double>(m_dimensions.second, log_base_weight_sum);
+        m_wave_state->log_weight.emplace_back(log_sum);
 
         m_wave_state->number_of_patterns.emplace_back(m_dimensions.second, m_all_states.size());
         auto entropies = std::vector<double>(dimensions().second, entropy_base);
         m_wave_state->entropy.emplace_back(entropies);
 
-        auto weights_sum = std::vector<double>(m_dimensions.second, base_s);
-        m_wave_state->weights_sum.emplace_back(weights_sum);
+        auto weights_sum = std::vector<double>(m_dimensions.second, base_weight_sum);
+        m_wave_state->weights.emplace_back(weights_sum);
     }
-    m_min_abs_half_plogp = Utils::get_min_abs_half(m_plogp_pattern_weights);
+    m_min_abs_half_weight_log_weight = Utils::get_min_abs_half(m_weight_log_weight);
 }
 
 Cell* TiledModel_ImageGrid::get_min_entropy()
 {
-    std::uniform_real_distribution<> distribution(0, m_min_abs_half_plogp);
+    std::uniform_real_distribution<> distribution(0, m_min_abs_half_weight_log_weight);
     double min = std::numeric_limits<double>::infinity();
     Cell* min_entropy_cell = nullptr;
 
@@ -413,11 +414,11 @@ void TiledModel_ImageGrid::update_wave_state(int x, int y, const std::string& ne
         }
     }
 
-    m_wave_state->plogp_weights_sum[x][y] -= m_plogp_pattern_weights.at(state_index);
-    m_wave_state->weights_sum[x][y] -= m_pattern_weights.at(state_index);
-    m_wave_state->log_weights_sum[x][y] = log(m_wave_state->weights_sum[x][y]);
+    m_wave_state->weight_log_weight[x][y] -= m_weight_log_weight.at(state_index);
+    m_wave_state->weights[x][y] -= m_pattern_weights.at(state_index);
+    m_wave_state->log_weight[x][y] = log(m_wave_state->weights[x][y]);
     m_wave_state->number_of_patterns[x][y]--;
-    m_wave_state->entropy[x][y] = m_wave_state->log_weights_sum.at(x).at(y) - m_wave_state->plogp_weights_sum.at(x).at(y) / m_wave_state->weights_sum.at(x).at(y);
+    m_wave_state->entropy[x][y] = m_wave_state->log_weight.at(x).at(y) - m_wave_state->weight_log_weight.at(x).at(y) / m_wave_state->weights.at(x).at(y);
 }
 
 void TiledModel_ImageGrid::propagate_collapse_info()
@@ -467,7 +468,7 @@ void TiledModel_ImageGrid::propagate_collapse_info()
                 {
                     if(next_cell -> get_superposition().size() == 1)
                     {
-                        std::cout << std::endl;
+                        std::cout << "Removing last valid pattern: Position(" << next_cell->get_position().first << ", " << next_cell->get_position().second << ")" << std::endl;
                     }
                     next_cell->remove_state(state);
                     update_wave_state(x2, y2, state->get_name());
@@ -551,8 +552,8 @@ void TiledModel_ImageGrid::generate_and_add_rule(const QString& left, const QStr
                 return r->m_rule.at(Direction::LEFT) == rule->m_rule.at(Direction::LEFT) && r->m_rule.at(Direction::RIGHT) == rule->m_rule.at(Direction::RIGHT)
                 && r->m_rule.at(Direction::DOWN) == rule->m_rule.at(Direction::DOWN) && r->m_rule.at(Direction::UP) == rule->m_rule.at(Direction::UP);
             });
-            if(found_iter != m_rules.end())
-                return;
+//            if(found_iter != m_rules.end())
+//                return;
             m_rules.emplace_back(rule);
         };
 
@@ -692,7 +693,7 @@ TiledModel_ImageGrid::get_reflection_pair(const std::string &first, const std::s
             return std::make_pair(second_, first_);
 
         case Axis::Y:
-            if(first_symmetry == "I" || first_symmetry == "X" || (first_symmetry == "T" == is_even(first_orientation)))
+            if(first_symmetry == "I" || first_symmetry == "X" || (first_symmetry == "T" && is_even(first_orientation)))
             {
                 first_ = append_orientation(first, first_orientation);
             }
