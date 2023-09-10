@@ -17,7 +17,7 @@ TiledModel_ImageGrid::TiledModel_ImageGrid(int number_of_rows, int number_of_col
     m_wave_state = new WaveState;
     m_in_contradiction = false;
     //Load the tileset and it's defined constraints
-    load_tile_set_specification("tilesets/Circles.xml", image_dir);
+    load_tile_set_specification("tilesets/Circuit.xml", image_dir);
     calculate_initial_entropy();
 
     for(auto row = 0; row < number_of_rows; row++)
@@ -123,7 +123,7 @@ bool TiledModel_ImageGrid::is_fully_generated() const {
 
 void TiledModel_ImageGrid::generate()
 {
-    while(true)
+    while(!m_in_contradiction)
     {
         observe();
         propagate_collapse_info();
@@ -132,6 +132,11 @@ void TiledModel_ImageGrid::generate()
 
 void TiledModel_ImageGrid::reset()
 {
+    delete m_wave_state;
+    m_wave_state = new WaveState;
+    calculate_initial_entropy();
+
+    m_in_contradiction = false;
     for(const auto& row : m_wave)
     {
         for(auto cell : row)
@@ -323,7 +328,7 @@ void TiledModel_ImageGrid::calculate_initial_entropy()
     for(unsigned i = 0; i < m_all_states.size(); i++)
     {
         base_entropy += m_plogp_pattern_weights.at(i);
-        base_s += m_all_states.at(i)->get_weight();
+        base_s += m_pattern_weights.at(i);
     }
     double log_base_s = log(base_s);
     double entropy_base = log_base_s - base_entropy / base_s;
@@ -408,7 +413,7 @@ void TiledModel_ImageGrid::update_wave_state(int x, int y, const std::string& ne
         }
     }
 
-    m_wave_state->plogp_weights_sum[x][y]-= m_plogp_pattern_weights.at(state_index);
+    m_wave_state->plogp_weights_sum[x][y] -= m_plogp_pattern_weights.at(state_index);
     m_wave_state->weights_sum[x][y] -= m_pattern_weights.at(state_index);
     m_wave_state->log_weights_sum[x][y] = log(m_wave_state->weights_sum[x][y]);
     m_wave_state->number_of_patterns[x][y]--;

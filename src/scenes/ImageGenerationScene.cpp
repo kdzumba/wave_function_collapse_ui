@@ -11,21 +11,23 @@ ImageGenerationScene::ImageGenerationScene(const std::string &img_directory, QWi
     m_retries_count = 0;
     m_image_grid = new TiledModel_ImageGrid(NUMBER_OF_ROWS, NUMBER_OF_COLS, img_directory);
     m_scene_container = new QGraphicsWidget;
-    m_scene_layout = new QGraphicsGridLayout(m_scene_container);
+    m_scene_layout = new QGraphicsLinearLayout(m_scene_container);
     m_canvas = new ImageGenerationCanvas;
     m_generation_menu = new ImageGenerationSideMenu;
     m_generation_menu_proxy = this ->addWidget(m_generation_menu);
 
     QObject::connect(m_generation_menu, SIGNAL(generateButtonClicked()), this, SLOT(animate()));
 
-    m_scene_layout ->addItem(m_canvas, 0, 0);
-    m_scene_layout ->addItem(m_generation_menu_proxy, 1, 0);
+    m_scene_layout ->addItem(m_canvas);
+    m_scene_layout ->addItem(m_generation_menu_proxy);
 
     this ->addItem(m_scene_container);
-    auto gradient = QGradient(QGradient::GentleCare);
+    //Generate a random number between 1 and 180 (QGradient::Present have values from 1 to 180)
+    auto rand_gradient = Utils::generate_random_int(1, 180);
+    auto gradient = QGradient(QGradient::Preset(rand_gradient));
+//    auto gradient = QGradient(QGradient::HealthyWater);
     auto brush = QBrush(gradient);
     this ->setBackgroundBrush(brush);
-
     init();
 }
 

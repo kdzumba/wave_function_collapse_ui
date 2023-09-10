@@ -7,8 +7,9 @@
 
 #include <QWidget>
 #include "../widgets/ButtonGroup.h"
+#include "../AbstractSideMenu.h"
 
-class ImageGenerationSideMenu : public QWidget
+class ImageGenerationSideMenu : public AbstractSideMenu
 {
     Q_OBJECT
 public:
@@ -21,7 +22,6 @@ signals:
     void resetButtonClicked();
 private:
     ButtonGroup* m_controls_button_group;
-
 };
 
 

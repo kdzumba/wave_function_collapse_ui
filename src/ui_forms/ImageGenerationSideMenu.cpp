@@ -5,12 +5,14 @@
 #include "ImageGenerationSideMenu.h"
 #include "../widgets/Button.h"
 
-ImageGenerationSideMenu::ImageGenerationSideMenu(QWidget *parent) : QWidget(parent)
+ImageGenerationSideMenu::ImageGenerationSideMenu(QWidget *parent) : AbstractSideMenu(parent)
 {
-    m_controls_button_group = new ButtonGroup(this);
-    setStyleSheet("background: transparent");
+    setStyleSheet("background: rgba(20, 20, 20, 0.1);"
+                  "margin: 0 10 0 10;");
 
-    auto generate_button = new Button("Generate");
+    m_controls_button_group = new ButtonGroup(this);
+
+    auto generate_button = new Button("Generate New");
     QObject::connect(generate_button, SIGNAL(clicked(bool)), this, SLOT(handleGenerateButtonClicked()));
     m_controls_button_group -> add(generate_button);
 

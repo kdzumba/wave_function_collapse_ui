@@ -17,7 +17,7 @@ GraphicsWorkspace::GraphicsWorkspace(QWidget *parent) : QGraphicsView(parent), u
 {
     ui->setupUi(this);
     init_default_scenes();
-    this ->setScene(m_scene_states.at(0));
+    this ->setScene(m_scene_states.at(1));
     m_main_grid_layout = new QGridLayout;
     this ->setLayout(m_main_grid_layout);
     this ->setRenderHint(QPainter::Antialiasing);
@@ -39,7 +39,7 @@ void GraphicsWorkspace::init_default_scenes()
 {
     //Initialize scenes at the same time as their menus
     auto sudoku_scene = new SudokuScene("puzzles/puzzle1.txt", this);
-    auto image_generation_scene = new ImageGenerationScene("images/Circles/", this);
+    auto image_generation_scene = new ImageGenerationScene("images/Circuit/", this);
 
     m_scene_states.emplace_back(sudoku_scene);
     m_scene_states.emplace_back(image_generation_scene);

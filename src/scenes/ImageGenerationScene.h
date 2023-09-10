@@ -19,6 +19,7 @@
 #include <QGraphicsGridLayout>
 #include <QGraphicsWidget>
 #include <QGraphicsProxyWidget>
+#include <QGraphicsLinearLayout>
 
 class ImageGenerationScene : public AbstractScene
 {
@@ -31,12 +32,12 @@ public slots:
     void animate() override;
     void reset();
 public:
-    static constexpr int NUMBER_OF_ROWS = 20;
-    static constexpr int NUMBER_OF_COLS = 30;
+    static constexpr int NUMBER_OF_ROWS = 40;
+    static constexpr int NUMBER_OF_COLS = 60;
 private:
     TiledModel_ImageGrid* m_image_grid;
     int m_retries_count;
-    QGraphicsGridLayout* m_scene_layout;
+    QGraphicsLinearLayout* m_scene_layout;
     ImageGenerationCanvas* m_canvas;
     QGraphicsWidget* m_scene_container;
     ImageGenerationSideMenu* m_generation_menu;
